@@ -52,10 +52,8 @@ This binding currently supports following channel types for blinds:
 
 | Channel Type ID | Item Type     | Description                                                                        |
 |-----------------|---------------|------------------------------------------------------------------------------------|
-| command         | Switch        | Command channel.                                                                   |     
-|                                                                                                                      |
+| command         | Switch        | Command channel.                                                                   |
 | shutter         | Rollershutter | Shutter/blind channel.                                                             |
-|                                                                                                                      |
 | dimminglevel    | Dimmer        | Dimming level channel.                                                             |
 
 ## Full Example
