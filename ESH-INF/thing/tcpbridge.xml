@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="openwms"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+    xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+    
+    <bridge-type id="tcpbridge">
+        <label>OpenWMS WAREMA WMS-Stick Transceiver over TCP/IP</label>
+        <description>This is transceiver bridge for using USB devices over a TCP/IP connection.</description>
+
+        <config-description>
+            <parameter name="host" type="text" required="true">
+                <label>Host</label>
+                <description>Host where the WMS-Stick transceiver is connected.</description>
+                <context>network-address</context>
+            </parameter>
+            <parameter name="port" type="integer" required="true">
+                <label>Port</label>
+                <description>Port where WMS-Stick transceiver is connected.</description>
+                <default>4001</default>
+            </parameter>
+            <parameter name="disableDiscovery" type="boolean" required="true">
+                <label>Disable discovery of unknown devices</label>
+                <description>These RF protocols are prone to noise. If you find a lot of unknown devices showing up in your inbox
+                    enabling this will stop devices being added to your inbox.</description>
+                <default>false</default>
+            </parameter>
+               
+
+        </config-description>
+    </bridge-type>
+
+</thing:thing-descriptions>
+    
