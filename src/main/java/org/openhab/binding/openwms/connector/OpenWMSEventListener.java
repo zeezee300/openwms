@@ -8,7 +8,7 @@ public interface OpenWMSEventListener {
      * @param data
      *            Received raw data.
      */
-    void packetReceived(byte[] data);
+    // void packetReceived(byte[] data);
 
     void packetStrReceived(String data);
 
