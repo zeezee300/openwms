@@ -3,7 +3,6 @@ package org.openhab.binding.openwms.messages;
 import static org.openhab.binding.openwms.config.OpenWMSBindingConstants.*;
 
 import org.eclipse.smarthome.config.discovery.DiscoveryResultBuilder;
-import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.library.types.OpenClosedType;
 import org.eclipse.smarthome.core.library.types.PercentType;
@@ -26,7 +25,7 @@ public class OpenWMSGetResponse {
     public String angle;
     public String valance1;
     public String valance2;
-    public String panId;
+    public String panId = "";
     public String deviceTyp;
 
     public Commands command;
@@ -177,22 +176,34 @@ public class OpenWMSGetResponse {
     public State convertToState(String channelId) {
         switch (channelId) {
             case CHANNEL_DIMMINGLEVEL:
-                return new PercentType(position);
+                if (position != null) {
+                    return new PercentType(position);
+                } else {
+                    return null;
+                }
 
             case CHANNEL_COMMAND:
-                int wert = Integer.valueOf(position);
-                if (wert == 0) {
-                    return OnOffType.OFF;
+                if (position != null) {
+                    int wert = Integer.valueOf(position);
+                    if (wert == 0) {
+                        return OnOffType.OFF;
+                    } else {
+                        return OnOffType.ON;
+                    }
                 } else {
-                    return OnOffType.ON;
+                    // return (command == Commands.OFF ? OnOffType.OFF : OnOffType.ON);
+                    return null;
                 }
-                // return (command == Commands.OFF ? OnOffType.OFF : OnOffType.ON);
 
             case CHANNEL_SHUTTER:
-                return new PercentType(position);
+                if (position != null) {
+                    return new PercentType(position);
+                } else {
+                    return null;
+                }
 
             default:
-                return new DecimalType(position);
+                return null;
             // return super.convertToState(channelId);
         }
     }

@@ -1,4 +1,4 @@
-package org.openhab.binding.openwms.internal.discovery;
+package org.openhab.binding.openwms.internal;
 
 import java.util.Set;
 
@@ -10,7 +10,6 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
-import org.openhab.binding.openwms.internal.DeviceMessageListener;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,29 +61,36 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
     public void onDeviceMessageReceived(ThingUID bridge, OpenWMSGetResponse message) {
         logger.trace("Received: bridge: {} message: {}", bridge, message);
         if (!message.getPanId().toString().equals("") && message.getMsgTyp().equals("7020")) {
-            // String messageString = "{M%17" + message.getPanId().toString() + "}";
-            // bridgeHandler.sendMessage(messageString);
-            String messageString = "{R04FFFFFF7020" + message.getPanId().toString() + "02}";
+            String messageString = "{M%17" + message.getPanId().toString() + "}";
             bridgeHandler.sendMessage(messageString);
+            messageString = "{R04FFFFFF7020" + message.getPanId().toString() + "02}";
+            bridgeHandler.sendMessage(messageString);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         String id = message.getDeviceId();
         ThingTypeUID uid = OpenWMSBindingConstants.PACKET_TYPE_THING_TYPE_UID_MAP.get(message.getDeviceTyp());
-        ThingUID thingUID = new ThingUID(uid, bridge, id);
+        if (uid != null) {
+            ThingUID thingUID = new ThingUID(uid, bridge, id);
+            if (callback.getExistingThing(thingUID) == null) {
+                if (!bridgeHandler.getConfiguration().disableDiscovery) {
+                    logger.trace("Adding new OpenWMS Device {} with id '{}' to smarthome inbox", thingUID, id);
+                    DiscoveryResultBuilder discoveryResultBuilder = DiscoveryResultBuilder.create(thingUID)
+                            .withBridge(bridge);
 
-        if (callback.getExistingThing(thingUID) == null) {
-            if (!bridgeHandler.getConfiguration().disableDiscovery) {
-                logger.trace("Adding new OpenWMS Device {} with id '{}' to smarthome inbox", thingUID, id);
-                DiscoveryResultBuilder discoveryResultBuilder = DiscoveryResultBuilder.create(thingUID)
-                        .withBridge(bridge);
+                    message.addDevicePropertiesTo(discoveryResultBuilder);
 
-                message.addDevicePropertiesTo(discoveryResultBuilder);
-
-                thingDiscovered(discoveryResultBuilder.build());
+                    thingDiscovered(discoveryResultBuilder.build());
+                } else {
+                    logger.trace("Ignoring OpenWMS {} with id '{}' - discovery disabled", thingUID, id);
+                }
             } else {
-                logger.trace("Ignoring OpenWMS {} with id '{}' - discovery disabled", thingUID, id);
+                logger.trace("Ignoring already known OpenWMS {} with id '{}'", thingUID, id);
             }
-        } else {
-            logger.trace("Ignoring already known OpenWMS {} with id '{}'", thingUID, id);
         }
     }
 

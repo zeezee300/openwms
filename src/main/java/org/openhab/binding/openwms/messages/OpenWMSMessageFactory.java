@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.smarthome.core.thing.Thing;
+import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,12 +137,12 @@ public class OpenWMSMessageFactory {
         switch (packetType) {
             case "BLIND":
                 cfg = thing.getConfiguration().getProperties();
-                String channel = (String) cfg.get("channel");
-                String panID = (String) cfg.get("panID");
-                String dest = (String) cfg.get("deviceId");
+                String channel = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_CHANNEL);
+                String panId = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_PANID);
+                String dest = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DEVICEID);
 
                 // zuerst muß der Channel und die panID gesetzt werden
-                ret = setzenPANID(channel, panID);
+                ret = setzenPANID(channel, panId);
                 messagesToSend.put("1", ret);
 
                 // dann kann der eigentlich Befehl gesetzt werden

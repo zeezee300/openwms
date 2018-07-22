@@ -26,7 +26,6 @@ import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
-import org.openhab.binding.openwms.internal.discovery.OpenWMSDeviceDiscovery;
 import org.osgi.framework.ServiceRegistration;
 
 import com.google.common.collect.Sets;

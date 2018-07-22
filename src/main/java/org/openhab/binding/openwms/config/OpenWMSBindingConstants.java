@@ -66,6 +66,8 @@ public class OpenWMSBindingConstants {
     // List of all Properties
     public static final String PROPERTY_DEVICEID = "deviceId";
     public static final String PROPERTY_PANID = "panId";
+    public static final String PROPERTY_STATECHECK = "stateCheck";
+    public static final String PROPERTY_CHANNEL = "channel";
 
     public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
             THING_TYPE_WEATHER);

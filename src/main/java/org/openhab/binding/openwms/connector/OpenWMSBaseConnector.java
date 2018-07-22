@@ -29,15 +29,15 @@ public abstract class OpenWMSBaseConnector implements OpenWMSConnectorInterface 
         listeners.remove(listener);
     }
 
-    void sendMsgToListeners(byte[] msg) {
-        try {
-            for (OpenWMSEventListener listener : listeners) {
-                listener.packetReceived(msg);
-            }
-        } catch (Exception e) {
-            logger.error("Event listener invoking error", e);
-        }
-    }
+    // void sendMsgToListeners(byte[] msg) {
+    // try {
+    // for (OpenWMSEventListener listener : listeners) {
+    // listener.packetReceived(msg);
+    // }
+    // } catch (Exception e) {
+    // logger.error("Event listener invoking error", e);
+    // }
+    // }
 
     void sendStrToListeners(String msg) {
         try {

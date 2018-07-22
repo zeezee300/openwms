@@ -12,8 +12,8 @@
         </supported-bridge-type-refs>
 
 
-        <label>OpenWMS Blind Actuator</label>
-        <description>A WMS Blind device</description>
+        <label>OpenWMS Weather sensor</label>
+        <description>A WMS Weather sensor device</description>
 
         <channels>
             <channel id="wind" typeId="windspeed" />

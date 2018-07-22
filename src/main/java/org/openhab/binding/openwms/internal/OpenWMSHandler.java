@@ -110,7 +110,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
             updateConfiguration(conf);
         }
 
-        if (config.deviceId == null || config.panID == null) {
+        if (config.deviceId == null || config.panId == null) {
             updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
                     "OpenWMS device missing deviceId or PANID");
         } else if (thingHandler != null && bridgeStatus != null) {
@@ -170,7 +170,9 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
 
                     for (Channel channel : getThing().getChannels()) {
                         String channelId = channel.getUID().getId();
-                        updateState(channelId, message.convertToState(channelId));
+                        if (message.convertToState(channelId) != null) {
+                            updateState(channelId, message.convertToState(channelId));
+                        }
 
                     }
                 }

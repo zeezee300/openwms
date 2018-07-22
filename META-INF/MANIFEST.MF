@@ -30,5 +30,6 @@ Import-Package:
 Service-Component: OSGI-INF/*.xml
 Export-Package: 
  org.openhab.binding.openwms.config,
- org.openhab.binding.openwms.handler
+ org.openhab.binding.openwms.handler,
+ org.openhab.binding.openwms.internal
 

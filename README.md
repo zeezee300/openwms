@@ -1,21 +1,16 @@
-# <bindingName> Binding
+# OpenWMS Binding
 
-The binding should be compatible with the Warema WMS Stick (1002775), which contains both receiver and transmitter functions.
+The OpenWMS binding should be compatible with the Warema WMS Stick (1002775), which contains both receiver and transmitter functions.
 
-
+For _bidirectional_ actuators ("blinds") it is even possible to update the OpenHab item state if the actuator gets modified outside of OpenHab.
 
 ## Supported Things
 
 This binding supports the Warema USB-Stick transceivers as bridges for accessing sensors and actuators. Unfortunately, I only have one blind, so other devices could not be tested. In addition, the log of the WMS stick is not publicly documented. 
 
-First of all you have to configure an Warema USB-Stick. This device has to be added manually to OpenHab and is represented by an _OpenWMS bridge_. You just have to set the right serial port. If everything is running fine you should see the _Current firmware version:_ of your USB-Stick in the properties of your bridge.
+First of all you have to configure an Warema USB-Stick. This device has to be added manually to OpenHab and is represented by an _OpenWMS bridge_. 
 
-
-## Discovery
-
-The devices may be automatically discovered by pressing the scan-button of your warema remote control and put in the Inbox or may be configured manually.
-After the bridge is configured, push the scan button and the USB-Stick receives a scan response message from any sensor or actuator. You can find the new device is put in the Inbox.
-Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
+You just have to set the right serial port. If everything is running fine you should see the _Current firmware version:_ of your USB-Stick in the properties of your bridge.
 
 ## Binding Configuration
 
@@ -35,6 +30,7 @@ A TCP bridge, for use with socat on a remote host, can only be configured manual
 
 ## Thing Configuration
 
+### Manually 
 Currently only blinds are supported.
 If you know the serial number of the motor and the PANID of your WMS-System you can configure the devices manually:
 
@@ -45,20 +41,30 @@ Channel: 17 (default)
 PANID: 2byte hex string (FF9D08)
 Check-Time: time in seconds (how long is the time until the next state scan - defauld 60)
 
-Note:The DeviceId OR the serial-No is necessary!
+Note:
+The DeviceId OR the serial-No is necessary!
+Also the PANID is required.
+
+### Discovery
+
+The devices may be automatically discovered by pressing the scan-button of your warema remote control and put in the Inbox or may be configured manually.
+After the bridge is configured, push the scan button about 5 seconds until the green controll control lamp lights up. 
+The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (Openhab PAPER UI).
+
+Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
 
 ## Channels
 This binding currently supports following channel types for blinds:
 
 | Channel Type ID | Item Type     | Description                                                                        |
 |-----------------|---------------|------------------------------------------------------------------------------------|
-| command         | Switch        | Command channel.                                                                   |
-| shutter         | Rollershutter | Shutter/blind channel.                                                             |
-| dimminglevel    | Dimmer        | Dimming level channel.                                                             |
+| command         | Switch        | Command channel (ON, OFF)                                                                   |
+| shutter         | Rollershutter | Shutter/blind channel (UP, DOWN, STOP).                                                             |
+| dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 (0 = UP, 100 = DOWN) .                                                             |
 
 ## Full Example
 
 
 
-## Any custom content here!
+
 
