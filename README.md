@@ -60,7 +60,7 @@ This binding currently supports following channel types for blinds:
 |-----------------|---------------|------------------------------------------------------------------------------------|
 | command         | Switch        | Command channel (ON, OFF)                                                                   |
 | shutter         | Rollershutter | Shutter/blind channel (UP, DOWN, STOP).                                                             |
-| dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 (0 = UP, 100 = DOWN) .                                                             |
+| dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 => 0 = UP, 100 = DOWN) .                                                             |
 
 ## Full Example
 
