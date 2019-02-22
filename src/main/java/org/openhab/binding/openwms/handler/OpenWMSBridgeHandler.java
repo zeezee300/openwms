@@ -174,7 +174,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
 
                     try {
                         connector.sendMessage(OpenWMSMessageFactory.VERSION.getBytes());
-                        thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, "Version 123456");
+                        // thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, "Version 123456");
 
                     } catch (IOException e) {
 
@@ -184,7 +184,8 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
 
                 } else if (data.replaceAll("[{}]", "").substring(0, 1).equals("v")) {
                     logger.debug("Set USB-Stick Version");
-                    thing.setProperty(Thing.PROPERTY_FIRMWARE_VERSION, data.replaceAll("[{}]", ""));
+                    // thing.setProperty(Thing.PROPERTY_FIRMWARE_VERSION, data.replaceAll("[{}]", ""));
+                    thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, data.replaceAll("[{}]", ""));
 
                 } else {
 

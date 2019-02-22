@@ -10,8 +10,8 @@ public interface OpenWMSConnectorInterface {
      * Procedure for connecting to OpenWMS controller.
      *
      * @param device
-     *            Controller connection parameters (e.g. serial port name or IP
-     *            address).
+     *                   Controller connection parameters (e.g. serial port name or IP
+     *                   address).
      */
     public void connect(OpenWMSBridgeConfiguration device) throws Exception;
 
@@ -25,7 +25,7 @@ public interface OpenWMSConnectorInterface {
      * Procedure for send raw data to OpenWMS controller.
      *
      * @param data
-     *            raw bytes.
+     *                 raw bytes.
      */
     public void sendMessage(byte[] data) throws IOException;
 
@@ -33,7 +33,7 @@ public interface OpenWMSConnectorInterface {
      * Procedure for register event listener.
      *
      * @param listener
-     *            Event listener instance to handle events.
+     *                     Event listener instance to handle events.
      */
     public void addEventListener(OpenWMSEventListener listener);
 
@@ -41,7 +41,7 @@ public interface OpenWMSConnectorInterface {
      * Procedure for remove event listener.
      *
      * @param listener
-     *            Event listener instance to remove.
+     *                     Event listener instance to remove.
      */
     public void removeEventListener(OpenWMSEventListener listener);
 

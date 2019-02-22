@@ -9,9 +9,9 @@ public interface DeviceMessageListener {
      * This method is called whenever the message is received from the bridge.
      *
      * @param bridge
-     *            The OpenWMS bridge where message is received.
+     *                    The OpenWMS bridge where message is received.
      * @param message
-     *            The message which received.
+     *                    The message which received.
      */
     void onDeviceMessageReceived(ThingUID bridge, OpenWMSGetResponse message);
 

@@ -9,7 +9,7 @@ public interface OpenWMSMessage {
      * Procedure for encode raw data.
      *
      * @param data
-     *            Raw data.
+     *                 Raw data.
      */
     void encodeMessage(byte[] data);
 

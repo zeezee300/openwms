@@ -29,6 +29,11 @@ public class OpenWMSTcpConnector extends OpenWMSBaseConnector {
         logger.info("Connecting to OpenWMS USB at {}:{} over TCP/IP", device.host, device.port);
         socket = new Socket(device.host, device.port);
         socket.setSoTimeout(100); // In ms. Small values mean faster shutdown but more cpu usage.
+
+        // socket.setKeepAlive(true);
+        // socket.setReuseAddress(true);
+        // socket.setTcpNoDelay(true);
+
         in = socket.getInputStream();
         out = socket.getOutputStream();
 
@@ -57,6 +62,7 @@ public class OpenWMSTcpConnector extends OpenWMSBaseConnector {
         if (out != null) {
             logger.debug("Close tcp out stream");
             IOUtils.closeQuietly(out);
+
         }
         if (in != null) {
             logger.debug("Close tcp in stream");
