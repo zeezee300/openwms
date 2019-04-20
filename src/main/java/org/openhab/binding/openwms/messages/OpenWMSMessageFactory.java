@@ -157,7 +157,7 @@ public class OpenWMSMessageFactory {
                 } else if (command.equals("WINKEN")) {
                     ret = sendeWINKEN(dest);
                 } else if (command.equals("GETSTATUS")) {
-                    ret = sendeGETSTATUS(dest);
+                    ret = "{R06" + dest + "801001000005" + "}"; // Current Position WMS Motor
                 } else if (Integer.valueOf(command) > 0 && Integer.valueOf(command) <= 100) {
                     pos = command;
                     ret = sendePOSITION(dest, pos);
@@ -182,11 +182,6 @@ public class OpenWMSMessageFactory {
 
     private static String sendeACK(String dest) {
         String ret = "{R21" + dest + "50AC" + "}";
-        return ret;
-    }
-
-    private static String sendeGETSTATUS(String dest) {
-        String ret = "{R06" + dest + "801001000005" + "}";
         return ret;
     }
 

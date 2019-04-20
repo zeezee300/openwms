@@ -3,6 +3,7 @@ package org.openhab.binding.openwms.messages;
 import static org.openhab.binding.openwms.config.OpenWMSBindingConstants.*;
 
 import org.eclipse.smarthome.config.discovery.DiscoveryResultBuilder;
+import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.library.types.OpenClosedType;
 import org.eclipse.smarthome.core.library.types.PercentType;
@@ -27,6 +28,9 @@ public class OpenWMSGetResponse {
     public String valance2;
     public String panId = "";
     public String deviceTyp;
+    public String wind;
+    public String rain = ""; // ON - OFF
+    public String temp;
 
     public Commands command;
 
@@ -52,6 +56,7 @@ public class OpenWMSGetResponse {
         // Antwort Fahrbefehl {rE49D0870710010023F023EFFFFFF0CFFFFFF}
         // Scan {rE18F0670204DE402}
         // Antwort Scan {rE49D0870214DE4258C2F000300000000000000000304000100C1000000000000}
+        // Wetter Scan {rAAAAAA708000WWL1FFFFFFL2FFRRTTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
 
         setPaketTyp(data);
         String payload = "0";
@@ -68,6 +73,15 @@ public class OpenWMSGetResponse {
                     payload = data.substring(12);
                     setPanId(data);
                     setDeviceTyp(data);
+                    break;
+                case "7080": // Wetter
+                    payload = data.substring(12);
+                    setWind(String.valueOf(Integer.parseInt(payload.substring(2, 4), 16))); // WW 00-25 m/s
+                    setRain(payload.substring(16, 18)); // RR 00: No Rain, C8: Rain
+                    // setTemp(String.valueOf(Integer.parseInt(payload.substring(18, 20), 16) / 2 - 35)); // TT -20 bis
+
+                    setTemp(payload.substring(18, 20)); // TT -20 bis +60
+
                     break;
                 case "8011":
                     switch (data.substring(12, 20)) {
@@ -173,6 +187,30 @@ public class OpenWMSGetResponse {
         this.valance2 = valance2;
     }
 
+    public String getWind() {
+        return wind;
+    }
+
+    public void setWind(String wind) {
+        this.wind = wind;
+    }
+
+    public void setRain(String rain) {
+        if (rain.equals("00")) {
+            this.rain = "OFF";
+        }
+        if (rain.equals("C8")) {
+            this.rain = "ON";
+        }
+
+    }
+
+    public void setTemp(String temp) {
+        // setTemp(String.valueOf(Integer.parseInt(payload.substring(18, 20), 16) / 2 - 35));
+        double val = Integer.parseInt(temp, 16) / 2 - 35;
+        this.temp = String.valueOf(val);
+    }
+
     public State convertToState(String channelId) {
         switch (channelId) {
             case CHANNEL_DIMMINGLEVEL:
@@ -198,6 +236,31 @@ public class OpenWMSGetResponse {
             case CHANNEL_SHUTTER:
                 if (position != null) {
                     return new PercentType(position);
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_WINDSPEED:
+                if (wind != null) {
+                    return new DecimalType(wind);
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_RAIN:
+                if (rain != null) {
+                    if (rain.equals("OFF")) {
+                        return OnOffType.OFF;
+                    } else {
+                        return OnOffType.ON;
+                    }
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_TEMPERATURE:
+                if (temp != null) {
+                    return new DecimalType(temp);
                 } else {
                     return null;
                 }

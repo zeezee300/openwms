@@ -16,11 +16,12 @@
         <description>A WMS Weather sensor device</description>
 
         <channels>
-            <channel id="wind" typeId="windspeed" />
-            <channel id="rain" typeId="status" />
-            <channel id="sun" typeId="status" />
-            <channel id="dusk" typeId="status" />
-            <channel id="opmode" typeId="status" />
+            <channel id="windspeed" typeId="windspeed" />
+            <channel id="rain" typeId="rain" />
+            <channel id="brightness" typeId="brightness" />
+            <channel id="dusk" typeId="illumination" />
+            <channel id="temperature" typeId="temperature" />
+            <channel id="humidity" typeId="humidity" />
             
            
         </channels>
@@ -53,7 +54,7 @@
                     <option value="26">Kanal 26</option>
                 </options>
             </parameter>
-            <parameter name="panID" type="text" required="true">
+            <parameter name="panId" type="text" required="true">
                 <label>PANID</label>
                 <description>Specifies device PANID. Example 4DE4</description>
             </parameter>

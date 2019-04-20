@@ -56,7 +56,6 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
             in.reset();
         }
 
-        // RXTX serial port library causes high CPU load
         // Start event listener, which will just sleep and slow down event loop
         try {
             serialPort.addEventListener(this);

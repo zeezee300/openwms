@@ -54,13 +54,21 @@ The USB-Stick should receives scan response messages from any sensor or actuator
 Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
 
 ## Channels
-This binding currently supports following channel types for blinds:
+This binding currently supports following channel types for blinds and weather-moduls:
 
+### BLINDS
 | Channel Type ID | Item Type     | Description                                                                        |
 |-----------------|---------------|------------------------------------------------------------------------------------|
-| command         | Switch        | Command channel (ON, OFF)                                                                   |
-| shutter         | Rollershutter | Shutter/blind channel (UP, DOWN, STOP).                                                             |
-| dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 => 0 = UP, 100 = DOWN) .                                                             |
+| command         | Switch        | Command channel (ON, OFF)                                                          |
+| shutter         | Rollershutter | Shutter/blind channel (UP, DOWN, STOP).                                            |
+| dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 => 0 = UP, 100 = DOWN) .                   |
+
+### WEATHER 
+| Channel Type ID | Item Type     | Description                                                                        |
+|-----------------|---------------|------------------------------------------------------------------------------------|
+| windspeed       | Number        | Average wind speed in meters per second (read only)                                |
+| rain            | Switch        | Stauts rain => ON: rain, OFF: No rain (read only)                                  |
+| temperature     | Number        | Current temperature in degree Celsius (read only)                                  |
 
 ## Full Example
 

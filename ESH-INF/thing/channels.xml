@@ -115,6 +115,27 @@
         <description>Wind direction in degrees</description>
         <state min="0" max="360" step="1" readOnly="true"></state>
     </channel-type>
+    
+    <channel-type id="brightness">
+        <item-type>Number</item-type>
+        <label>Brightness</label>
+        <description>brightness in klx</description>
+        <state min="0" max="100" readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="illumination">
+        <item-type>Number:Illuminance</item-type>
+        <label>Lux</label>
+        <description>Illumination in lux</description>
+        <state pattern="%d %unit%" readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="rain">
+        <item-type>Switch</item-type>
+        <label>Rain</label>
+        <description>Status rain</description>
+        <state readOnly="true"></state>
+    </channel-type>
 
 
 </thing:thing-descriptions>

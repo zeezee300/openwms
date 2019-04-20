@@ -62,6 +62,9 @@ public class OpenWMSBindingConstants {
     public static final String CHANNEL_STATUS = "status";
     public static final String CHANNEL_MOTION = "motion";
     public static final String CHANNEL_CONTACT = "contact";
+    public static final String CHANNEL_WINDSPEED = "windspeed";
+    public static final String CHANNEL_RAIN = "rain";
+    public static final String CHANNEL_TEMPERATURE = "temperature";
 
     // List of all Properties
     public static final String PROPERTY_DEVICEID = "deviceId";
@@ -72,6 +75,13 @@ public class OpenWMSBindingConstants {
     public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
             THING_TYPE_WEATHER);
 
+    /*
+     * 02: Stick/Software
+     * 06: Webcontrol
+     * 20: Zwischenstecker - berücksichtigt
+     * 25: Zwischenstecker - berücksichtigt
+     * 63: Wetterstation - berücksichtigt
+     */
     public static final Map<String, ThingTypeUID> PACKET_TYPE_THING_TYPE_UID_MAP = ImmutableMap
             .<String, ThingTypeUID> builder().put("20", OpenWMSBindingConstants.THING_TYPE_BLIND)
             .put("25", OpenWMSBindingConstants.THING_TYPE_BLIND).put("63", OpenWMSBindingConstants.THING_TYPE_WEATHER)
