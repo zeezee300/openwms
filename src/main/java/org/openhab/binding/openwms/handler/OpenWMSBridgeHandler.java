@@ -108,8 +108,6 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 connector.disconnect();
                 connector.connect(configuration);
 
-                // logger.debug("Reset controller");
-                // connector.sendMessage(RFXComMessageFactory.CMD_RESET);
                 String messageString = "{G}";
                 connector.sendMessage(messageString.getBytes());
                 byte[] data = messageString.getBytes();

@@ -47,7 +47,6 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
 
     private final Logger logger = LoggerFactory.getLogger(OpenWMSHandler.class);
     private ScheduledFuture<?> connectorTask;
-
     private OpenWMSDeviceConfiguration config;
     private OpenWMSBridgeHandler bridgeHandler;
 

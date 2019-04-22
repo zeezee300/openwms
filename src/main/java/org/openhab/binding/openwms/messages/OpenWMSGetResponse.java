@@ -78,8 +78,6 @@ public class OpenWMSGetResponse {
                     payload = data.substring(12);
                     setWind(String.valueOf(Integer.parseInt(payload.substring(2, 4), 16))); // WW 00-25 m/s
                     setRain(payload.substring(16, 18)); // RR 00: No Rain, C8: Rain
-                    // setTemp(String.valueOf(Integer.parseInt(payload.substring(18, 20), 16) / 2 - 35)); // TT -20 bis
-
                     setTemp(payload.substring(18, 20)); // TT -20 bis +60
 
                     break;

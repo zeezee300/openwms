@@ -61,7 +61,7 @@
             <parameter name="stateCheck" type="text" required="true">
                 <label>Check Time</label>
                 <description>Time to check the Status state in sec</description>
-                <default>60</default>
+                <default>3000</default>
             </parameter>
         </config-description>
     </thing-type>

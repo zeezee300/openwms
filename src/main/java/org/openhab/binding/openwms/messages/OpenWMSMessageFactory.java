@@ -134,18 +134,17 @@ public class OpenWMSMessageFactory {
         Map<String, Object> cfg = null;
         String pos = "";
 
+        cfg = thing.getConfiguration().getProperties();
+        String channel = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_CHANNEL);
+        String panId = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_PANID);
+        String dest = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DEVICEID);
+
+        // zuerst muß der Channel und die panID gesetzt werden
+        ret = setzenPANID(channel, panId);
+        messagesToSend.put("1", ret);
+        // dann kann der eigentlich Befehl gesetzt werden
         switch (packetType) {
             case "BLIND":
-                cfg = thing.getConfiguration().getProperties();
-                String channel = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_CHANNEL);
-                String panId = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_PANID);
-                String dest = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DEVICEID);
-
-                // zuerst muß der Channel und die panID gesetzt werden
-                ret = setzenPANID(channel, panId);
-                messagesToSend.put("1", ret);
-
-                // dann kann der eigentlich Befehl gesetzt werden
                 if (command.equals("ON") || command.equals("UP")) {
                     pos = "0";
                     ret = sendePOSITION(dest, pos);
@@ -168,6 +167,10 @@ public class OpenWMSMessageFactory {
 
                 messagesToSend.put("2", ret);
 
+                break;
+
+            case "WEATHER":
+                // ToDo
                 break;
 
         }
