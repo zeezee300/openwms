@@ -164,6 +164,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                 String receivedId = message.getDeviceId();
                 logger.debug("Received message from bridge: {} message: {}", bridge, message);
 
+                // nur für bereits bekannte Devices erfolgt eine weitere Verarbeitung
                 if (receivedId.equals(getThing().getConfiguration().getProperties().get("deviceId"))) {
                     updateStatus(ThingStatus.ONLINE);
 

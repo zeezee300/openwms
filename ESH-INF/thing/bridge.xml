@@ -6,7 +6,7 @@
     
     <bridge-type id="bridge">
         <label>OpenWMS WAREMA WMS-Stick Transceiver</label>
-        <description>This is USB transceiver bridge for manual configuration purposes.</description>
+        <description>This is USB transceiver bridge for using USB devices directly at the USB-port.</description>
 
         <config-description>
             <parameter name="serialPort" type="text" required="true">

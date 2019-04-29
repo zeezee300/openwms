@@ -200,11 +200,19 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                                 logger.error("An exception occurred while calling the DeviceStatusListener", e);
                             }
                         }
+                        // auf die jeweiligen empfangen "r"-Messages reagieren und Antwort senden .....
+                        if (wmsMsg.wms_response != null) {
+                            sendMessage(wmsMsg.wms_response);
+                        }
+                        if (wmsMsg.networkid != null) {
+                            thing.setProperty(Thing.PROPERTY_VENDOR, wmsMsg.networkid);
+                        }
 
                     }
                 }
 
                 // ToDo - auf die jeweiligen Antworten reagieren.....
+
                 transmitQueue.sendNext();
 
             } catch (Exception e) {

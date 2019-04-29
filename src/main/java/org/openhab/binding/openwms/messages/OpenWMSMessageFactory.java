@@ -118,7 +118,7 @@ public class OpenWMSMessageFactory {
     }
 
     /*
-     * mit createMessage werden die Kommandos erzeugt, die an den USB Stickgesendet werden
+     * mit createMessage werden die Kommandos erzeugt, die an den USB Stick gesendet werden
      * Es soll sichergestellt werden, dass verschiedene Kanäle und PANIDs verwendet werden können, daher werden jeweils
      * zwei Messages erzeugt:
      * 1. setzen von Kanal und PANID (Daten aus dem Thingitem)
@@ -178,6 +178,11 @@ public class OpenWMSMessageFactory {
         return sortedMessages;
     }
 
+    public static String sendeSCANRESPONSE(String dest, String panid, String typ) {
+        String ret = "{R01" + dest + "7021" + panid + typ + "}";
+        return ret;
+    }
+
     private static String sendeWINKEN(String dest) {
         String ret = "{R06" + dest + "7050" + "}";
         return ret;
@@ -200,7 +205,7 @@ public class OpenWMSMessageFactory {
         return ret;
     }
 
-    private static String setzenPANID(String channel, String panID) {
+    public static String setzenPANID(String channel, String panID) {
         String ret = "{M%" + channel + panID + "}";
         return ret;
     }
