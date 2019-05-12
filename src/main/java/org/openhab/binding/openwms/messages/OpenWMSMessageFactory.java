@@ -55,15 +55,15 @@ public class OpenWMSMessageFactory {
 
                 switch (type) {
                     case "5018":
-                        StringBuilder input1 = new StringBuilder();
-                        String input = payload.substring(4, 36);
-                        input1.append(input);
-                        input1 = input1.reverse();
-                        message_payload.put("type", "joinNetworkRequest");
-                        message_payload.put("panId", payload.substring(0, 4));
-                        message_payload.put("networkKey", input1.toString());
-                        message_payload.put("unknown", payload.substring(36, 38));
-                        message_payload.put("channel", parseInt(payload.substring(38, 40), 16).toString());
+                        // StringBuilder input1 = new StringBuilder();
+                        // String input = payload.substring(4, 36);
+                        // input1.append(input);
+                        // input1 = input1.reverse();
+                        // message_payload.put("type", "joinNetworkRequest");
+                        // message_payload.put("panId", payload.substring(0, 4));
+                        // message_payload.put("networkKey", input1.toString());
+                        // message_payload.put("unknown", payload.substring(36, 38));
+                        // message_payload.put("channel", parseInt(payload.substring(38, 40), 16).toString());
                         break;
 
                     case "7021":
@@ -176,6 +176,11 @@ public class OpenWMSMessageFactory {
         }
         Map<String, String> sortedMessages = new TreeMap<>(messagesToSend);
         return sortedMessages;
+    }
+
+    public static String sendeSCANREQUEST(String panid) {
+        String ret = "{R04FFFFFF7020" + panid + "02}";
+        return ret;
     }
 
     public static String sendeSCANRESPONSE(String dest, String panid, String typ) {

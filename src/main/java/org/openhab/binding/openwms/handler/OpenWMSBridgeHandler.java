@@ -16,6 +16,7 @@ import org.eclipse.smarthome.core.thing.ThingStatus;
 import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseBridgeHandler;
 import org.eclipse.smarthome.core.types.Command;
+import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.connector.OpenWMSConnectorInterface;
 import org.openhab.binding.openwms.connector.OpenWMSEventListener;
@@ -205,7 +206,9 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                             sendMessage(wmsMsg.wms_response);
                         }
                         if (wmsMsg.networkid != null) {
-                            thing.setProperty(Thing.PROPERTY_VENDOR, wmsMsg.networkid);
+                            thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, wmsMsg.networkid);
+                            thing.setProperty(OpenWMSBindingConstants.PROPERTY_PANID, wmsMsg.panId);
+
                         }
 
                     }

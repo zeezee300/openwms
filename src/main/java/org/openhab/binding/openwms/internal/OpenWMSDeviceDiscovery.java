@@ -50,6 +50,37 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
     protected void startScan() {
         // this can be ignored here as we discover devices from received messages
 
+        // jetzt versuchen wir es doch einmal....
+        logger.debug("Start scan");
+        String messageString = "";
+        // zuerst prüfen, ob ein Netzwerkschlüssel vorhanden ist
+        String netId = bridgeHandler.getThing().getProperties().get(OpenWMSBindingConstants.PROPERTY_NETWORKKEY);
+        String panId = bridgeHandler.getThing().getProperties().get(OpenWMSBindingConstants.PROPERTY_PANID);
+        logger.debug("Scan - found Networkkey: " + netId);
+        logger.debug("Scan - found PANID: " + panId);
+
+        // wenn Netzwerkschlüsssel und PANID vorhanden sind, dann weiter, sonst wird gesucht,
+        if (netId != null && !netId.isEmpty() && !panId.isEmpty() && !panId.equals("")) {
+            messageString = "{K401" + netId + "}";
+            logger.debug("Scan - Transmitting message: " + messageString);
+            bridgeHandler.sendMessage(messageString);
+            int i = 17;
+            messageString = "{M#" + Integer.toString(i) + panId + "}";
+            logger.debug("Scan - Transmitting message: " + messageString);
+            bridgeHandler.sendMessage(messageString);
+            messageString = "{R04FFFFFF5060" + panId + "2021100}"; // chanel request
+            logger.debug("Scan - Transmitting message: " + messageString);
+            bridgeHandler.sendMessage(messageString);
+
+        } else {
+
+            messageString = "{R04FFFFFF5058}";
+            bridgeHandler.sendMessage(messageString);
+
+            // ToDo - suchen nach der PANID
+
+        }
+
     }
 
     @Override
@@ -63,7 +94,15 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
         if (!message.getPanId().toString().equals("") && message.getMsgTyp().equals("7020")) {
             String messageString = "{M%17" + message.getPanId().toString() + "}";
             bridgeHandler.sendMessage(messageString);
-            messageString = "{R04FFFFFF7020" + message.getPanId().toString() + "02}";
+
+            // wenn noch kein Netzwerkschlüssel vorhanden ist, dann soll versucht werden diesen zu ermitteln
+            String netId = bridgeHandler.getThing().getProperties().get(OpenWMSBindingConstants.PROPERTY_NETWORKKEY);
+            if (netId != null && !netId.isEmpty()) {
+                messageString = "{R04FFFFFF7020" + message.getPanId().toString() + "02}";
+            } else {
+                messageString = "{R01" + message.getDeviceId().toString() + "7021FFFF02}"; // scan für den
+                                                                                           // Netzwerkschlüssel
+            }
             bridgeHandler.sendMessage(messageString);
             try {
                 Thread.sleep(2000);

@@ -60,6 +60,8 @@ public class OpenWMSGetResponse {
         // Scan {rE18F0670204DE402}
         // Antwort Scan {rE49D0870214DE4258C2F000300000000000000000304000100C1000000000000}
         // Wetter response {rAAAAAA708000WWL1FFFFFFL2FFRRTTFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        // Netzwerkschlüssel {rAAAAAA5018PPPP0123456789ABCDEFFEDCBA9876543210FF11}
+        // Netzwerkschlüssel II {rxxxxxx5059kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk}
 
         setPaketTyp(data);
         String payload = "0";
@@ -67,34 +69,35 @@ public class OpenWMSGetResponse {
             setDeviceId(data.substring(2, 8));
             setMsgTyp(data.substring(8, 12));
             switch (msgTyp) {
-                case "5018": // klappt noch nicht
+                case "5018":
                     payload = data.substring(12);
-                    StringBuilder input1 = new StringBuilder();
-                    String input = payload.substring(4, 36);
-                    input1.append(input);
-                    input1 = input1.reverse();
+                    String s = payload.substring(4, 36);
                     setPanId(data);
-                    setNetworkID(input1.toString());
+                    setNetworkID(s);
                     setChannel(payload.substring(38, 40));
-
-                    // message_payload.put("type", "joinNetworkRequest");
-                    // message_payload.put("panId", payload.substring(0, 4));
-                    // message_payload.put("networkKey", input1.toString());
-                    // message_payload.put("unknown", payload.substring(36, 38));
-                    // message_payload.put("channel", parseInt(payload.substring(38, 40), 16).toString());
+                    setWmsResponse("{R04FFFFFF7020" + panId + "02}");
 
                     break;
                 case "5060": // Switch Channel request
                     payload = data.substring(12);
                     setPanId(data);
                     setChannel(String.valueOf(Integer.parseInt(payload.substring(6, 8), 16)));
+                    setDeviceTyp(data);
                     setWmsResponse(OpenWMSMessageFactory.setzenPANID(channel, "FFFF"));
+
                     break;
+                case "5059": // Network Key
+                    payload = data.substring(12);
+                    String t = payload.substring(0, 32);
+                    setNetworkID(t);
+
+                    break;
+
                 case "7020": // Scan request
                     payload = data.substring(12);
                     setPanId(data);
                     setDeviceTyp(data);
-                    setWmsResponse(OpenWMSMessageFactory.sendeSCANRESPONSE(deviceId, "FFFF", deviceTyp));
+                    // setWmsResponse(OpenWMSMessageFactory.sendeSCANRESPONSE(deviceId, "FFFF", deviceTyp));
 
                     break;
                 case "7021":
@@ -239,8 +242,18 @@ public class OpenWMSGetResponse {
         this.channel = channel;
     }
 
+    public String getChannel() {
+        return channel;
+    }
+
     public void setNetworkID(String networkid) {
-        this.networkid = networkid;
+        String s = networkid;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i <= s.length() - 2; i = i + 2) {
+            result.append(new StringBuilder(s.substring(i, i + 2)).reverse());
+        }
+        result = result.reverse();
+        this.networkid = result.toString();
     }
 
     public void setTemp(String temp) {

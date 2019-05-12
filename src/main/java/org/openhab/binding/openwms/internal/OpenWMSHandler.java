@@ -124,7 +124,9 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                 }
                 if (connectorTask == null || connectorTask.isCancelled()) {
                     connectorTask = scheduler.scheduleWithFixedDelay(() -> {
-                        logger.debug("Checking OpenWMS BLIND connection, thing status = {}", thing.getStatus());
+                        // logger.debug("Checking OpenWMS BLIND connection, thing status = {}", thing.getStatus());
+                        logger.debug("Checking OpenWMS connection, thing label = {}, thing status = {}",
+                                thing.getLabel(), thing.getStatus());
                         Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing);
                         for (Entry<String, String> entry : msg.entrySet()) {
                             // System.out.println(entry.getValue());

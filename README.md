@@ -45,11 +45,22 @@ Note:
 The DeviceId OR the serial-No is necessary!
 Also the PANID is required.
 
-### Discovery
+### Discovery (search for new devices with the remote control)
 
-The devices may be automatically discovered by pressing the scan-button of your warema remote control and put in the Inbox or may be configured manually.
-After the bridge is configured, push the scan button about 5 seconds until the green controll control lamp lights up. 
-The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (Openhab PAPER UI).
+Tested with: WAREMA WMS Handsender basis (ArtNr. 1002953)
+
+The devices could be automatically discovered by pressing the scan-button of your warema remote control and put in the Inbox (PAPER UI) or may be conigured manually. 
+
+Note:
+However, it is a prerequisite that the devices have already been trained in the warema network and are known.
+
+After the bridge is configured in openhab, wake up the remote control (simply press any button on the remote control). Then press the "Learn" button in the battery compartment for about 5 seconds until the green control lamp lights up. 
+
+You have to wait a few seconds until the green light stops blinking and turns into red or orange.
+During the first scan the WMS network ID is determined and the LED light turns red. Then the red stop button must be pressed (this is the round button between the high and low buttons).
+
+The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (openhab PAPER UI).
+You can also find the current WMS network key as a property of the WMS-Stick transceiver
 
 Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
 
