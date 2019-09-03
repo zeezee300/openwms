@@ -12,14 +12,20 @@
  */
 package org.openhab.binding.openwms.config;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
+//import jersey.repackaged.com.google.common.collect.ImmutableMap;
+
+//import com.google.common.collect.ImmutableMap;
+//import com.google.common.collect.ImmutableSet;
 
 /**
  * The {@link OpenWMSBindingConstants} class defines common constants, which are
@@ -41,11 +47,27 @@ public class OpenWMSBindingConstants {
     public static final ThingTypeUID BRIDGE_MANUAL = new ThingTypeUID(BINDING_ID, BRIDGE_TYPE_MANUAL_BRIDGE);
     public static final ThingTypeUID BRIDGE_TCP = new ThingTypeUID(BINDING_ID, BRIDGE_TYPE_TCP_BRIDGE);
 
-    public static final Set<ThingTypeUID> SUPPORTED_BRIDGE_THING_TYPES_UIDS = ImmutableSet.of(BRIDGE_MANUAL,
-            BRIDGE_TCP);
+    /**
+     * Presents all supported Bridge types by openwms binding.
+     */
+    // public static final Set<ThingTypeUID> SUPPORTED_BRIDGE_THING_TYPES_UIDS = ImmutableSet.of(BRIDGE_MANUAL,
+    // BRIDGE_TCP);
+    public static final Set<ThingTypeUID> SUPPORTED_BRIDGE_THING_TYPES_UIDS = Collections
+            .unmodifiableSet(Stream.of(BRIDGE_MANUAL, BRIDGE_TCP).collect(Collectors.toSet()));
 
-    public static final Set<ThingTypeUID> DISCOVERABLE_BRIDGE_THING_TYPES_UIDS = ImmutableSet.of(BRIDGE_MANUAL,
-            BRIDGE_TCP);
+    /**
+     * Presents all discoverable Bridge types by openwms binding.
+     */
+    // public static final Set<ThingTypeUID> DISCOVERABLE_BRIDGE_THING_TYPES_UIDS = ImmutableSet.of(BRIDGE_MANUAL,
+    // BRIDGE_TCP);
+    public static final Set<ThingTypeUID> DISCOVERABLE_BRIDGE_THING_TYPES_UIDS = Collections
+            .unmodifiableSet(Stream.of(BRIDGE_MANUAL, BRIDGE_TCP).collect(Collectors.toSet()));
+
+    /**
+     * Presents all discoverable Bridge types by openwms binding.
+     */
+    // public static final Set<ThingTypeUID> DISCOVERABLE_BRIDGE_THING_TYPES_UIDS = Collections.unmodifiableSet(
+    // Stream.of(BRIDGE_RFXTRX443, BRIDGE_RFXTRX315, BRIDGE_RFXREC443).collect(Collectors.toSet()));
 
     // List of all Thing Type UIDs
     // private static final ThingTypeUID THING_TYPE_SAMPLE = new ThingTypeUID(BINDING_ID, "sample");
@@ -73,8 +95,10 @@ public class OpenWMSBindingConstants {
     public static final String PROPERTY_CHANNEL = "channel";
     public static final String PROPERTY_NETWORKKEY = "Current WMS network key";
 
-    public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
-            THING_TYPE_WEATHER);
+    // public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
+    // THING_TYPE_WEATHER);
+    public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = Collections
+            .unmodifiableSet(Stream.of(THING_TYPE_BLIND, THING_TYPE_WEATHER).collect(Collectors.toSet()));
 
     /*
      * 02: Stick/Software
@@ -83,9 +107,23 @@ public class OpenWMSBindingConstants {
      * 25: Zwischenstecker - berücksichtigt
      * 63: Wetterstation - berücksichtigt
      */
-    public static final Map<String, ThingTypeUID> PACKET_TYPE_THING_TYPE_UID_MAP = ImmutableMap
-            .<String, ThingTypeUID> builder().put("20", OpenWMSBindingConstants.THING_TYPE_BLIND)
-            .put("25", OpenWMSBindingConstants.THING_TYPE_BLIND).put("63", OpenWMSBindingConstants.THING_TYPE_WEATHER)
-            .build();
+    // public static final Map<String, ThingTypeUID> PACKET_TYPE_THING_TYPE_UID_MAP = ImmutableMap
+    // .<String, ThingTypeUID> builder().put("20", OpenWMSBindingConstants.THING_TYPE_BLIND)
+    // .put("25", OpenWMSBindingConstants.THING_TYPE_BLIND).put("63", OpenWMSBindingConstants.THING_TYPE_WEATHER)
+    // .build();
+
+    // public static final Map<String, ThingTypeUID> PACKET_TYPE_THING_TYPE_UID_MAP = ImmutableMap
+    // .<String, ThingTypeUID> builder().put("20", OpenWMSBindingConstants.THING_TYPE_BLIND)
+    // .put("25", OpenWMSBindingConstants.THING_TYPE_BLIND).put("63", OpenWMSBindingConstants.THING_TYPE_WEATHER)
+    // .build();
+    //
+    public static final Map<String, ThingTypeUID> PACKET_TYPE_THING_TYPE_UID_MAP = Collections
+            .unmodifiableMap(new HashMap<String, ThingTypeUID>() {
+                {
+                    put("20", OpenWMSBindingConstants.THING_TYPE_BLIND);
+                    put("25", OpenWMSBindingConstants.THING_TYPE_BLIND);
+                    put("63", OpenWMSBindingConstants.THING_TYPE_WEATHER);
+                }
+            });
 
 }

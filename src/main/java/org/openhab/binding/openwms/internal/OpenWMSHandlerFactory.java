@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.smarthome.config.discovery.DiscoveryService;
 import org.eclipse.smarthome.core.thing.Bridge;
@@ -28,7 +30,7 @@ import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.osgi.framework.ServiceRegistration;
 
-import com.google.common.collect.Sets;
+//import com.google.common.collect.Sets;
 
 /**
  * The {@link OpenWMSHandlerFactory} is responsible for creating things and thing
@@ -41,11 +43,19 @@ import com.google.common.collect.Sets;
 // @Component(configurationPid = "binding.openwms", service = ThingHandlerFactory.class)
 public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
 
+
     private Map<ThingUID, ServiceRegistration<?>> discoveryServiceRegs = new HashMap<>();
 
-    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Sets.union(
-            OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS,
-            OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS);
+
+//    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Sets.union(
+//            OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS,
+//            OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS);
+    
+    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Stream
+            .concat(OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS.stream(),
+            		OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.stream())
+            .collect(Collectors.toSet());
+    
 
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
@@ -91,3 +101,4 @@ public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
     }
 
 }
+
