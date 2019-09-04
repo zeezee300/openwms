@@ -19,6 +19,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.smarthome.config.discovery.DiscoveryService;
 import org.eclipse.smarthome.core.thing.Bridge;
 import org.eclipse.smarthome.core.thing.Thing;
@@ -26,9 +28,11 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
+import org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.component.annotations.Component;
 
 //import com.google.common.collect.Sets;
 
@@ -39,23 +43,21 @@ import org.osgi.framework.ServiceRegistration;
  *
  * @author zeezee - Initial contribution
  */
-// @NonNullByDefault
-// @Component(configurationPid = "binding.openwms", service = ThingHandlerFactory.class)
+@NonNullByDefault
+// @Component(service = ThingHandlerFactory.class, configurationPid = "binding.openwms")
+@Component(configurationPid = "binding.openwms", service = ThingHandlerFactory.class)
 public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
-
 
     private Map<ThingUID, ServiceRegistration<?>> discoveryServiceRegs = new HashMap<>();
 
+    // private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Sets.union(
+    // OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS,
+    // OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS);
 
-//    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Sets.union(
-//            OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS,
-//            OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS);
-    
     private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES = Stream
             .concat(OpenWMSBindingConstants.SUPPORTED_DEVICE_THING_TYPES_UIDS.stream(),
-            		OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.stream())
+                    OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.stream())
             .collect(Collectors.toSet());
-    
 
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
@@ -63,8 +65,8 @@ public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
     }
 
     @Override
-    // protected @Nullable ThingHandler createHandler(Thing thing) {
-    protected ThingHandler createHandler(Thing thing) {
+    protected @Nullable ThingHandler createHandler(Thing thing) {
+        // protected ThingHandler createHandler(Thing thing) {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
 
         if (OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.contains(thingTypeUID)) {
@@ -101,4 +103,3 @@ public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
     }
 
 }
-
