@@ -56,7 +56,7 @@ However, it is a prerequisite that the devices have already been trained in the 
 
 After the bridge is configured in openhab, wake up the remote control (simply press any button on the remote control). Then press the "Learn" button in the battery compartment for about 5 seconds until the green control lamp lights up. 
 
-You have to wait a few seconds until the green light stops blinking and turns into red or orange.
+You have to wait a few seconds until the green light (the right one on the front of the remote control) stops blinking and turns into red or orange.
 During the first scan the WMS network ID is determined and the LED light turns red. Then the red stop button must be pressed (this is the round button between the high and low buttons).
 
 The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (openhab PAPER UI).
