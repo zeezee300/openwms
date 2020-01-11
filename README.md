@@ -12,6 +12,15 @@ First of all you have to configure an Warema USB-Stick. This device has to be ad
 
 You just have to set the right serial port. If everything is running fine you should see the _Current firmware version:_ of your USB-Stick in the properties of your bridge.
 
+## Installation notes
+To use this binding, the feature openhab-transport-serial has to be installed with karaf:
+
+   * open karaf shell (`` ssh -p 8101 openhab@localhost ``, Standard password 'habopen')
+ 
+   * ``feature:install openhab-transport-serial``
+    
+    
+
 ## Binding Configuration
 
 #### Warema USB-Stick as Bridge

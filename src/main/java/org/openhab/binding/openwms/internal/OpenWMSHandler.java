@@ -129,7 +129,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                                 thing.getLabel(), thing.getStatus());
                         Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing);
                         for (Entry<String, String> entry : msg.entrySet()) {
-                            // System.out.println(entry.getValue());
+                            System.out.println(entry.getValue());
                             bridgeHandler.sendMessage(entry.getValue());
                         }
                     }, 0, Integer.valueOf(timer), TimeUnit.SECONDS);

@@ -82,9 +82,20 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
 
         if (connectorTask == null || connectorTask.isCancelled()) {
             connectorTask = scheduler.scheduleWithFixedDelay(() -> {
-                logger.debug("Checking OpenWMS transceiver connection, thing status = {}", thing.getStatus());
+                logger.debug("Checking OpenWMS transceiver connection, thing status should be = {}", thing.getStatus());
                 if (thing.getStatus() != ThingStatus.ONLINE) {
                     connect();
+                } else {
+                    logger.debug("Checke ob WMS bridge handler tatsächlich online ist");
+                    try {
+                        connector.sendMessage(OpenWMSMessageFactory.CHECK.getBytes());
+                        // Thread.sleep(1000);
+                    } catch (IOException e1) {
+                        logger.debug("WMS bridge handler ist offline");
+                        updateStatus(ThingStatus.OFFLINE);
+                        e1.printStackTrace();
+                    }
+
                 }
             }, 0, 60, TimeUnit.SECONDS);
         }
@@ -109,7 +120,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 connector.disconnect();
                 connector.connect(configuration);
 
-                String messageString = "{G}";
+                String messageString = "M%174DE4";
                 connector.sendMessage(messageString.getBytes());
                 byte[] data = messageString.getBytes();
 
@@ -130,6 +141,8 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
+                        updateStatus(ThingStatus.ONLINE);
+                        // updateStatus(ThingStatus.OFFLINE); 31.12.2019
                     }
                 }
                 // connector.sendMessage(messageString.getBytes());
@@ -137,14 +150,14 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
 
             }
         } catch (NoSuchPortException e) {
-            logger.error("Connection to OpenWMS transceiver failed", e);
+            logger.error("Connection to OpenWMS transceiver failed - NoSuchPortException", e);
         } catch (IOException e) {
-            logger.error("Connection to OpenWMS transceiver failed", e);
+            logger.error("Connection to OpenWMS transceiver failed - IOException", e);
             if ("device not opened (3)".equalsIgnoreCase(e.getMessage())) {
 
             }
         } catch (Exception e) {
-            logger.error("Connection to OpenWMS transceiver failed", e);
+            logger.error("Connection to OpenWMS transceiver failed - Exception", e);
         } catch (UnsatisfiedLinkError e) {
             logger.error("Error occurred when trying to load native library for OS '{}' version '{}', processor '{}'",
                     System.getProperty("os.name"), System.getProperty("os.version"), System.getProperty("os.arch"), e);
