@@ -16,6 +16,7 @@ import org.eclipse.smarthome.core.thing.ThingStatus;
 import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseBridgeHandler;
 import org.eclipse.smarthome.core.types.Command;
+import org.eclipse.smarthome.io.transport.serial.SerialPortManager;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.connector.OpenWMSConnectorInterface;
@@ -42,8 +43,11 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
     private MessageListener eventListener = new MessageListener();
     private List<DeviceMessageListener> deviceStatusListeners = new CopyOnWriteArrayList<>();
 
-    public OpenWMSBridgeHandler(@NonNull Bridge br) {
+    private SerialPortManager serialPortManager;
+
+    public OpenWMSBridgeHandler(@NonNull Bridge br, SerialPortManager serialPortManager) {
         super(br);
+        this.serialPortManager = serialPortManager;
     }
 
     @Override
@@ -107,7 +111,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
         try {
             if (configuration.serialPort != null) {
                 if (connector == null) {
-                    connector = new OpenWMSSerialConnector();
+                    connector = new OpenWMSSerialConnector(serialPortManager);
                 }
 
             } else if (configuration.host != null) {
@@ -120,14 +124,15 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 connector.disconnect();
                 connector.connect(configuration);
 
-                String messageString = "M%174DE4";
-                connector.sendMessage(messageString.getBytes());
-                byte[] data = messageString.getBytes();
+                // connector.addEventListener(eventListener);
 
                 // controller does not response immediately after reset,
                 // so wait a while
-                Thread.sleep(300);
-
+                // Thread.sleep(600);
+                String messageString = "{G}";
+                connector.sendMessage(messageString.getBytes());
+                // byte[] data = messageString.getBytes();
+                // Thread.sleep(600);
                 connector.addEventListener(eventListener);
 
                 logger.debug("Try to send to controller");
@@ -138,6 +143,10 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                     // System.out.println("Sekunden verbleiben: " + secondsRemaining.toString());
                     secondsRemaining--;
                     connector.sendMessage(OpenWMSMessageFactory.CHECK.getBytes());
+
+                    // connector.sendMessage("{R06E49D08801001000005}".getBytes());
+                    // sendMessage("{R06E49D08801001000005}");
+
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -257,6 +266,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
             boolean wasEmpty = queue.isEmpty();
             if (queue.offer(msg)) {
                 if (wasEmpty) {
+
                     send();
                 }
             } else {

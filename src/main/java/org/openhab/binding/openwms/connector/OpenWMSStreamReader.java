@@ -82,6 +82,9 @@ public class OpenWMSStreamReader extends Thread {
 
             if (bytesRead > 0) {
                 bufferIndex += bytesRead;
+                readTimeoutCount = 1;
+            } else if (readTimeoutCount++ == MAX_READ_TIMEOUTS) {
+                throw new IOException("Timeout during packet read");
 
             }
         }

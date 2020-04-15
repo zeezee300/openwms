@@ -29,10 +29,12 @@ import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
 import org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory;
+import org.eclipse.smarthome.io.transport.serial.SerialPortManager;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 //import com.google.common.collect.Sets;
 
@@ -59,6 +61,17 @@ public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
                     OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.stream())
             .collect(Collectors.toSet());
 
+    private @NonNullByDefault({}) SerialPortManager serialPortManager;
+
+    @Reference
+    protected void setSerialPortManager(final SerialPortManager serialPortManager) {
+        this.serialPortManager = serialPortManager;
+    }
+
+    protected void unsetSerialPortManager(final SerialPortManager serialPortManager) {
+        this.serialPortManager = null;
+    }
+
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
         return SUPPORTED_THING_TYPES.contains(thingTypeUID);
@@ -70,7 +83,7 @@ public class OpenWMSHandlerFactory extends BaseThingHandlerFactory {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
 
         if (OpenWMSBindingConstants.SUPPORTED_BRIDGE_THING_TYPES_UIDS.contains(thingTypeUID)) {
-            OpenWMSBridgeHandler handler = new OpenWMSBridgeHandler((Bridge) thing);
+            OpenWMSBridgeHandler handler = new OpenWMSBridgeHandler((Bridge) thing, serialPortManager);
             registerDeviceDiscoveryService(handler);
             return handler;
         } else if (supportsThingType(thingTypeUID)) {

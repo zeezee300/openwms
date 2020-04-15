@@ -26,6 +26,33 @@ To use this binding, the feature openhab-transport-serial has to be installed wi
 #### Warema USB-Stick as Bridge
 So far the Bridge should be configured manually via the PaperUI. Note that the serial port that is assigned to it may change if you have more than one USB serial device.
 
+To solve this, you can define a udev rule to create a symlink so that the port name for the WMS stick is always /dev/warema.
+
+1.) Check which is the ATTRS{serial} of your WMS stick:
+
+```
+udevadm info --name=/dev/ttyUSB0 --attribute-walk
+```
+
+2.) Edit /lib/udev/rules.d/99-usbsticks.rules and add the following line (pls. replace ABC12345 with the ATTRS{serial} of your WMS stick)
+
+```
+SUBSYSTEM==“tty”, ATTRS{serial}==“ABC12345”, SYMLINK+=“warema”
+```
+
+If necessary, an initialization script can be executed at the same time:
+
+```
+SUBSYSTEM==“tty”, ATTRS{serial}==“ABC12345”, SYMLINK+=“warema”, RUN+="/usr/bin/at -M -f /opt/warema/yourscript.sh now + 1 minutes"
+```
+
+3.) Do not forget to restart the udev rules after the changes:
+
+```
+udevadm control --reload-rules && udevadm trigger
+```
+
+
 #### Warema USB-Stick as Bridge over TCP/IP
 You can also use an USB-Stick device over TCP/IP.
 To start a TCP server for an WMS device, you can use socat:
@@ -34,8 +61,26 @@ To start a TCP server for an WMS device, you can use socat:
 socat tcp-l:4001,fork,keepalive,nodelay,reuseaddr /dev/ttyUSB2,nonblock,raw
 
 ```
-A TCP bridge, for use with socat on a remote host, can only be configured manually either through the PaperUI by adding an "OpenWMS WAREMA WMS-Stick Transceiver over TCP/IP" device
+A TCP bridge, for use with socat on a remote host, can only be configured manually through the PaperUI by adding an "OpenWMS WAREMA WMS-Stick Transceiver over TCP/IP" device.
 
+Sometimes the serial port on the server side is not initialized correctly. For testing purposes I have provided a small java program to fix this problem as a workaround:
+
+1.) download 'serialport.jar'
+
+2.) copy it where you want (f.e. /opt/warema) and make it excecutable
+
+3.) excecute it with your device as an argument (f.e./dev/ttyUSB2):
+
+```
+java -jar /opt/warema/serialport.jar /dev/ttyUSB2
+```
+
+The script opens the port and everything should work as expected until the wms-stick is unpluged.
+Therefor a udev-definition wich runs a script could be helpfull (see above).
+
+```
+SUBSYSTEM==“tty”, ATTRS{serial}==“ABC12345”, SYMLINK+=“warema”, RUN+="/usr/bin/at -M -f /opt/warema/yourscript.sh now + 1 minutes"
+```
 
 ## Thing Configuration
 
@@ -87,7 +132,7 @@ This binding currently supports following channel types for blinds and weather-m
 | Channel Type ID | Item Type     | Description                                                                        |
 |-----------------|---------------|------------------------------------------------------------------------------------|
 | windspeed       | Number        | Average wind speed in meters per second (read only)                                |
-| rain            | Switch        | Stauts rain => ON: rain, OFF: No rain (read only)                                  |
+| rain            | Switch        | Status rain => ON: rain, OFF: No rain (read only)                                  |
 | temperature     | Number        | Current temperature in degree Celsius (read only)                                  |
 
 ## Full Example

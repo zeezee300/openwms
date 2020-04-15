@@ -2,22 +2,21 @@ package org.openhab.binding.openwms.connector;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.TooManyListenersException;
 
 import org.apache.commons.io.IOUtils;
 import org.eclipse.smarthome.core.util.HexUtils;
+import org.eclipse.smarthome.io.transport.serial.PortInUseException;
+import org.eclipse.smarthome.io.transport.serial.SerialPort;
+import org.eclipse.smarthome.io.transport.serial.SerialPortEvent;
+import org.eclipse.smarthome.io.transport.serial.SerialPortEventListener;
+import org.eclipse.smarthome.io.transport.serial.SerialPortIdentifier;
+import org.eclipse.smarthome.io.transport.serial.SerialPortManager;
+import org.eclipse.smarthome.io.transport.serial.UnsupportedCommOperationException;
 import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
-import gnu.io.PortInUseException;
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
-import gnu.io.UnsupportedCommOperationException;
 
 /*
 * @author zeezee - Initial contribution
@@ -31,24 +30,55 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
 
     private Thread readerThread;
 
-    protected byte[] buffer;
+    private SerialPortManager serialPortManager;
 
-    protected int bufferPos;
+    public OpenWMSSerialConnector(SerialPortManager serialPortManager) {
+        super();
+        this.serialPortManager = serialPortManager;
+    }
+
+    // protected byte[] buffer;
+
+    // protected int bufferPos;
 
     @Override
-    public void connect(OpenWMSBridgeConfiguration device) throws NoSuchPortException, PortInUseException,
-            UnsupportedCommOperationException, IOException, TooManyListenersException {
+    public void connect(OpenWMSBridgeConfiguration device)
+            throws PortInUseException, UnsupportedCommOperationException, IOException {
 
-        CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(device.serialPort);
-        CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000);
+        logger.info("Connecting to OpenWMS USB at {}", device.serialPort);
+        logger.debug("Serial port #### Jetzt gehts los");
 
-        serialPort = (SerialPort) commPort;
-        serialPort.setSerialPortParams(128000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-        // serialPort.enableReceiveThreshold(1);
-        // serialPort.enableReceiveTimeout(100); // In ms. Small values mean faster shutdown but more cpu usage.
-        serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_NONE);
+        SerialPortIdentifier portIdentifier = serialPortManager.getIdentifier(device.serialPort.toString());
+        if (portIdentifier == null) {
+            logger.debug("No serial port {}", device.serialPort);
+            throw new IOException("Could not find a gateway on given path '" + device.serialPort + "', "
+                    + serialPortManager.getIdentifiers().count() + " ports available.");
+        }
 
+        // CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(device.serialPort.toString());
+
+        // logger.debug("Serial port #### Schritt 1 - open Port");
+        SerialPort commPort = portIdentifier.open(this.getClass().getName(), 5000);
+        // CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000); // timeout 2 s.
+
+        // logger.debug("Serial port #### Schritt 2");
+        // serialPort = (SerialPort) commPort;
+        serialPort = commPort;
+
+        // logger.debug("Serial port #### Schritt 3 125000");
+        serialPort.setSerialPortParams(125000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+        // logger.debug("Serial port #### Schritt 4");
+        serialPort.enableReceiveThreshold(1);
+        // logger.debug("Serial port #### Schritt 5");
+        serialPort.enableReceiveTimeout(2000); // In ms. Small values mean faster shutdown but more cpu usage.
+
+        // logger.debug("Serial port #### Schritt 4");
+        // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_NONE);
+        // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT | SerialPort.FLOWCONTROL_RTSCTS_IN);
+
+        // logger.debug("Serial port #### Schritt 6");
         in = serialPort.getInputStream();
+        // logger.debug("Serial port #### Schritt 7");
         out = serialPort.getOutputStream();
 
         out.flush();
@@ -56,6 +86,7 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
             in.reset();
         }
 
+        // RXTX serial port library causes high CPU load
         // Start event listener, which will just sleep and slow down event loop
         try {
             serialPort.addEventListener(this);
@@ -111,12 +142,13 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
 
     @Override
     public void sendMessage(byte[] data) throws IOException {
+        String str = new String(data, StandardCharsets.UTF_8);
         if (out == null) {
             throw new IOException("Not connected sending messages is not possible");
         }
 
         if (logger.isTraceEnabled()) {
-            logger.trace("Send data (len={}): {}", data.length, HexUtils.bytesToHex(data));
+            logger.trace("Send data (data={}, len={}): {}", str, data.length, HexUtils.bytesToHex(data));
         }
 
         out.write(data);
