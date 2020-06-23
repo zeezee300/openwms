@@ -28,9 +28,11 @@ public class OpenWMSGetResponse {
     public String valance2;
     public String panId = "";
     public String deviceTyp;
-    public String wind;
+    public String windspeed;
     public String rain = ""; // ON - OFF
     public String temp;
+    public String brightness;
+    public String dusk;
     public String channel;
     public String networkid;
     public String wms_response;
@@ -69,7 +71,7 @@ public class OpenWMSGetResponse {
             setDeviceId(data.substring(2, 8));
             setMsgTyp(data.substring(8, 12));
             switch (msgTyp) {
-                case "5018":
+                case "5018": // Join Network request
                     payload = data.substring(12);
                     String s = payload.substring(4, 36);
                     setPanId(data);
@@ -100,35 +102,38 @@ public class OpenWMSGetResponse {
                     // setWmsResponse(OpenWMSMessageFactory.sendeSCANRESPONSE(deviceId, "FFFF", deviceTyp));
 
                     break;
-                case "7021":
+                case "7021": // Scan response
                     payload = data.substring(12);
                     setPanId(data);
                     setDeviceTyp(data);
                     break;
                 case "7080": // Wetter
                     payload = data.substring(12);
-                    setWind(String.valueOf(Integer.parseInt(payload.substring(2, 4), 16))); // WW 00-25 m/s
+                    setBrightness(payload.substring(4, 6));
+                    setWindspeed(String.valueOf(Integer.parseInt(payload.substring(2, 4), 16))); // WW 00-25 m/s
                     setRain(payload.substring(16, 18)); // RR 00: No Rain, C8: Rain
                     setTemp(payload.substring(18, 20)); // TT -20 bis +60
+                    setDusk(payload.substring(12, 14));
 
                     break;
                 case "8011":
+                    payload = data.substring(20);
                     switch (data.substring(12, 20)) {
-                        case "01000003": // position
+                        case "01000003": // position WMS Motor
                             // TODO
-                            payload = data.substring(20);
                             setPosition(String.valueOf(Integer.parseInt(payload.substring(0, 2), 16) / 2));
                             break;
-                        case "01000005": // position
-                            // TODO Valance, Angle etc.
-                            payload = data.substring(20);
+                        case "01000005": // position WMS Motor
                             setPosition(String.valueOf(Integer.parseInt(payload.substring(0, 2), 16) / 2));
                             break;
-                        case "26000046":
+                        case "26000046": // Current clock timer settings
                             // TODO
                             break;
-                        case "0C000006":
+                        case "0C000006": // Current limits
                             // TODO
+                            setWindspeed(String.valueOf(Integer.parseInt(payload.substring(0, 2), 16))); // WW 00-25 m/s
+                            setBrightness(payload.substring(4, 6));
+                            setDusk(payload.substring(6, 8));
                             break;
                     }
 
@@ -220,12 +225,35 @@ public class OpenWMSGetResponse {
         this.valance2 = valance2;
     }
 
-    public String getWind() {
-        return wind;
+    public String getWindspeed() {
+        return windspeed;
     }
 
-    public void setWind(String wind) {
-        this.wind = wind;
+    public void setWindspeed(String windspeed) {
+        this.windspeed = windspeed;
+    }
+
+    public String getBrightness() {
+        return brightness;
+    }
+
+    public void setBrightness(String brightness) {
+        int i = Integer.parseInt(brightness);
+        i = (i * 5);
+        if (i > 0) {
+            i = i + 5;
+        }
+        this.brightness = String.valueOf(i);
+    }
+
+    public String getDusk() {
+        return dusk;
+    }
+
+    public void setDusk(String s) {
+        String dusk;
+        dusk = String.valueOf(Integer.parseInt(s, 16) * 2);
+        this.dusk = dusk;
     }
 
     public void setRain(String rain) {
@@ -292,8 +320,8 @@ public class OpenWMSGetResponse {
                 }
 
             case CHANNEL_WINDSPEED:
-                if (wind != null) {
-                    return new DecimalType(wind);
+                if (windspeed != null) {
+                    return new DecimalType(windspeed);
                 } else {
                     return null;
                 }
@@ -312,6 +340,20 @@ public class OpenWMSGetResponse {
             case CHANNEL_TEMPERATURE:
                 if (temp != null) {
                     return new DecimalType(temp);
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_BRIGHTNESS:
+                if (brightness != null) {
+                    return new DecimalType(brightness);
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_DUSK:
+                if (dusk != null) {
+                    return new DecimalType(dusk);
                 } else {
                     return null;
                 }

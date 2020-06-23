@@ -112,6 +112,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
             if (configuration.serialPort != null) {
                 if (connector == null) {
                     connector = new OpenWMSSerialConnector(serialPortManager);
+
                 }
 
             } else if (configuration.host != null) {
@@ -129,8 +130,8 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 // controller does not response immediately after reset,
                 // so wait a while
                 // Thread.sleep(600);
-                String messageString = "{G}";
-                connector.sendMessage(messageString.getBytes());
+                // String messageString = "{G}";
+                // connector.sendMessage(messageString.getBytes());
                 // byte[] data = messageString.getBytes();
                 // Thread.sleep(600);
                 connector.addEventListener(eventListener);
@@ -187,7 +188,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
 
         @Override
         public void packetStrReceived(String data) {
-            logger.debug("Message received: {}", data);
+            logger.debug("Message received packet: {}", data);
             try {
                 if (data.replaceAll("[{}]", "").equals("gWMS USB-Stick")) {
                     logger.debug("Get USB-Stick Version");
@@ -223,12 +224,15 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                                 logger.error("An exception occurred while calling the DeviceStatusListener", e);
                             }
                         }
-                        // auf die jeweiligen empfangen "r"-Messages reagieren und Antwort senden .....
+                        // auf die jeweiligen empfangenen "r"-Messages reagieren und Antwort senden .....
                         if (wmsMsg.wms_response != null) {
                             sendMessage(wmsMsg.wms_response);
                         }
                         if (wmsMsg.networkid != null) {
                             thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, wmsMsg.networkid);
+
+                        }
+                        if (wmsMsg.panId != null) {
                             thing.setProperty(OpenWMSBindingConstants.PROPERTY_PANID, wmsMsg.panId);
 
                         }

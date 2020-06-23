@@ -38,7 +38,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
 @NonNullByDefault
 public class OpenWMSBindingConstants {
 
-    private static final String BINDING_ID = "openwms";
+    public static final String BINDING_ID = "openwms";
 
     // List of all Bridge Type UIDs
     public static final String BRIDGE_TYPE_MANUAL_BRIDGE = "bridge";
@@ -79,6 +79,8 @@ public class OpenWMSBindingConstants {
     public static final String CHANNEL_1 = "channel1";
     public static final String CHANNEL_SHUTTER = "shutter";
     public static final String CHANNEL_DIMMINGLEVEL = "dimminglevel";
+    public static final String CHANNEL_BRIGHTNESS = "brightness";
+    public static final String CHANNEL_DUSK = "dusk";
     public static final String CHANNEL_COMMAND_ID = "commandId";
     public static final String CHANNEL_COMMAND = "command";
     public static final String CHANNEL_STATUS = "status";
@@ -94,6 +96,10 @@ public class OpenWMSBindingConstants {
     public static final String PROPERTY_STATECHECK = "stateCheck";
     public static final String PROPERTY_CHANNEL = "channel";
     public static final String PROPERTY_NETWORKKEY = "Current WMS network key";
+    public static final String PROPERTY_WIND = "wind";
+    public static final String PROPERTY_SUN = "sun";
+    public static final String PROPERTY_DUSK = "dusk";
+    public static final String PROPERTY_RAIN = "rain";
 
     // public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
     // THING_TYPE_WEATHER);

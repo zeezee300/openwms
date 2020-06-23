@@ -89,15 +89,24 @@ Currently only blinds are supported.
 If you know the serial number of the motor and the PANID of your WMS-System you can configure the devices manually:
 
 Bridge: Must be provided
+
 DeviceId: 3 byte hex string (E49D08) - should be the Hex of Serial
+
 Serial: The serial-No. of the motor (123456) 
+
 Channel: 17 (default)
+
 PANID: 2byte hex string (FF9D08)
+
 Check-Time: time in seconds (how long is the time until the next state scan - defauld 60)
+
+
 
 Note:
 The DeviceId OR the serial-No is necessary!
+
 Also the PANID is required.
+
 
 ### Discovery (search for new devices with the remote control)
 
@@ -111,10 +120,10 @@ However, it is a prerequisite that the devices have already been trained in the 
 After the bridge is configured in openhab, wake up the remote control (simply press any button on the remote control). Then press the "Learn" button in the battery compartment for about 5 seconds until the green control lamp lights up. 
 
 You have to wait a few seconds until the green light (the right one on the front of the remote control) stops blinking and turns into red or orange.
-During the first scan the WMS network ID is determined and the LED light turns red. Then the red stop button must be pressed (this is the round button between the high and low buttons).
+During the first scan the WMS network ID is determined and the LED light turns red. Then the stop button must be pressed (this is the round button between the high and low buttons).
 
 The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (openhab PAPER UI).
-You can also find the current WMS network key as a property of the WMS-Stick transceiver
+For your information the current WMS network key will be stored as a property of the WMS-Stick transceiver
 
 Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
 

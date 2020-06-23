@@ -64,6 +64,72 @@
                 <description>Time to check the Status state in sec</description>
                 <default>60</default>
             </parameter>
+            <parameter name="ignoreConfig" type="boolean" required="true">
+                <label>Skip limit configuration</label>
+                <description>Fully skip and ignore the limit configuration. For using the weather station you can overwrite the  
+                    preconfigured limits for wind, rain, brightness and dusk.  When this is enabled, the set mode command and individual message
+                    configurations are ignored.
+                </description>
+                <default>true</default>
+            </parameter>
+            
+            <parameter name="rain" type="boolean" required="true">
+                <label>Rain on/off</label>
+                <description>Rain on/off</description>
+                <default>true</default>
+            </parameter>
+            
+            <parameter name="wind" type="text" required="false">
+                <label>limit wind</label>
+                <description>Set limit value wind</description>
+                <default>04</default>
+                <options>
+                    <option value="00">off</option>
+                    <option value="01">5 m/s</option>
+                    <option value="02">6 m/s</option>
+                    <option value="03">7 m/s</option>
+                    <option value="04">8 m/s</option>
+                    <option value="05">9 m/s</option>
+                    <option value="06">10 /m/s</option>
+                    <option value="07">11 m/s</option>
+                    <option value="08">12 m/s</option>
+                    <option value="09">13 m/s</option>                  
+                </options>
+            </parameter>
+            <parameter name="sun" type="text" required="false">
+                <label>limit sun</label>
+                <description>Set limit value sun</description>
+                <default>04</default>
+                <options>
+                    <option value="00">off</option>
+                    <option value="01">10 klx</option>
+                    <option value="02">15 klx</option>
+                    <option value="03">20 klx</option>
+                    <option value="04">25 klx</option>
+                    <option value="05">30 klx</option>
+                    <option value="06">35 klx</option>
+                    <option value="07">40 klx</option>
+                    <option value="08">45 klx</option>
+                    <option value="09">50 klx</option>                  
+                </options>
+            </parameter>
+            <parameter name="dusk" type="text" required="false">
+                <label>limit dusk</label>
+                <description>Set limit value dusk</description>
+                <default>04</default>
+                <options>
+                    <option value="00">off</option>
+                    <option value="01"> 16 lx</option>
+                    <option value="02"> 30 lx</option>
+                    <option value="03"> 46 lx</option>
+                    <option value="04"> 60 lx</option>
+                    <option value="05"> 80 lx</option>
+                    <option value="06">100 lx</option>
+                    <option value="07">150 lx</option>
+                    <option value="08">200 lx</option>
+                    <option value="09">400 lx</option>                  
+                </options>
+            </parameter>
         </config-description>
     </thing-type>
 

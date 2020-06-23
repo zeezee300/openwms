@@ -29,6 +29,7 @@ import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
 import org.eclipse.smarthome.core.types.Command;
 import org.eclipse.smarthome.core.types.RefreshType;
+import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.binding.openwms.messages.OpenWMSMessageFactory;
@@ -88,6 +89,18 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
         logger.debug("Initializing thing {}", getThing().getUID());
         initializeBridge((getBridge() == null) ? null : getBridge().getHandler(),
                 (getBridge() == null) ? null : getBridge().getStatus());
+
+        // Limits gemäß der vorgegeben Parameter setzen
+        if ((boolean) getThing().getConfiguration().getProperties().get("ignoreConfig") != true) {
+            // if (msgTyp.equals("8011")) {
+            Map<String, String> msg = OpenWMSMessageFactory.createMessage("SETLIMITS", thing);
+            for (Entry<String, String> entry : msg.entrySet()) {
+                System.out.println(entry.getValue());
+                bridgeHandler.sendMessage(entry.getValue());
+            }
+
+            // }
+        }
     }
 
     @Override
@@ -159,8 +172,10 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
 
     @Override
     public void onDeviceMessageReceived(ThingUID bridge, OpenWMSGetResponse message) {
+        String msgTyp = message.getMsgTyp();
         try {
             String id = message.getDeviceId();
+
             if (config.deviceId.equals(id)) {
                 // String receivedId = PACKET_TYPE_THING_TYPE_UID_MAP.get(message.getPacketType()).getId();
                 String receivedId = message.getDeviceId();
@@ -177,11 +192,29 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                         }
 
                     }
+                    if (message.networkid != null) {
+                        thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, message.networkid);
+
+                    }
+
+                    // // Limits gemäß der vorgegeben Parameter setzen
+                    // if ((boolean) getThing().getConfiguration().getProperties().get("ignoreConfig") != true) {
+                    // if (msgTyp.equals("8011")) {
+                    // Map<String, String> msg = OpenWMSMessageFactory.createMessage("SETLIMITS", thing);
+                    // for (Entry<String, String> entry : msg.entrySet()) {
+                    // System.out.println(entry.getValue());
+                    // bridgeHandler.sendMessage(entry.getValue());
+                    // }
+                    //
+                    // }
+                    // }
+
                 }
             }
         } catch (Exception e) {
             logger.error("Error occurred during message receiving", e);
         }
+
     }
 
 }

@@ -133,15 +133,21 @@ public class OpenWMSMessageFactory {
         String packetType = thing.getThingTypeUID().getId().toUpperCase();
         Map<String, Object> cfg = null;
         String pos = "";
+        int zeile = 0;
 
         cfg = thing.getConfiguration().getProperties();
         String channel = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_CHANNEL);
         String panId = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_PANID);
         String dest = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DEVICEID);
+        String wind = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_WIND);
+        String sun = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_SUN);
+        String dusk = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DUSK);
+        Boolean rain = (Boolean) cfg.get(OpenWMSBindingConstants.PROPERTY_RAIN);
+        // Boolean ignore_config = (Boolean) cfg.get(ignore_config);
 
         // zuerst muß der Channel und die panID gesetzt werden
         ret = setzenPANID(channel, panId);
-        messagesToSend.put("1", ret);
+        messagesToSend.put(String.valueOf(zeile++), ret);
         // dann kann der eigentlich Befehl gesetzt werden
         switch (packetType) {
             case "BLIND":
@@ -157,6 +163,10 @@ public class OpenWMSMessageFactory {
                     ret = sendeWINKEN(dest);
                 } else if (command.equals("GETSTATUS")) {
                     ret = "{R06" + dest + "801001000005" + "}"; // Current Position WMS Motor
+                    messagesToSend.put(String.valueOf(zeile++), ret);
+                    ret = "{R06" + dest + "80100C000006" + "}"; // Current limits
+                } else if (command.equals("SETLIMITS")) {
+                    ret = sendeLIMITS(dest, wind, rain, sun, dusk);
                 } else if (Integer.valueOf(command) > 0 && Integer.valueOf(command) <= 100) {
                     pos = command;
                     ret = sendePOSITION(dest, pos);
@@ -165,7 +175,7 @@ public class OpenWMSMessageFactory {
                     ret = sendePOSITION(dest, pos);
                 }
 
-                messagesToSend.put("2", ret);
+                messagesToSend.put(String.valueOf(zeile++), ret);
 
                 break;
 
@@ -207,6 +217,20 @@ public class OpenWMSMessageFactory {
         // 127).toString(16)).substr(-2).toUpperCase()
                 + "FF" // angle
                 + "FFFF00}"; // no idea how valance works
+        return ret;
+    }
+
+    private static String sendeLIMITS(String dest, String wind, Boolean rain, String sun, String dusk) {
+        String ret = "{R06" + dest + "80200D000004"; // Set new limits
+        ret = ret + wind;
+        if (rain) {
+            ret = ret + "01";
+        } else {
+            ret = ret + "00";
+        }
+        ret = ret + sun;
+        ret = ret + dusk;
+        ret = ret + "}";
         return ret;
     }
 

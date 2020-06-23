@@ -62,4 +62,5 @@ public abstract class OpenWMSBaseConnector implements OpenWMSConnectorInterface 
     int read(byte[] buffer, int offset, int length) throws IOException {
         return in.read(buffer, offset, length);
     }
+
 }

@@ -22,9 +22,9 @@ import org.slf4j.LoggerFactory;
 /*
 * @author zeezee - Initial contribution
 */
-public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements SerialPortEventListener {
+public class OpenWMSSerialConnectorNeu extends OpenWMSBaseConnector implements SerialPortEventListener {
 
-    private final Logger logger = LoggerFactory.getLogger(OpenWMSSerialConnector.class);
+    private final Logger logger = LoggerFactory.getLogger(OpenWMSSerialConnectorNeu.class);
 
     private OutputStream out;
     private SerialPort serialPort;
@@ -33,7 +33,7 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
 
     private SerialPortManager serialPortManager;
 
-    public OpenWMSSerialConnector(SerialPortManager serialPortManager) {
+    public OpenWMSSerialConnectorNeu(SerialPortManager serialPortManager) {
         super();
         this.serialPortManager = serialPortManager;
     }
@@ -65,11 +65,11 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
         /// serialPort = commPort;
 
         logger.debug("Serial port #### Schritt 3 230400");
-        serialPort.setSerialPortParams(128000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+        serialPort.setSerialPortParams(230400, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
         logger.debug("Serial port #### Schritt 4");
         serialPort.enableReceiveThreshold(1);
         logger.debug("Serial port #### Schritt 5");
-        serialPort.enableReceiveTimeout(100); // In ms. Small values mean faster shutdown but more cpu usage.
+        serialPort.enableReceiveTimeout(2000); // In ms. Small values mean faster shutdown but more cpu usage.
         // logger.debug("Serial port #### Schritt 4");
         // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_NONE);
         // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT | SerialPort.FLOWCONTROL_RTSCTS_IN);
@@ -96,13 +96,6 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
         readerThread = new OpenWMSStreamReader(this);
         readerThread.start();
 
-        // logger.debug("Serial port #### Schritt 10 - workaround");
-        // try {
-        // OpenWMSSerialWorkaround.TestSerial(device.serialPort.toString());
-        // } catch (SerialPortException e1) {
-        // // TODO Auto-generated catch block
-        // e1.printStackTrace();
-        // }
     }
 
     @Override

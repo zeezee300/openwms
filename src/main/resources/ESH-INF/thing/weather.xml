@@ -19,9 +19,9 @@
             <channel id="windspeed" typeId="windspeed" />
             <channel id="rain" typeId="rain" />
             <channel id="brightness" typeId="brightness" />
-            <channel id="dusk" typeId="illumination" />
+            <channel id="dusk" typeId="dusk" />
             <channel id="temperature" typeId="temperature" />
-            <channel id="humidity" typeId="humidity" />
+
             
            
         </channels>

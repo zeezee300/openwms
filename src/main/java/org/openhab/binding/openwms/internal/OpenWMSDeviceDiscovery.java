@@ -56,11 +56,11 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
         // zuerst prüfen, ob ein Netzwerkschlüssel vorhanden ist
         String netId = bridgeHandler.getThing().getProperties().get(OpenWMSBindingConstants.PROPERTY_NETWORKKEY);
         String panId = bridgeHandler.getThing().getProperties().get(OpenWMSBindingConstants.PROPERTY_PANID);
-        logger.debug("Scan - found Networkkey: " + netId);
-        logger.debug("Scan - found PANID: " + panId);
 
         // wenn Netzwerkschlüsssel und PANID vorhanden sind, dann weiter, sonst wird gesucht,
         if (netId != null && !netId.isEmpty() && !panId.isEmpty() && !panId.equals("")) {
+            logger.debug("Scan - found Networkkey: " + netId);
+            logger.debug("Scan - found PANID: " + panId);
             messageString = "{K401" + netId + "}";
             logger.debug("Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
@@ -68,7 +68,7 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
             messageString = "{M#" + Integer.toString(i) + panId + "}";
             logger.debug("Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
-            messageString = "{R04FFFFFF5060" + panId + "2021100}"; // chanel request
+            messageString = "{R04FFFFFF5060" + panId + "021100}"; // chanel request
             logger.debug("Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
 
@@ -113,8 +113,10 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
         }
         String id = message.getDeviceId();
         ThingTypeUID uid = OpenWMSBindingConstants.PACKET_TYPE_THING_TYPE_UID_MAP.get(message.getDeviceTyp());
+
         if (uid != null) {
             ThingUID thingUID = new ThingUID(uid, bridge, id);
+            // TODO prüfen, ob das Device bereits vorhanden ist (gibt es die Device-ID schon?)
             if (callback.getExistingThing(thingUID) == null) {
                 if (!bridgeHandler.getConfiguration().disableDiscovery) {
                     logger.trace("Adding new OpenWMS Device {} with id '{}' to smarthome inbox", thingUID, id);
