@@ -14,7 +14,7 @@ public class OpenWMSDeviceConfiguration {
     public String serial;
     public String channel;
     public String panId;
-    public String stateCheck;
+    public Boolean ignoreConfig;
     public Integer onCommandId;
     public Integer offCommandId;
 

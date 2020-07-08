@@ -7,24 +7,27 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 
 public class OpenWMSSerialWorkaround {
-    private static SerialPort serialPort = null;
+    // private static SerialPort serialPort = null;
     private final static Logger logger = LoggerFactory.getLogger(OpenWMSSerialConnector.class);
 
     public static void TestSerial(String port) throws SerialPortException {
+        // public static void TestSerial(String port) {
         logger.debug("Workaround ## start Port: {}", port);
 
-        serialPort = new SerialPort(port);
-        final int MAX_CONNECTION = 10;
+        SerialPort serialPort = new SerialPort(port);
+        final int MAX_CONNECTION = 3;
         int reconnections = 0;
 
         boolean scanning = true;
+
         while (scanning && reconnections < MAX_CONNECTION) { // 10x versuchen den Port zu öffnen, danach weiter
             {
                 reconnections++;
                 try {
                     System.out.println("Versuch " + reconnections);
+
                     logger.debug("Workaround ## Versuch {}", reconnections);
-                    // serialPort.openPort();
+                    serialPort.openPort();
                     // logger.debug("Workaround #### Pkt 1");
                     serialPort.setParams(SerialPort.BAUDRATE_128000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
                             SerialPort.PARITY_NONE);
@@ -37,6 +40,7 @@ public class OpenWMSSerialWorkaround {
                     // logger.debug("Workaround #### Pkt 4 {} ", scanning);
                 } catch (Exception e) {
                     System.out.println("Connect failed, waiting and trying again. Versuch " + reconnections);
+                    logger.debug("Connect failed, waiting and trying again");
                     e.printStackTrace();
                     try {
                         Thread.sleep(2000);// 2 seconds
@@ -47,7 +51,12 @@ public class OpenWMSSerialWorkaround {
             }
 
         }
-        // serialPort.closePort();
+        try {
+            serialPort.closePort();
+        } catch (SerialPortException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         serialPort = null;
 
         logger.debug("Workaround ## ende");

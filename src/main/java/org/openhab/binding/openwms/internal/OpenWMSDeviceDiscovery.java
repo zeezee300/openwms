@@ -73,7 +73,10 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
             bridgeHandler.sendMessage(messageString);
 
         } else {
-
+            logger.debug("Scan - found Networkkey: ");
+            int i = 17;
+            messageString = "{M%" + Integer.toString(i) + "FFFF}";
+            bridgeHandler.sendMessage(messageString);
             messageString = "{R04FFFFFF5058}";
             bridgeHandler.sendMessage(messageString);
 

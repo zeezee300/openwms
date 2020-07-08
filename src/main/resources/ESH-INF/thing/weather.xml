@@ -20,9 +20,7 @@
             <channel id="rain" typeId="rain" />
             <channel id="brightness" typeId="brightness" />
             <channel id="dusk" typeId="dusk" />
-            <channel id="temperature" typeId="temperature" />
-
-            
+            <channel id="temperature" typeId="temperature" />       
            
         </channels>
 

@@ -109,11 +109,11 @@ public class OpenWMSGetResponse {
                     break;
                 case "7080": // Wetter
                     payload = data.substring(12);
-                    setBrightness(payload.substring(4, 6));
                     setWindspeed(String.valueOf(Integer.parseInt(payload.substring(2, 4), 16))); // WW 00-25 m/s
+                    setBrightness(payload.substring(4, 6));
+                    setDusk(payload.substring(12, 14));
                     setRain(payload.substring(16, 18)); // RR 00: No Rain, C8: Rain
                     setTemp(payload.substring(18, 20)); // TT -20 bis +60
-                    setDusk(payload.substring(12, 14));
 
                     break;
                 case "8011":
@@ -230,6 +230,11 @@ public class OpenWMSGetResponse {
     }
 
     public void setWindspeed(String windspeed) {
+        // int i = Integer.parseInt(windspeed);
+        // if (i > 0) {
+        // i = i + 4;
+        // }
+        // this.windspeed = String.valueOf(i);
         this.windspeed = windspeed;
     }
 

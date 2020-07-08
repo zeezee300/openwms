@@ -114,7 +114,7 @@
         <item-type>Number</item-type>
         <label>Wind Speed</label>
         <description>Average wind speed in meters per second</description>
-        <state pattern="%d m/s" readOnly="true"></state>
+        <state pattern="%d %unit% m/s" readOnly="true"></state>
     </channel-type>
 
     <channel-type id="winddirection">
@@ -128,7 +128,7 @@
         <item-type>Number</item-type>
         <label>Brightness</label>
         <description>brightness in klx</description>
-        <state min="0" max="100" readOnly="true"></state>
+        <state pattern="%d %unit% klx" min="0" max="100" readOnly="true"></state>
     </channel-type>
     
     <channel-type id="dusk">

@@ -100,6 +100,7 @@ public class OpenWMSBindingConstants {
     public static final String PROPERTY_SUN = "sun";
     public static final String PROPERTY_DUSK = "dusk";
     public static final String PROPERTY_RAIN = "rain";
+    public static final String PROPERTY_OPMODE = "opmode";
 
     // public static final Set<ThingTypeUID> SUPPORTED_DEVICE_THING_TYPES_UIDS = ImmutableSet.of(THING_TYPE_BLIND,
     // THING_TYPE_WEATHER);

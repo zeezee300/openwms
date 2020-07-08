@@ -96,7 +96,7 @@ Serial: The serial-No. of the motor (123456)
 
 Channel: 17 (default)
 
-PANID: 2byte hex string (FF9D08)
+PANID: 2byte hex string (9D08). If you don't know the PANID try to use 'FFFF' as default.
 
 Check-Time: time in seconds (how long is the time until the next state scan - defauld 60)
 
@@ -123,9 +123,10 @@ You have to wait a few seconds until the green light (the right one on the front
 During the first scan the WMS network ID is determined and the LED light turns red. Then the stop button must be pressed (this is the round button between the high and low buttons).
 
 The USB-Stick should receives scan response messages from any sensor or actuator. You can find the new devices put in the Inbox (openhab PAPER UI).
-For your information the current WMS network key will be stored as a property of the WMS-Stick transceiver
+For your information the current WMS network key will be stored as a property of the WMS-Stick transceiver.
 
 Please note that currently only the preconfigured radio channel 17 is scanned. Other channel settings are supported but must be configured manually.
+It is suggested to repeat the process 2-3 times.
 
 ## Channels
 This binding currently supports following channel types for blinds and weather-moduls:
@@ -137,12 +138,24 @@ This binding currently supports following channel types for blinds and weather-m
 | shutter         | Rollershutter | Shutter/blind channel (UP, DOWN, STOP).                                            |
 | dimminglevel    | Dimmer        | Dimming level channel (Percentage 0-100 => 0 = UP, 100 = DOWN) .                   |
 
-### WEATHER 
+If you use a weather station, you can set the the preconfigured limits for wind, rain, brightness and dusk. 
+But attention: This will overwrite the default values.
+| Parameter                |  Description                                                                        |
+|--------------------------|-------------------------------------------------------------------------------------|
+| Skip Limit configuration | Fully skip and ignore the limit configuration. When this is enabled, the set mode command and individual message configurations are ignored.|
+| Rain                     | Note or ignore rain                                                                 |
+| Limit Wind               | Speed in meters per second: min = 5 m/s, max = 13 m/s                               |
+| Limit Sun                | Brightness: min = 10 klx, max = 50 klx                                              |
+| Limit Dusk               | Dusk: min = 16 klx, max = 400 klx                                                   |
+
+### WEATHER
 | Channel Type ID | Item Type     | Description                                                                        |
 |-----------------|---------------|------------------------------------------------------------------------------------|
-| windspeed       | Number        | Average wind speed in meters per second (read only)                                |
+| windspeed       | Number        | Average wind speed in meters per second: min = 5 m/s, max = 13 m/s (read only)     |
 | rain            | Switch        | Status rain => ON: rain, OFF: No rain (read only)                                  |
-| temperature     | Number        | Current temperature in degree Celsius (read only)                                  |
+| brightness      | Number        | (read only)                                                                        |
+| dusk            | Number        | (read only)                                                                        |
+| temperature     | Number        | Current temperature in degree Celsius (read only)                                  ||
 
 ## Full Example
 

@@ -87,20 +87,25 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
     @Override
     public void initialize() {
         logger.debug("Initializing thing {}", getThing().getUID());
+        String befehl = null;
         initializeBridge((getBridge() == null) ? null : getBridge().getHandler(),
                 (getBridge() == null) ? null : getBridge().getStatus());
 
         // Limits gemäß der vorgegeben Parameter setzen
-        if ((boolean) getThing().getConfiguration().getProperties().get("ignoreConfig") != true) {
-            // if (msgTyp.equals("8011")) {
-            Map<String, String> msg = OpenWMSMessageFactory.createMessage("SETLIMITS", thing);
-            for (Entry<String, String> entry : msg.entrySet()) {
-                System.out.println(entry.getValue());
-                bridgeHandler.sendMessage(entry.getValue());
+        config = getConfigAs(OpenWMSDeviceConfiguration.class);
+        logger.debug("Config: ignoreConfig '{}' for thing {}", config.ignoreConfig, getThing().getLabel());
+        if (config.ignoreConfig != null) {
+            if ((boolean) getThing().getConfiguration().getProperties().get("ignoreConfig") != true) {
+                // Limitüberwachung einschalten und Limits setzen (falls der Parameter 'IgnoreConfig' = false)
+                befehl = "SETLIMITS";
+                Map<String, String> msg = OpenWMSMessageFactory.createMessage(befehl, thing);
+                for (Entry<String, String> entry : msg.entrySet()) {
+                    System.out.println(entry.getValue());
+                    bridgeHandler.sendMessage(entry.getValue());
+                }
             }
-
-            // }
         }
+
     }
 
     @Override
@@ -173,13 +178,14 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
     @Override
     public void onDeviceMessageReceived(ThingUID bridge, OpenWMSGetResponse message) {
         String msgTyp = message.getMsgTyp();
+        logger.trace("Received: bridge: {} messageTyp: {}", bridge, msgTyp);
         try {
             String id = message.getDeviceId();
 
             if (config.deviceId.equals(id)) {
                 // String receivedId = PACKET_TYPE_THING_TYPE_UID_MAP.get(message.getPacketType()).getId();
                 String receivedId = message.getDeviceId();
-                logger.debug("Received message from bridge: {} message: {}", bridge, message);
+                // logger.debug("Received message from bridge: {} message: {}", bridge, message);
 
                 // nur für bereits bekannte Devices erfolgt eine weitere Verarbeitung
                 if (receivedId.equals(getThing().getConfiguration().getProperties().get("deviceId"))) {
@@ -195,6 +201,11 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                     if (message.networkid != null) {
                         thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, message.networkid);
 
+                    }
+                    if (message.panId != null && message.panId != "") { // die PANID wird gesetzt und aktualisiert
+                        Configuration configuration = editConfiguration();
+                        configuration.put(message.panId, configuration.get(OpenWMSBindingConstants.PROPERTY_PANID));
+                        updateConfiguration(configuration);
                     }
 
                     // // Limits gemäß der vorgegeben Parameter setzen

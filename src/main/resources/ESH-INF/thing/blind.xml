@@ -64,7 +64,9 @@
                 <description>Time to check the Status state in sec</description>
                 <default>60</default>
             </parameter>
+            
             <parameter name="ignoreConfig" type="boolean" required="true">
+                <advanced>true</advanced>
                 <label>Skip limit configuration</label>
                 <description>Fully skip and ignore the limit configuration. For using the weather station you can overwrite the  
                     preconfigured limits for wind, rain, brightness and dusk.  When this is enabled, the set mode command and individual message
@@ -74,12 +76,14 @@
             </parameter>
             
             <parameter name="rain" type="boolean" required="true">
-                <label>Rain on/off</label>
-                <description>Rain on/off</description>
+                <advanced>true</advanced>
+                <label>Rain off/on</label>
+                <description>Rain off/on</description>
                 <default>true</default>
             </parameter>
             
             <parameter name="wind" type="text" required="false">
+                <advanced>true</advanced>
                 <label>limit wind</label>
                 <description>Set limit value wind</description>
                 <default>04</default>
@@ -97,6 +101,7 @@
                 </options>
             </parameter>
             <parameter name="sun" type="text" required="false">
+                <advanced>true</advanced>
                 <label>limit sun</label>
                 <description>Set limit value sun</description>
                 <default>04</default>
@@ -114,6 +119,7 @@
                 </options>
             </parameter>
             <parameter name="dusk" type="text" required="false">
+                <advanced>true</advanced>
                 <label>limit dusk</label>
                 <description>Set limit value dusk</description>
                 <default>04</default>
@@ -130,6 +136,13 @@
                     <option value="09">400 lx</option>                  
                 </options>
             </parameter>
+            <parameter name="opmode" type="boolean" required="false">
+                <advanced>true</advanced>
+                <label>Op-Mode off/on</label>
+                <description>Set the OP-Mode off/on</description>
+                <default>true</default>
+            </parameter>
+            
         </config-description>
     </thing-type>
 

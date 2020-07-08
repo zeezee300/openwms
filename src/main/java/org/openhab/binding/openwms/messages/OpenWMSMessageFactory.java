@@ -143,7 +143,7 @@ public class OpenWMSMessageFactory {
         String sun = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_SUN);
         String dusk = (String) cfg.get(OpenWMSBindingConstants.PROPERTY_DUSK);
         Boolean rain = (Boolean) cfg.get(OpenWMSBindingConstants.PROPERTY_RAIN);
-        // Boolean ignore_config = (Boolean) cfg.get(ignore_config);
+        Boolean opmode = (Boolean) cfg.get(OpenWMSBindingConstants.PROPERTY_OPMODE);
 
         // zuerst muß der Channel und die panID gesetzt werden
         ret = setzenPANID(channel, panId);
@@ -166,7 +166,9 @@ public class OpenWMSMessageFactory {
                     messagesToSend.put(String.valueOf(zeile++), ret);
                     ret = "{R06" + dest + "80100C000006" + "}"; // Current limits
                 } else if (command.equals("SETLIMITS")) {
-                    ret = sendeLIMITS(dest, wind, rain, sun, dusk);
+                    ret = sendeLIMITS(dest, wind, rain, sun, dusk, opmode); // Limits gemäss der Parameter setzen
+                    // messagesToSend.put(String.valueOf(zeile++), ret);
+                    // ret = setOpMode(dest, opmode); // auch noch gleichzeitig die Comfortüberwachung ein-/ausschalten
                 } else if (Integer.valueOf(command) > 0 && Integer.valueOf(command) <= 100) {
                     pos = command;
                     ret = sendePOSITION(dest, pos);
@@ -220,8 +222,8 @@ public class OpenWMSMessageFactory {
         return ret;
     }
 
-    private static String sendeLIMITS(String dest, String wind, Boolean rain, String sun, String dusk) {
-        String ret = "{R06" + dest + "80200D000004"; // Set new limits
+    private static String sendeLIMITS(String dest, String wind, Boolean rain, String sun, String dusk, Boolean mode) {
+        String ret = "{R06" + dest + "8020" + "0D000004"; // Set new limits
         ret = ret + wind;
         if (rain) {
             ret = ret + "01";
@@ -230,6 +232,22 @@ public class OpenWMSMessageFactory {
         }
         ret = ret + sun;
         ret = ret + dusk;
+        if (mode) { // true = ON
+            ret = ret + "01";
+        } else { // false = OFF
+            ret = ret + "00";
+        }
+        ret = ret + "}";
+        return ret;
+    }
+
+    public static String setOpMode(String dest, Boolean mode) {
+        String ret = "{R06" + dest + "8020" + "0D040001"; // Set Comfort mode on/off;
+        if (mode) { // true = ON
+            ret = ret + "01";
+        } else { // false = OFF
+            ret = ret + "00";
+        }
         ret = ret + "}";
         return ret;
     }

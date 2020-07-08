@@ -19,6 +19,8 @@ import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jssc.SerialPortException;
+
 /*
 * @author zeezee - Initial contribution
 */
@@ -44,7 +46,7 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
 
     @Override
     public void connect(OpenWMSBridgeConfiguration device)
-            throws PortInUseException, UnsupportedCommOperationException, IOException {
+            throws PortInUseException, UnsupportedCommOperationException, IOException, SerialPortException {
 
         logger.info("Connecting to OpenWMS USB at {}", device.serialPort);
         logger.debug("Serial port #### Jetzt gehts los");
@@ -64,12 +66,18 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
         logger.debug("Serial port #### Schritt 2");
         /// serialPort = commPort;
 
-        logger.debug("Serial port #### Schritt 3 230400");
-        serialPort.setSerialPortParams(128000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-        logger.debug("Serial port #### Schritt 4");
-        serialPort.enableReceiveThreshold(1);
-        logger.debug("Serial port #### Schritt 5");
-        serialPort.enableReceiveTimeout(100); // In ms. Small values mean faster shutdown but more cpu usage.
+        logger.debug("Serial port #### Schritt 3 125000");
+        serialPort.setSerialPortParams(125000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+
+        try {
+            logger.debug("Serial port #### Schritt 4");
+            serialPort.enableReceiveThreshold(1);
+            logger.debug("Serial port #### Schritt 5");
+            serialPort.enableReceiveTimeout(100); // In ms. Small values mean faster shutdown but more cpu usage.
+        } catch (UnsupportedCommOperationException e) {
+            // rfc connections do not allow a ReceiveThreshold
+        }
+
         // logger.debug("Serial port #### Schritt 4");
         // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_NONE);
         // serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_OUT | SerialPort.FLOWCONTROL_RTSCTS_IN);
@@ -96,13 +104,13 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
         readerThread = new OpenWMSStreamReader(this);
         readerThread.start();
 
-        // logger.debug("Serial port #### Schritt 10 - workaround");
-        // try {
-        // OpenWMSSerialWorkaround.TestSerial(device.serialPort.toString());
-        // } catch (SerialPortException e1) {
-        // // TODO Auto-generated catch block
-        // e1.printStackTrace();
-        // }
+        logger.debug("Serial port #### Schritt 10 - workaround");
+        try {
+            OpenWMSSerialWorkaround.TestSerial(device.serialPort.toString());
+        } catch (SerialPortException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
     @Override

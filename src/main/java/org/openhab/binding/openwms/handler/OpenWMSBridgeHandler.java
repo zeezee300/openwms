@@ -229,10 +229,12 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                             sendMessage(wmsMsg.wms_response);
                         }
                         if (wmsMsg.networkid != null) {
+                            logger.debug("Set NetworkId {}", wmsMsg.networkid);
                             thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, wmsMsg.networkid);
 
                         }
                         if (wmsMsg.panId != null) {
+                            logger.debug("Set PANID {}", wmsMsg.panId);
                             thing.setProperty(OpenWMSBindingConstants.PROPERTY_PANID, wmsMsg.panId);
 
                         }
