@@ -114,7 +114,7 @@
         <item-type>Number</item-type>
         <label>Wind Speed</label>
         <description>Average wind speed in meters per second</description>
-        <state pattern="%d %unit% m/s" readOnly="true"></state>
+        <state pattern="%d %unit% m/s" readOnly="true" />
     </channel-type>
 
     <channel-type id="winddirection">
@@ -124,26 +124,26 @@
         <state min="0" max="360" step="1" readOnly="true"></state>
     </channel-type>
     
-    <channel-type id="brightness">
-        <item-type>Number</item-type>
-        <label>Brightness</label>
-        <description>brightness in klx</description>
-        <state pattern="%d %unit% klx" min="0" max="100" readOnly="true"></state>
-    </channel-type>
-    
     <channel-type id="dusk">
         <item-type>Number</item-type>
         <label>Dusk</label>
         <description>brightness in lx</description>
-        <state  min="0" max="500" pattern="%d %unit% lx" readOnly="true" />
-
+        <state pattern="%d %unit% lx" min="0" max="500" readOnly="true" ></state>
     </channel-type>
+    
+    <channel-type id="brightness">
+        <item-type>Number</item-type>
+        <label>Brightness</label>
+        <description>brightness in klx</description>
+        <state pattern="%d %unit% klx" min="0" max="100" readOnly="true" ></state>
+    </channel-type>
+    
     
     <channel-type id="illumination">
         <item-type>Number:Illuminance</item-type>
         <label>Dusk</label>
         <description>Illumination in lux</description>
-        <state pattern="%d %unit%" readOnly="true" />
+        <state pattern="%d %unit%" readOnly="true" ></state>
     </channel-type>
     
     <channel-type id="rain">

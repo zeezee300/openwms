@@ -13,16 +13,4 @@
 
   <name>openHAB Add-ons :: Bundles :: openwms Binding</name>
 
-  <dependencies>
-  	<dependency>
-  		<groupId>org.scream3r</groupId>
-  		<artifactId>jssc</artifactId>
-  		<version>2.8.0</version>
-  	</dependency>
-  	
-
-    
-
-
-  </dependencies>
 </project>

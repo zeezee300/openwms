@@ -243,12 +243,13 @@ public class OpenWMSGetResponse {
     }
 
     public void setBrightness(String brightness) {
-        int i = Integer.parseInt(brightness);
-        i = (i * 5);
-        if (i > 0) {
-            i = i + 5;
-        }
-        this.brightness = String.valueOf(i);
+        // int i = Integer.parseInt(brightness);
+        // i = (i * 5);
+        // if (i > 0) {
+        // i = i + 5;
+        // }
+        brightness = String.valueOf(Integer.parseInt(brightness, 16) * 2);
+        this.brightness = String.valueOf(brightness);
     }
 
     public String getDusk() {

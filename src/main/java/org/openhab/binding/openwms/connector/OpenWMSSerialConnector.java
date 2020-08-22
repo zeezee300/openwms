@@ -49,7 +49,7 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
             throws PortInUseException, UnsupportedCommOperationException, IOException, SerialPortException {
 
         logger.info("Connecting to OpenWMS USB at {}", device.serialPort);
-        logger.debug("Serial port #### Jetzt gehts los");
+        logger.debug("Serial port #### V6 2.5.5. jetzt gehts los");
 
         SerialPortIdentifier portIdentifier = serialPortManager.getIdentifier(device.serialPort.toString());
         if (portIdentifier == null) {
@@ -57,19 +57,22 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
             throw new IOException("Could not find a gateway on given path '" + device.serialPort + "', "
                     + serialPortManager.getIdentifiers().count() + " ports available.");
         }
+        logger.debug("Serial port #### Schritt 1 - open Port {}", portIdentifier.getName());
+        serialPort = portIdentifier.open(OpenWMSBindingConstants.BINDING_ID, 1000);
 
-        logger.debug("Serial port #### Schritt 1 - open Port");
-        serialPort = portIdentifier.open(OpenWMSBindingConstants.BINDING_ID, 2000);
         /// SerialPort commPort = portIdentifier.open(this.getClass().getName(), 5000);
         // CommPort commPort = portIdentifier.open(this.getClass().getName(), 2000); // timeout 2 s.
 
         logger.debug("Serial port #### Schritt 2");
         /// serialPort = commPort;
 
-        logger.debug("Serial port #### Schritt 3 125000");
-        serialPort.setSerialPortParams(125000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+        // logger.debug("Serial port #### Schritt 3 125000");
+        // serialPort.setSerialPortParams(125000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 
         try {
+            logger.debug("Serial port #### Schritt 3 125000");
+            serialPort.setSerialPortParams(125000, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
+                    SerialPort.PARITY_NONE);
             logger.debug("Serial port #### Schritt 4");
             serialPort.enableReceiveThreshold(1);
             logger.debug("Serial port #### Schritt 5");
@@ -107,9 +110,9 @@ public class OpenWMSSerialConnector extends OpenWMSBaseConnector implements Seri
         logger.debug("Serial port #### Schritt 10 - workaround");
         try {
             OpenWMSSerialWorkaround.TestSerial(device.serialPort.toString());
-        } catch (SerialPortException e1) {
+        } catch (SerialPortException e) {
             // TODO Auto-generated catch block
-            e1.printStackTrace();
+            e.printStackTrace();
         }
     }
 

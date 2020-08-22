@@ -93,7 +93,7 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
 
     @Override
     public void onDeviceMessageReceived(ThingUID bridge, OpenWMSGetResponse message) {
-        logger.trace("Received: bridge: {} message: {}", bridge, message);
+        // logger.trace("Received: bridge: {} message: {}", bridge, message);
         if (!message.getPanId().toString().equals("") && message.getMsgTyp().equals("7020")) {
             String messageString = "{M%17" + message.getPanId().toString() + "}";
             bridgeHandler.sendMessage(messageString);
