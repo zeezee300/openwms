@@ -29,6 +29,10 @@
                 <label>Device Id</label>
                 <description>Sensor Id in Hex. Example E49D08</description>
             </parameter>
+            <parameter name="serial" type="text" required="false">
+                <label>Device Serial</label>
+                <description>Sensor Serial-No Example 430049</description>
+            </parameter>
             <parameter name="channel" type="text" required="true">
                 <label>Channel</label>
                 <description>Specifies device channel. Default 17</description>
