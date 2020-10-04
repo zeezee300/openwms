@@ -132,7 +132,7 @@ public class OpenWMSMessageFactory {
         Map<String, String> messagesToSend = new Hashtable();
         String packetType = thing.getThingTypeUID().getId().toUpperCase();
         Map<String, Object> cfg = null;
-        String pos = "";
+        int pos = 0;
         int zeile = 0;
 
         cfg = thing.getConfiguration().getProperties();
@@ -152,10 +152,10 @@ public class OpenWMSMessageFactory {
         switch (packetType) {
             case "BLIND":
                 if (command.equals("ON") || command.equals("UP")) {
-                    pos = "0";
+                    pos = 0;
                     ret = sendePOSITION(dest, pos);
                 } else if (command.equals("OFF") || command.equals("DOWN")) {
-                    pos = "100";
+                    pos = 100;
                     ret = sendePOSITION(dest, pos);
                 } else if (command.equals("STOP")) {
                     ret = "{R06" + dest + "7070" + "01" + "FF" + "FF" + "FFFF00}";
@@ -169,11 +169,11 @@ public class OpenWMSMessageFactory {
                     ret = sendeLIMITS(dest, wind, rain, sun, dusk, opmode); // Limits gemäss der Parameter setzen
                     // messagesToSend.put(String.valueOf(zeile++), ret);
                     // ret = setOpMode(dest, opmode); // auch noch gleichzeitig die Comfortüberwachung ein-/ausschalten
-                } else if (Integer.valueOf(command) > 0 && Integer.valueOf(command) <= 100) {
-                    pos = command;
+                } else if (Float.valueOf(command) > 0.0 && Float.valueOf(command) <= 100.0) {
+                    pos = Math.round(Float.valueOf(command));
                     ret = sendePOSITION(dest, pos);
                 } else {
-                    pos = "0";
+                    pos = 0;
                     ret = sendePOSITION(dest, pos);
                 }
 
@@ -210,8 +210,8 @@ public class OpenWMSMessageFactory {
         return ret;
     }
 
-    private static String sendePOSITION(String dest, String position) {
-        String pos = Integer.toHexString(Math.min(Math.max(Integer.valueOf(position), 0), 100) * 2).toUpperCase();
+    private static String sendePOSITION(String dest, int position) {
+        String pos = Integer.toHexString(Math.min(Math.max(position, 0), 100) * 2).toUpperCase();
         pos = ("00" + pos).substring(pos.length()); // mit führenden Nullen auf 2 Stelle auffüllen
         String ret = "{R06" + dest + "7070" + "03" + pos
 
