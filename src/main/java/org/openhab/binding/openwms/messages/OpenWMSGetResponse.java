@@ -122,9 +122,13 @@ public class OpenWMSGetResponse {
                         case "01000003": // position WMS Motor
                             // TODO
                             setPosition(String.valueOf(Integer.parseInt(payload.substring(0, 2), 16) / 2));
+                            setValance1(String.valueOf(Integer.parseInt(payload.substring(4, 6), 16) / 2));
+                            setValance2(String.valueOf(Integer.parseInt(payload.substring(6, 8), 16) / 2));
                             break;
                         case "01000005": // position WMS Motor
                             setPosition(String.valueOf(Integer.parseInt(payload.substring(0, 2), 16) / 2));
+                            setValance1(String.valueOf(Integer.parseInt(payload.substring(4, 6), 16) / 2));
+                            setValance2(String.valueOf(Integer.parseInt(payload.substring(6, 8), 16) / 2));
                             break;
                         case "26000046": // Current clock timer settings
                             // TODO
@@ -180,7 +184,8 @@ public class OpenWMSGetResponse {
     }
 
     public void setPosition(String position) {
-        this.position = position;
+        if (!position.toUpperCase().equals("FF"))
+            this.position = position;
     }
 
     public String getDeviceId() {
@@ -214,7 +219,8 @@ public class OpenWMSGetResponse {
     }
 
     public void setValance1(String valance1) {
-        this.valance1 = valance1;
+        if (!valance1.toUpperCase().equals("FF"))
+            this.valance1 = valance1;
     }
 
     public String getValance2() {
@@ -222,7 +228,8 @@ public class OpenWMSGetResponse {
     }
 
     public void setValance2(String valance2) {
-        this.valance2 = valance2;
+        if (!valance2.toUpperCase().equals("FF"))
+            this.valance2 = valance2;
     }
 
     public String getWindspeed() {
@@ -325,6 +332,20 @@ public class OpenWMSGetResponse {
                     return null;
                 }
 
+            case CHANNEL_VALANCE1:
+                if (valance1 != null) {
+                    return new PercentType(valance1);
+                } else {
+                    return null;
+                }
+
+            case CHANNEL_VALANCE2:
+                if (valance2 != null) {
+                    return new PercentType(valance2);
+                } else {
+                    return null;
+                }
+
             case CHANNEL_WINDSPEED:
                 if (windspeed != null) {
                     return new DecimalType(windspeed);
@@ -371,7 +392,7 @@ public class OpenWMSGetResponse {
     }
 
     public void convertFromState(String channelId, Type type) {
-        if (CHANNEL_SHUTTER.equals(channelId)) {
+        if (CHANNEL_SHUTTER.equals(channelId) || CHANNEL_VALANCE1.equals(channelId) || CHANNEL_VALANCE2.equals(channelId)) {
             if (type instanceof OpenClosedType) {
                 command = (type == OpenClosedType.CLOSED ? Commands.CLOSE : Commands.OPEN);
             } else if (type instanceof UpDownType) {

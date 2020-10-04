@@ -66,7 +66,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                 String t = getThing().getThingTypeUID().getId().toUpperCase();
                 logger.debug("Thing: ", t);
 
-                Map<String, String> msg = OpenWMSMessageFactory.createMessage(command.toString(), thing);
+                Map<String, String> msg = OpenWMSMessageFactory.createMessage(command.toString(), thing, channelUID);
                 // String tt = getThing().g.getThingTypeUID().getId().toUpperCase();
                 // .convertPacketType(getThing().getThingTypeUID().getId().toUpperCase());
 
@@ -98,7 +98,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
             if ((boolean) getThing().getConfiguration().getProperties().get("ignoreConfig") != true) {
                 // Limitüberwachung einschalten und Limits setzen (falls der Parameter 'IgnoreConfig' = false)
                 befehl = "SETLIMITS";
-                Map<String, String> msg = OpenWMSMessageFactory.createMessage(befehl, thing);
+                Map<String, String> msg = OpenWMSMessageFactory.createMessage(befehl, thing, null);
                 for (Entry<String, String> entry : msg.entrySet()) {
                     System.out.println(entry.getValue());
                     bridgeHandler.sendMessage(entry.getValue());
@@ -145,7 +145,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                         // logger.debug("Checking OpenWMS BLIND connection, thing status = {}", thing.getStatus());
                         logger.debug("Checking OpenWMS connection, thing label = {}, thing status = {}",
                                 thing.getLabel(), thing.getStatus());
-                        Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing);
+                        Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing, null);
                         for (Entry<String, String> entry : msg.entrySet()) {
                             System.out.println(entry.getValue());
                             bridgeHandler.sendMessage(entry.getValue());
