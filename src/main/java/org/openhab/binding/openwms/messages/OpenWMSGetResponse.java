@@ -327,21 +327,33 @@ public class OpenWMSGetResponse {
 
             case CHANNEL_SHUTTER:
                 if (position != null) {
-                    return new PercentType(position);
+                    try {
+                        return new PercentType(position);
+                    } catch(IllegalArgumentException e) {
+                        return null;
+                    }
                 } else {
                     return null;
                 }
 
             case CHANNEL_VALANCE1:
                 if (valance1 != null) {
-                    return new PercentType(valance1);
+                    try {
+                        return new PercentType(valance1);
+                    } catch(IllegalArgumentException e) {
+                        return null;
+                    }
                 } else {
                     return null;
                 }
 
             case CHANNEL_VALANCE2:
                 if (valance2 != null) {
-                    return new PercentType(valance2);
+                    try {
+                        return new PercentType(valance2);
+                    } catch(IllegalArgumentException e) {
+                        return null;
+                    }
                 } else {
                     return null;
                 }
