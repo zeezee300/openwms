@@ -190,55 +190,61 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
         public void packetStrReceived(String data) {
             logger.debug("Message received packet: {}", data);
             try {
-                if (data.replaceAll("[{}]", "").equals("gWMS USB-Stick")) {
-                    logger.debug("Get USB-Stick Version");
-                    updateStatus(ThingStatus.ONLINE);
+                // weiter nur dann, wenn überhaupt Daten vorhanden sind....
+                if (data.replaceAll("[{}]", "").length() > 0) {
+                    if (data.replaceAll("[{}]", "").equals("gWMS USB-Stick")) {
+                        logger.debug("Get USB-Stick Version");
+                        updateStatus(ThingStatus.ONLINE);
 
-                    try {
-                        connector.sendMessage(OpenWMSMessageFactory.VERSION.getBytes());
-                        // thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, "Version 123456");
+                        try {
+                            connector.sendMessage(OpenWMSMessageFactory.VERSION.getBytes());
+                            // thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, "Version 123456");
 
-                    } catch (IOException e) {
+                        } catch (IOException e) {
 
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
 
-                } else if (data.replaceAll("[{}]", "").substring(0, 1).equals("v")) {
-                    logger.debug("Set USB-Stick Version");
-                    // thing.setProperty(Thing.PROPERTY_FIRMWARE_VERSION, data.replaceAll("[{}]", ""));
-                    thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, data.replaceAll("[{}]", ""));
+                    } else if (data.replaceAll("[{}]", "").substring(0, 1).equals("v")) {
+                        logger.debug("Set USB-Stick Version");
+                        // thing.setProperty(Thing.PROPERTY_FIRMWARE_VERSION, data.replaceAll("[{}]", ""));
+                        thing.setProperty(Thing.PROPERTY_HARDWARE_VERSION, data.replaceAll("[{}]", ""));
 
-                } else {
+                    } else if (data.replaceAll("[{}]", "").substring(0, 1).equals("f")) {
+                        logger.debug("{f} An error occurd with the last command send to the WMS Stick");
 
-                    if (data.replaceAll("[{}]", "").substring(0, 1).equals("r")) {
-                        // String txt = getThing().getThingTypeUID().getId().toUpperCase();
+                    } else {
 
-                        OpenWMSGetResponse wmsMsg = new OpenWMSGetResponse(data);
+                        if (data.replaceAll("[{}]", "").substring(0, 1).equals("r")) {
+                            // String txt = getThing().getThingTypeUID().getId().toUpperCase();
 
-                        for (DeviceMessageListener deviceStatusListener : deviceStatusListeners) {
-                            try {
-                                deviceStatusListener.onDeviceMessageReceived(getThing().getUID(), wmsMsg);
-                            } catch (Exception e) {
-                                // catch all exceptions give all handlers a fair chance of handling the messages
-                                logger.error("An exception occurred while calling the DeviceStatusListener", e);
+                            OpenWMSGetResponse wmsMsg = new OpenWMSGetResponse(data);
+
+                            for (DeviceMessageListener deviceStatusListener : deviceStatusListeners) {
+                                try {
+                                    deviceStatusListener.onDeviceMessageReceived(getThing().getUID(), wmsMsg);
+                                } catch (Exception e) {
+                                    // catch all exceptions give all handlers a fair chance of handling the messages
+                                    logger.error("An exception occurred while calling the DeviceStatusListener", e);
+                                }
                             }
-                        }
-                        // auf die jeweiligen empfangenen "r"-Messages reagieren und Antwort senden .....
-                        if (wmsMsg.wms_response != null) {
-                            sendMessage(wmsMsg.wms_response);
-                        }
-                        if (wmsMsg.networkid != null) {
-                            logger.debug("Set NetworkId {}", wmsMsg.networkid);
-                            thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, wmsMsg.networkid);
+                            // auf die jeweiligen empfangenen "r"-Messages reagieren und Antwort senden .....
+                            if (wmsMsg.wms_response != null) {
+                                sendMessage(wmsMsg.wms_response);
+                            }
+                            if (wmsMsg.networkid != null) {
+                                logger.debug("Set NetworkId {}", wmsMsg.networkid);
+                                thing.setProperty(OpenWMSBindingConstants.PROPERTY_NETWORKKEY, wmsMsg.networkid);
+
+                            }
+                            if (wmsMsg.panId != null && wmsMsg.panId != "") {
+                                logger.debug("Set PANID {}", wmsMsg.panId);
+                                thing.setProperty(OpenWMSBindingConstants.PROPERTY_PANID, wmsMsg.panId);
+
+                            }
 
                         }
-                        if (wmsMsg.panId != null && wmsMsg.panId != "") {
-                            logger.debug("Set PANID {}", wmsMsg.panId);
-                            thing.setProperty(OpenWMSBindingConstants.PROPERTY_PANID, wmsMsg.panId);
-
-                        }
-
                     }
                 }
 
