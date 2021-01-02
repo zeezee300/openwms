@@ -21,7 +21,7 @@ import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
+import org.openhab.binding.openwms.internal.OpenWMSBridgeConfiguration;
 import org.openhab.core.util.HexUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

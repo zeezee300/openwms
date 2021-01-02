@@ -13,7 +13,7 @@
 
 package org.openhab.binding.openwms.messages;
 
-import static org.openhab.binding.openwms.config.OpenWMSBindingConstants.*;
+import static org.openhab.binding.openwms.internal.OpenWMSBindingConstants.*;
 
 import org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration;
 import org.openhab.core.config.discovery.DiscoveryResultBuilder;

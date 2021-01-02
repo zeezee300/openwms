@@ -14,7 +14,7 @@ package org.openhab.binding.openwms.connector;
 
 import java.io.IOException;
 
-import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
+import org.openhab.binding.openwms.internal.OpenWMSBridgeConfiguration;
 
 /**
  * @author zeezee - Initial contribution

@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.TooManyListenersException;
 
 import org.apache.commons.io.IOUtils;
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
-import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
+import org.openhab.binding.openwms.internal.OpenWMSBindingConstants;
+import org.openhab.binding.openwms.internal.OpenWMSBridgeConfiguration;
 import org.openhab.core.io.transport.serial.PortInUseException;
 import org.openhab.core.io.transport.serial.SerialPort;
 import org.openhab.core.io.transport.serial.SerialPortEvent;

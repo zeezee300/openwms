@@ -15,7 +15,6 @@ package org.openhab.binding.openwms.internal;
 
 import java.util.Set;
 
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.core.config.discovery.AbstractDiscoveryService;

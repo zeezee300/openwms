@@ -10,7 +10,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package org.openhab.binding.openwms.config;
+package org.openhab.binding.openwms.internal;
 
 /**
  * @author zeezee - Initial contribution

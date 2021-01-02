@@ -18,7 +18,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.binding.openwms.messages.OpenWMSMessageFactory;

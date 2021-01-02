@@ -17,7 +17,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
+import org.openhab.binding.openwms.internal.OpenWMSBindingConstants;
 import org.openhab.core.thing.Thing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

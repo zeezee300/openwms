@@ -21,13 +21,13 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
-import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.connector.OpenWMSConnectorInterface;
 import org.openhab.binding.openwms.connector.OpenWMSEventListener;
 import org.openhab.binding.openwms.connector.OpenWMSSerialConnector;
 import org.openhab.binding.openwms.connector.OpenWMSTcpConnector;
 import org.openhab.binding.openwms.internal.DeviceMessageListener;
+import org.openhab.binding.openwms.internal.OpenWMSBindingConstants;
+import org.openhab.binding.openwms.internal.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.binding.openwms.messages.OpenWMSMessageFactory;
 import org.openhab.core.io.transport.serial.SerialPortManager;
