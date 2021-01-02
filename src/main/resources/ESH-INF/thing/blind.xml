@@ -1,149 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <thing:thing-descriptions bindingId="openwms"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:thing="http://openhab.org/schemas/thing-description/v1.0.0"
-    xsi:schemaLocation="http://openhab.org/schemas/thing-description/v1.0.0 http://openhab.org/schemas/thing-description-1.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:thing="http://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://openhab.org/schemas/thing-description/v1.0.0 http://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-    <thing-type id="blind">
-        <supported-bridge-type-refs>
-            <bridge-type-ref id="bridge" />
-            <bridge-type-ref id="tcpbridge" />
-      
-        </supported-bridge-type-refs>
+	<thing-type id="blind">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="bridge"/>
+			<bridge-type-ref id="tcpbridge"/>
+
+		</supported-bridge-type-refs>
 
 
-        <label>OpenWMS Blind Actuator</label>
-        <description>A WMS Blind device</description>
+		<label>OpenWMS Blind Actuator</label>
+		<description>A WMS Blind device</description>
 
-        <channels>
-            <channel id="command" typeId="command" />
-            <channel id="shutter" typeId="shutter" />
-            <channel id="dimminglevel" typeId="dimminglevel" />
-            
-           
-        </channels>
+		<channels>
+			<channel id="command" typeId="command"/>
+			<channel id="shutter" typeId="shutter"/>
+			<channel id="dimminglevel" typeId="dimminglevel"/>
 
-        <config-description>
-            <parameter name="deviceId" type="text" required="false">
-                <label>Device Id</label>
-                <description>Sensor Id in Hex. Example E49D08</description>
-            </parameter>
-            <parameter name="serial" type="text" required="false">
-                <label>Device Serial</label>
-                <description>Sensor Serial-No Example 430049</description>
-            </parameter>
-            <parameter name="channel" type="text" required="true">
-                <label>Channel</label>
-                <description>Specifies device channel. Default 17</description>
-                <default>17</default>
-                <options>
-                    <option value="11">Kanal 11</option>
-                    <option value="12">Kanal 12</option>
-                    <option value="13">Kanal 13</option>
-                    <option value="14">Kanal 14</option>
-                    <option value="15">Kanal 15</option>
-                    <option value="16">Kanal 16</option>
-                    <option value="17">Kanal 17</option>
-                    <option value="18">Kanal 18</option>
-                    <option value="19">Kanal 19</option>
-                    <option value="20">Kanal 20</option>
-                    <option value="21">Kanal 21</option>
-                    <option value="22">Kanal 22</option>
-                    <option value="23">Kanal 23</option>
-                    <option value="24">Kanal 24</option>
-                    <option value="25">Kanal 25</option>
-                    <option value="26">Kanal 26</option>
-                </options>
-            </parameter>
-            <parameter name="panId" type="text" required="true">
-                <label>PANID</label>
-                <description>Specifies device PANID. Example 4DE4</description>
-            </parameter>
-            <parameter name="stateCheck" type="text" required="true">
-                <label>Check Time</label>
-                <description>Time to check the Status state in sec</description>
-                <default>60</default>
-            </parameter>
-            
-            <parameter name="ignoreConfig" type="boolean" required="true">
-                <advanced>true</advanced>
-                <label>Skip limit configuration</label>
-                <description>Fully skip and ignore the limit configuration. For using the weather station you can overwrite the  
-                    preconfigured limits for wind, rain, brightness and dusk.  When this is enabled, the set mode command and individual message
-                    configurations are ignored.
-                </description>
-                <default>true</default>
-            </parameter>
-            
-            <parameter name="rain" type="boolean" required="true">
-                <advanced>true</advanced>
-                <label>Rain off/on</label>
-                <description>Rain off/on</description>
-                <default>true</default>
-            </parameter>
-            
-            <parameter name="wind" type="text" required="false">
-                <advanced>true</advanced>
-                <label>limit wind</label>
-                <description>Set limit value wind</description>
-                <default>04</default>
-                <options>
-                    <option value="00">off</option>
-                    <option value="01">5 m/s</option>
-                    <option value="02">6 m/s</option>
-                    <option value="03">7 m/s</option>
-                    <option value="04">8 m/s</option>
-                    <option value="05">9 m/s</option>
-                    <option value="06">10 /m/s</option>
-                    <option value="07">11 m/s</option>
-                    <option value="08">12 m/s</option>
-                    <option value="09">13 m/s</option>                  
-                </options>
-            </parameter>
-            <parameter name="sun" type="text" required="false">
-                <advanced>true</advanced>
-                <label>limit sun</label>
-                <description>Set limit value sun</description>
-                <default>04</default>
-                <options>
-                    <option value="00">off</option>
-                    <option value="01">10 klx</option>
-                    <option value="02">15 klx</option>
-                    <option value="03">20 klx</option>
-                    <option value="04">25 klx</option>
-                    <option value="05">30 klx</option>
-                    <option value="06">35 klx</option>
-                    <option value="07">40 klx</option>
-                    <option value="08">45 klx</option>
-                    <option value="09">50 klx</option>                  
-                </options>
-            </parameter>
-            <parameter name="dusk" type="text" required="false">
-                <advanced>true</advanced>
-                <label>limit dusk</label>
-                <description>Set limit value dusk</description>
-                <default>04</default>
-                <options>
-                    <option value="00">off</option>
-                    <option value="01"> 16 lx</option>
-                    <option value="02"> 30 lx</option>
-                    <option value="03"> 46 lx</option>
-                    <option value="04"> 60 lx</option>
-                    <option value="05"> 80 lx</option>
-                    <option value="06">100 lx</option>
-                    <option value="07">150 lx</option>
-                    <option value="08">200 lx</option>
-                    <option value="09">400 lx</option>                  
-                </options>
-            </parameter>
-            <parameter name="opmode" type="boolean" required="false">
-                <advanced>true</advanced>
-                <label>Op-Mode off/on</label>
-                <description>Set the OP-Mode off/on</description>
-                <default>true</default>
-            </parameter>
-            
-        </config-description>
-    </thing-type>
+
+		</channels>
+
+		<config-description>
+			<parameter name="deviceId" type="text" required="false">
+				<label>Device Id</label>
+				<description>Sensor Id in Hex. Example E49D08</description>
+			</parameter>
+			<parameter name="serial" type="text" required="false">
+				<label>Device Serial</label>
+				<description>Sensor Serial-No Example 430049</description>
+			</parameter>
+			<parameter name="channel" type="text" required="true">
+				<label>Channel</label>
+				<description>Specifies device channel. Default 17</description>
+				<default>17</default>
+				<options>
+					<option value="11">Kanal 11</option>
+					<option value="12">Kanal 12</option>
+					<option value="13">Kanal 13</option>
+					<option value="14">Kanal 14</option>
+					<option value="15">Kanal 15</option>
+					<option value="16">Kanal 16</option>
+					<option value="17">Kanal 17</option>
+					<option value="18">Kanal 18</option>
+					<option value="19">Kanal 19</option>
+					<option value="20">Kanal 20</option>
+					<option value="21">Kanal 21</option>
+					<option value="22">Kanal 22</option>
+					<option value="23">Kanal 23</option>
+					<option value="24">Kanal 24</option>
+					<option value="25">Kanal 25</option>
+					<option value="26">Kanal 26</option>
+				</options>
+			</parameter>
+			<parameter name="panId" type="text" required="true">
+				<label>PANID</label>
+				<description>Specifies device PANID. Example 4DE4</description>
+			</parameter>
+			<parameter name="stateCheck" type="text" required="true">
+				<label>Check Time</label>
+				<description>Time to check the Status state in sec</description>
+				<default>60</default>
+			</parameter>
+
+			<parameter name="ignoreConfig" type="boolean" required="true">
+				<advanced>true</advanced>
+				<label>Skip limit configuration</label>
+				<description>Fully skip and ignore the limit configuration. For using the weather station you can overwrite the
+					preconfigured limits for wind, rain, brightness and dusk. When this is enabled, the set mode command and individual
+					message
+					configurations are ignored.
+				</description>
+				<default>true</default>
+			</parameter>
+
+			<parameter name="rain" type="boolean" required="true">
+				<advanced>true</advanced>
+				<label>Rain off/on</label>
+				<description>Rain off/on</description>
+				<default>true</default>
+			</parameter>
+
+			<parameter name="wind" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit wind</label>
+				<description>Set limit value wind</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01">5 m/s</option>
+					<option value="02">6 m/s</option>
+					<option value="03">7 m/s</option>
+					<option value="04">8 m/s</option>
+					<option value="05">9 m/s</option>
+					<option value="06">10 /m/s</option>
+					<option value="07">11 m/s</option>
+					<option value="08">12 m/s</option>
+					<option value="09">13 m/s</option>
+				</options>
+			</parameter>
+			<parameter name="sun" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit sun</label>
+				<description>Set limit value sun</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01">10 klx</option>
+					<option value="02">15 klx</option>
+					<option value="03">20 klx</option>
+					<option value="04">25 klx</option>
+					<option value="05">30 klx</option>
+					<option value="06">35 klx</option>
+					<option value="07">40 klx</option>
+					<option value="08">45 klx</option>
+					<option value="09">50 klx</option>
+				</options>
+			</parameter>
+			<parameter name="dusk" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit dusk</label>
+				<description>Set limit value dusk</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01"> 16 lx</option>
+					<option value="02"> 30 lx</option>
+					<option value="03"> 46 lx</option>
+					<option value="04"> 60 lx</option>
+					<option value="05"> 80 lx</option>
+					<option value="06">100 lx</option>
+					<option value="07">150 lx</option>
+					<option value="08">200 lx</option>
+					<option value="09">400 lx</option>
+				</options>
+			</parameter>
+			<parameter name="opmode" type="boolean" required="false">
+				<advanced>true</advanced>
+				<label>Op-Mode off/on</label>
+				<description>Set the OP-Mode off/on</description>
+				<default>true</default>
+			</parameter>
+
+		</config-description>
+	</thing-type>
 
 </thing:thing-descriptions>

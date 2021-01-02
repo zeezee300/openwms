@@ -1,3 +1,15 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.openhab.binding.openwms.connector;
 
 import java.io.IOException;
@@ -9,15 +21,13 @@ import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
-import org.eclipse.smarthome.core.util.HexUtils;
 import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
+import org.openhab.core.util.HexUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * OpenWMS USB connector for TCP/IP communication.
- *
- *
+ * @author zeezee - Initial contribution
  */
 public class OpenWMSTcpConnector extends OpenWMSBaseConnector {
     private final Logger logger = LoggerFactory.getLogger(OpenWMSTcpConnector.class);
@@ -67,11 +77,10 @@ public class OpenWMSTcpConnector extends OpenWMSBaseConnector {
                 }
                 scanning = false;
             } catch (UnknownHostException e) {
-                System.out.println("Unknown Host...");
-                e.printStackTrace();
+                logger.error("Unkown Host Error: message: {}", e.getMessage());
+
             } catch (IOException e) {
-                System.out.println("IOProbleme...");
-                e.printStackTrace();
+                logger.error("IO Error: message: {}", e.getMessage());
             }
         }
         readerThread = new OpenWMSStreamReader(this);
@@ -122,7 +131,6 @@ public class OpenWMSTcpConnector extends OpenWMSBaseConnector {
         }
         out.write(data);
         out.flush();
-
     }
 
     @Override

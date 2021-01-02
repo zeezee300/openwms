@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="openwms"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+
+	<channel-type id="command">
+		<item-type>Switch</item-type>
+		<label>Command</label>
+		<description>Command channel</description>
+	</channel-type>
+
+	<channel-type id="commandId">
+		<item-type>Number</item-type>
+		<label>Command ID</label>
+		<description>Command channel, ID of the channel</description>
+		<state min="0" max="255" step="1" pattern="%d" readOnly="false"/>
+	</channel-type>
+
+	<channel-type id="contact">
+		<item-type>Contact</item-type>
+		<label>Contact</label>
+		<description>Contact channel</description>
+	</channel-type>
+
+	<!-- General Switch Channel -->
+	<channel-type id="generalSwitch">
+		<item-type>Switch</item-type>
+		<label>Switch Channel A</label>
+		<description>The switch channel allows to switch on and off.</description>
+		<category>Switch</category>
+	</channel-type>
+
+	<channel-type id="datetime">
+		<item-type>DateTime</item-type>
+		<label>DateTime</label>
+		<description>DateTime channel</description>
+	</channel-type>
+
+	<channel-type id="dimminglevel">
+		<item-type>Dimmer</item-type>
+		<label>Dimming Level</label>
+		<description>Dimming level channel</description>
+		<state min="0" max="100" step="1" readOnly="false"/>
+	</channel-type>
+
+	<channel-type id="status">
+		<item-type>String</item-type>
+		<label>Status</label>
+		<description>Status channel</description>
+		<state readOnly="false"/>
+	</channel-type>
+
+	<channel-type id="setpoint">
+		<item-type>Number</item-type>
+		<label>Set-point</label>
+		<description>Requested temperature</description>
+		<state min="0" max="100" step="1" pattern="%d %" readOnly="false"/>
+	</channel-type>
+
+	<channel-type id="shutter">
+		<item-type>Rollershutter</item-type>
+		<label>Shutter</label>
+		<description>Open/Close shutter/blind</description>
+	</channel-type>
+
+	<channel-type id="venetianBlind">
+		<item-type>Dimmer</item-type>
+		<label>Venetian Blind</label>
+		<description>Open/close and adjust angle of venetian blind</description>
+	</channel-type>
+
+	<channel-type id="temperature">
+		<item-type>Number</item-type>
+		<label>Temperature</label>
+		<description>Current temperature in degree Celsius</description>
+		<category>Temperature</category>
+		<state pattern="%.1f °C" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="humidity">
+		<item-type>Number</item-type>
+		<label>Humidity</label>
+		<description>Relative humidity level in percentages</description>
+		<category>Humidity</category>
+		<state min="0" max="100" step="1" pattern="%d %%" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="humiditystatus" advanced="true">
+		<item-type>String</item-type>
+		<label>Humidity Status</label>
+		<description>Current humidity status</description>
+		<state readOnly="true">
+			<options>
+				<option value="NORMAL">Normal</option>
+				<option value="COMFORT">Comfort</option>
+				<option value="DRY">Dry</option>
+				<option value="WET">Wet</option>
+			</options>
+		</state>
+	</channel-type>
+
+	<channel-type id="pressure">
+		<item-type>Number</item-type>
+		<label>Pressure</label>
+		<description>Barometric value in hPa.</description>
+		<category>Pressure</category>
+		<state min="0" max="2000" step="1" pattern="%d hPa." readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="windspeed">
+		<item-type>Number</item-type>
+		<label>Wind Speed</label>
+		<description>Average wind speed in meters per second</description>
+		<state pattern="%d %unit% m/s" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="winddirection">
+		<item-type>Number</item-type>
+		<label>Wind Direction</label>
+		<description>Wind direction in degrees</description>
+		<state min="0" max="360" step="1" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="dusk">
+		<item-type>Number</item-type>
+		<label>Dusk</label>
+		<description>brightness in lx</description>
+		<state pattern="%d %unit% lx" min="0" max="500" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="brightness">
+		<item-type>Number</item-type>
+		<label>Brightness</label>
+		<description>brightness in klx</description>
+		<state pattern="%d %unit% klx" min="0" max="100" readOnly="true"/>
+	</channel-type>
+
+
+	<channel-type id="illumination">
+		<item-type>Number:Illuminance</item-type>
+		<label>Dusk</label>
+		<description>Illumination in lux</description>
+		<state pattern="%d %unit%" readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="rain">
+		<item-type>Switch</item-type>
+		<label>Rain</label>
+		<description>Status rain</description>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<bridge-type id="tcpbridge">
+		<label>OpenWMS WAREMA WMS-Stick Transceiver over TCP/IP</label>
+		<description>This is transceiver bridge for using USB devices over a TCP/IP connection.</description>
+
+		<config-description>
+			<parameter name="host" type="text" required="true">
+				<label>Host</label>
+				<description>Host where the WMS-Stick transceiver is connected.</description>
+				<context>network-address</context>
+			</parameter>
+			<parameter name="port" type="integer" required="true">
+				<label>Port</label>
+				<description>Port where WMS-Stick transceiver is connected.</description>
+				<default>4001</default>
+			</parameter>
+			<parameter name="disableDiscovery" type="boolean" required="true">
+				<label>Disable discovery of unknown devices</label>
+				<description>These RF protocols are prone to noise. If you find a lot of unknown devices showing up in your inbox
+					enabling this will stop devices being added to your inbox.</description>
+				<default>false</default>
+			</parameter>
+
+
+		</config-description>
+	</bridge-type>
+
+	<bridge-type id="bridge">
+		<label>OpenWMS WAREMA WMS-Stick Transceiver</label>
+		<description>This is USB transceiver bridge for using USB devices directly at the USB-port.</description>
+
+		<config-description>
+			<parameter name="serialPort" type="text" required="true">
+				<label>Serial Port</label>
+				<context>serial-port</context>
+				<description>Serial port where the WMS-Stick transceiver is connected.</description>
+			</parameter>
+			<parameter name="disableDiscovery" type="boolean" required="true">
+				<label>Disable discovery of unknown devices</label>
+				<description>These RF protocols are prone to noise. If you find a lot of unknown devices showing up in your inbox
+					enabling this will stop devices being added to your inbox.</description>
+				<default>false</default>
+			</parameter>
+
+
+		</config-description>
+	</bridge-type>
+
+
+	<thing-type id="blind">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="bridge"/>
+			<bridge-type-ref id="tcpbridge"/>
+
+		</supported-bridge-type-refs>
+
+
+		<label>OpenWMS Blind Actuator</label>
+		<description>A WMS Blind device</description>
+
+		<channels>
+			<channel id="command" typeId="command"/>
+			<channel id="shutter" typeId="shutter"/>
+			<channel id="dimminglevel" typeId="dimminglevel"/>
+
+
+		</channels>
+
+		<config-description>
+			<parameter name="deviceId" type="text" required="false">
+				<label>Device Id</label>
+				<description>Sensor Id in Hex. Example E49D08</description>
+			</parameter>
+			<parameter name="serial" type="text" required="false">
+				<label>Device Serial</label>
+				<description>Sensor Serial-No Example 430049</description>
+			</parameter>
+			<parameter name="channel" type="text" required="true">
+				<label>Channel</label>
+				<description>Specifies device channel. Default 17</description>
+				<default>17</default>
+				<options>
+					<option value="11">Kanal 11</option>
+					<option value="12">Kanal 12</option>
+					<option value="13">Kanal 13</option>
+					<option value="14">Kanal 14</option>
+					<option value="15">Kanal 15</option>
+					<option value="16">Kanal 16</option>
+					<option value="17">Kanal 17</option>
+					<option value="18">Kanal 18</option>
+					<option value="19">Kanal 19</option>
+					<option value="20">Kanal 20</option>
+					<option value="21">Kanal 21</option>
+					<option value="22">Kanal 22</option>
+					<option value="23">Kanal 23</option>
+					<option value="24">Kanal 24</option>
+					<option value="25">Kanal 25</option>
+					<option value="26">Kanal 26</option>
+				</options>
+			</parameter>
+			<parameter name="panId" type="text" required="true">
+				<label>PANID</label>
+				<description>Specifies device PANID. Example 4DE4</description>
+			</parameter>
+			<parameter name="stateCheck" type="text" required="true">
+				<label>Check Time</label>
+				<description>Time to check the Status state in sec</description>
+				<default>60</default>
+			</parameter>
+
+			<parameter name="ignoreConfig" type="boolean" required="true">
+				<advanced>true</advanced>
+				<label>Skip limit configuration</label>
+				<description>Fully skip and ignore the limit configuration. For using the weather station you can overwrite the
+					preconfigured limits for wind, rain, brightness and dusk. When this is enabled, the set mode command and individual
+					message
+					configurations are ignored.
+				</description>
+				<default>true</default>
+			</parameter>
+
+			<parameter name="rain" type="boolean" required="true">
+				<advanced>true</advanced>
+				<label>Rain off/on</label>
+				<description>Rain off/on</description>
+				<default>true</default>
+			</parameter>
+
+			<parameter name="wind" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit wind</label>
+				<description>Set limit value wind</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01">5 m/s</option>
+					<option value="02">6 m/s</option>
+					<option value="03">7 m/s</option>
+					<option value="04">8 m/s</option>
+					<option value="05">9 m/s</option>
+					<option value="06">10 /m/s</option>
+					<option value="07">11 m/s</option>
+					<option value="08">12 m/s</option>
+					<option value="09">13 m/s</option>
+				</options>
+			</parameter>
+			<parameter name="sun" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit sun</label>
+				<description>Set limit value sun</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01">10 klx</option>
+					<option value="02">15 klx</option>
+					<option value="03">20 klx</option>
+					<option value="04">25 klx</option>
+					<option value="05">30 klx</option>
+					<option value="06">35 klx</option>
+					<option value="07">40 klx</option>
+					<option value="08">45 klx</option>
+					<option value="09">50 klx</option>
+				</options>
+			</parameter>
+			<parameter name="dusk" type="text" required="false">
+				<advanced>true</advanced>
+				<label>limit dusk</label>
+				<description>Set limit value dusk</description>
+				<default>04</default>
+				<options>
+					<option value="00">off</option>
+					<option value="01"> 16 lx</option>
+					<option value="02"> 30 lx</option>
+					<option value="03"> 46 lx</option>
+					<option value="04"> 60 lx</option>
+					<option value="05"> 80 lx</option>
+					<option value="06">100 lx</option>
+					<option value="07">150 lx</option>
+					<option value="08">200 lx</option>
+					<option value="09">400 lx</option>
+				</options>
+			</parameter>
+			<parameter name="opmode" type="boolean" required="false">
+				<advanced>true</advanced>
+				<label>Op-Mode off/on</label>
+				<description>Set the OP-Mode off/on</description>
+				<default>true</default>
+			</parameter>
+
+		</config-description>
+	</thing-type>
+
+	<thing-type id="weather">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="bridge"/>
+			<bridge-type-ref id="tcpbridge"/>
+
+		</supported-bridge-type-refs>
+
+
+		<label>OpenWMS Weather sensor</label>
+		<description>A WMS Weather sensor device</description>
+
+		<channels>
+			<channel id="windspeed" typeId="windspeed"/>
+			<channel id="rain" typeId="rain"/>
+			<channel id="brightness" typeId="brightness"/>
+			<channel id="dusk" typeId="dusk"/>
+			<channel id="temperature" typeId="temperature"/>
+
+		</channels>
+
+		<config-description>
+			<parameter name="deviceId" type="text" required="true">
+				<label>Device Id</label>
+				<description>Sensor Id in Hex. Example E49D08</description>
+			</parameter>
+			<parameter name="serial" type="text" required="false">
+				<label>Device Serial</label>
+				<description>Sensor Serial-No Example 430049</description>
+			</parameter>
+			<parameter name="channel" type="text" required="true">
+				<label>Channel</label>
+				<description>Specifies device channel. Default 17</description>
+				<default>17</default>
+				<options>
+					<option value="11">Kanal 11</option>
+					<option value="12">Kanal 12</option>
+					<option value="13">Kanal 13</option>
+					<option value="14">Kanal 14</option>
+					<option value="15">Kanal 15</option>
+					<option value="16">Kanal 16</option>
+					<option value="17">Kanal 17</option>
+					<option value="18">Kanal 18</option>
+					<option value="19">Kanal 19</option>
+					<option value="20">Kanal 20</option>
+					<option value="21">Kanal 21</option>
+					<option value="22">Kanal 22</option>
+					<option value="23">Kanal 23</option>
+					<option value="24">Kanal 24</option>
+					<option value="25">Kanal 25</option>
+					<option value="26">Kanal 26</option>
+				</options>
+			</parameter>
+			<parameter name="panId" type="text" required="true">
+				<label>PANID</label>
+				<description>Specifies device PANID. Example 4DE4</description>
+			</parameter>
+			<parameter name="stateCheck" type="text" required="true">
+				<label>Check Time</label>
+				<description>Time to check the Status state in sec</description>
+				<default>3000</default>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+</thing:thing-descriptions>

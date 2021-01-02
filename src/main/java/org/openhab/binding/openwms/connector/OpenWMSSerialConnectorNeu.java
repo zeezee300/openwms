@@ -1,3 +1,15 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.openhab.binding.openwms.connector;
 
 import java.io.IOException;
@@ -6,22 +18,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.TooManyListenersException;
 
 import org.apache.commons.io.IOUtils;
-import org.eclipse.smarthome.core.util.HexUtils;
-import org.eclipse.smarthome.io.transport.serial.PortInUseException;
-import org.eclipse.smarthome.io.transport.serial.SerialPort;
-import org.eclipse.smarthome.io.transport.serial.SerialPortEvent;
-import org.eclipse.smarthome.io.transport.serial.SerialPortEventListener;
-import org.eclipse.smarthome.io.transport.serial.SerialPortIdentifier;
-import org.eclipse.smarthome.io.transport.serial.SerialPortManager;
-import org.eclipse.smarthome.io.transport.serial.UnsupportedCommOperationException;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
+import org.openhab.core.io.transport.serial.PortInUseException;
+import org.openhab.core.io.transport.serial.SerialPort;
+import org.openhab.core.io.transport.serial.SerialPortEvent;
+import org.openhab.core.io.transport.serial.SerialPortEventListener;
+import org.openhab.core.io.transport.serial.SerialPortIdentifier;
+import org.openhab.core.io.transport.serial.SerialPortManager;
+import org.openhab.core.io.transport.serial.UnsupportedCommOperationException;
+import org.openhab.core.util.HexUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
-* @author zeezee - Initial contribution
-*/
+/**
+ * @author zeezee - Initial contribution
+ */
 public class OpenWMSSerialConnectorNeu extends OpenWMSBaseConnector implements SerialPortEventListener {
 
     private final Logger logger = LoggerFactory.getLogger(OpenWMSSerialConnectorNeu.class);
@@ -95,7 +107,6 @@ public class OpenWMSSerialConnectorNeu extends OpenWMSBaseConnector implements S
 
         readerThread = new OpenWMSStreamReader(this);
         readerThread.start();
-
     }
 
     @Override
@@ -165,7 +176,5 @@ public class OpenWMSSerialConnectorNeu extends OpenWMSBaseConnector implements S
             Thread.sleep(Long.MAX_VALUE);
         } catch (InterruptedException ignore) {
         }
-
     }
-
 }

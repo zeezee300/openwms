@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2014,2018 by the respective copyright holders.
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
- * information regarding copyright ownership.
+ * information.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -10,6 +10,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
+
 package org.openhab.binding.openwms.internal;
 
 import java.util.Map;
@@ -17,22 +18,22 @@ import java.util.Map.Entry;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.smarthome.config.core.Configuration;
-import org.eclipse.smarthome.core.thing.Channel;
-import org.eclipse.smarthome.core.thing.ChannelUID;
-import org.eclipse.smarthome.core.thing.Thing;
-import org.eclipse.smarthome.core.thing.ThingStatus;
-import org.eclipse.smarthome.core.thing.ThingStatusDetail;
-import org.eclipse.smarthome.core.thing.ThingStatusInfo;
-import org.eclipse.smarthome.core.thing.ThingUID;
-import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
-import org.eclipse.smarthome.core.thing.binding.ThingHandler;
-import org.eclipse.smarthome.core.types.Command;
-import org.eclipse.smarthome.core.types.RefreshType;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.binding.openwms.messages.OpenWMSMessageFactory;
+import org.openhab.core.config.core.Configuration;
+import org.openhab.core.thing.Channel;
+import org.openhab.core.thing.ChannelUID;
+import org.openhab.core.thing.Thing;
+import org.openhab.core.thing.ThingStatus;
+import org.openhab.core.thing.ThingStatusDetail;
+import org.openhab.core.thing.ThingStatusInfo;
+import org.openhab.core.thing.ThingUID;
+import org.openhab.core.thing.binding.BaseThingHandler;
+import org.openhab.core.thing.binding.ThingHandler;
+import org.openhab.core.types.Command;
+import org.openhab.core.types.RefreshType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,7 +65,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                 logger.trace("Received unsupported Refresh command");
             } else {
                 String t = getThing().getThingTypeUID().getId().toUpperCase();
-                logger.debug("Thing: ", t);
+                logger.debug("Thing: {} ", t);
 
                 Map<String, String> msg = OpenWMSMessageFactory.createMessage(command.toString(), thing);
                 // String tt = getThing().g.getThingTypeUID().getId().toUpperCase();
@@ -105,7 +106,6 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
                 }
             }
         }
-
     }
 
     @Override
@@ -114,6 +114,7 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
         initializeBridge((getBridge() == null) ? null : getBridge().getHandler(), bridgeStatusInfo.getStatus());
     }
 
+    @SuppressWarnings("null")
     private void initializeBridge(ThingHandler thingHandler, ThingStatus bridgeStatus) {
         logger.debug("initializeBridge {} for thing {}", bridgeStatus, getThing().getUID());
 
@@ -137,20 +138,22 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
             if (bridgeStatus == ThingStatus.ONLINE) {
 
                 String timer = (String) thing.getConfiguration().getProperties().get("stateCheck");
-                if (!(Integer.valueOf(timer) > 0)) {
-                    timer = "60";
-                }
-                if (connectorTask == null || connectorTask.isCancelled()) {
-                    connectorTask = scheduler.scheduleWithFixedDelay(() -> {
-                        // logger.debug("Checking OpenWMS BLIND connection, thing status = {}", thing.getStatus());
-                        logger.debug("Checking OpenWMS connection, thing label = {}, thing status = {}",
-                                thing.getLabel(), thing.getStatus());
-                        Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing);
-                        for (Entry<String, String> entry : msg.entrySet()) {
-                            System.out.println(entry.getValue());
-                            bridgeHandler.sendMessage(entry.getValue());
-                        }
-                    }, 0, Integer.valueOf(timer), TimeUnit.SECONDS);
+                if (timer != null) {
+                    if (!(Integer.valueOf(timer) > 0)) {
+                        timer = "60";
+                    }
+                    if (connectorTask == null || connectorTask.isCancelled()) {
+                        connectorTask = scheduler.scheduleWithFixedDelay(() -> {
+                            // logger.debug("Checking OpenWMS BLIND connection, thing status = {}", thing.getStatus());
+                            logger.debug("Checking OpenWMS connection, thing label = {}, thing status = {}",
+                                    thing.getLabel(), thing.getStatus());
+                            Map<String, String> msg = OpenWMSMessageFactory.createMessage("GETSTATUS", thing);
+                            for (Entry<String, String> entry : msg.entrySet()) {
+                                System.out.println(entry.getValue());
+                                bridgeHandler.sendMessage(entry.getValue());
+                            }
+                        }, 0, Integer.valueOf(timer), TimeUnit.SECONDS);
+                    }
                 }
 
             } else {
@@ -225,7 +228,5 @@ public class OpenWMSHandler extends BaseThingHandler implements DeviceMessageLis
         } catch (Exception e) {
             logger.error("Error occurred during message receiving", e);
         }
-
     }
-
 }
