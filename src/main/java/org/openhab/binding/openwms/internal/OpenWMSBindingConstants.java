@@ -10,18 +10,17 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-
 package org.openhab.binding.openwms.internal;
 
-/**
- * The {@link OpenWMSConfiguration} class contains fields mapping thing configuration parameters.
- *
- * @author zeezee - Initial contribution
- */
-public class OpenWMSConfiguration {
+import org.eclipse.jdt.annotation.NonNullByDefault;
 
-    /**
-     * Sample configuration parameter. Replace with your own.
-     */
-    public String config1;
+/**
+ * The {@link OpenWMSBindingConstants} class defines common constants, which are
+ * used across the whole binding.
+ *
+ * @author Thorsten Meudt - Initial contribution
+ */
+@NonNullByDefault
+public class OpenWMSBindingConstants {
+
 }
