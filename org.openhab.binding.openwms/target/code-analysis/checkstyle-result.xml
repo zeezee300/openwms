@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.30">
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\pom.xml">
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\config\OpenWMSBindingConstants.java">
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\config\OpenWMSBridgeConfiguration.java">
+<error line="18" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="37" column="19" severity="info" message="Name &apos;NetzID&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSBaseConnector.java">
+<error line="26" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSConnectorInterface.java">
+<error line="23" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="29" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+<error line="44" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+<error line="52" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+<error line="60" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSEventListener.java">
+<error line="19" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="27" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+<error line="35" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSSerialConnector.java">
+<error line="20" severity="warning" message="The package org.apache.commons.io.IOUtils should not be used." source="org.openhab.tools.analysis.checkstyle.ForbiddenPackageUsageCheck"/>
+<error line="37" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="60" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSSerialConnectorNeu.java">
+<error line="20" severity="warning" message="The package org.apache.commons.io.IOUtils should not be used." source="org.openhab.tools.analysis.checkstyle.ForbiddenPackageUsageCheck"/>
+<error line="37" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="60" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSStreamReader.java">
+<error line="23" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="55" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="65" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="77" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="88" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="100" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSTcpConnector.java">
+<error line="23" severity="warning" message="The package org.apache.commons.io.IOUtils should not be used." source="org.openhab.tools.analysis.checkstyle.ForbiddenPackageUsageCheck"/>
+<error line="32" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="42" column="19" severity="info" message="Name &apos;MAX_CONNECTION&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+<error line="81" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="106" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\handler\OpenWMSBridgeHandler.java">
+<error line="48" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="59" severity="warning" message="There is no need for a @NonNull annotation because it is set as default. Only @Nullable should be used" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="113" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="126" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="128" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="171" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="176" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="211" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="213" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="214" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="217" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="222" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="225" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="227" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="248" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="253" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="255" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="263" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="273" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="288" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\DeviceMessageListener.java">
+<error line="24" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\Diverses.java">
+<error line="21" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="23" column="16" severity="info" message="Name &apos;Long_little_endian_TO_big_endian&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSBindingConstants.java">
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSConfiguration.java">
+<error line="21" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSDeviceConfiguration.java">
+<error line="23" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSDeviceDiscovery.java">
+<error line="35" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="84" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="94" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="117" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="126" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSHandler.java">
+<error line="48" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="83" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="139" severity="info" message="Remove empty line after opening brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="158" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="206" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="225" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSHandlerFactory.java">
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\messages\OpenWMSDeviceMessage.java">
+<error line="24" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\messages\OpenWMSGetResponse.java">
+<error line="32" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="51" column="19" severity="info" message="Name &apos;wms_response&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck"/>
+<error line="135" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="142" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="145" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="154" severity="info" message="Remove empty line before closing brace" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="397" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="401" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="405" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\messages\OpenWMSMessage.java">
+<error line="23" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="29" severity="info" message="The parameter description in a Javadoc comment of a method or constructor should not start on a new line." source="org.openhab.tools.analysis.checkstyle.JavadocMethodStyleCheck"/>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\messages\OpenWMSMessageFactory.java">
+<error line="28" severity="warning" message="Classes/Interfaces should be annotated with @NonNullByDefault" source="org.openhab.tools.analysis.checkstyle.NullAnnotationsCheck"/>
+<error line="45" column="16" severity="info" message="Name &apos;paket_type&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="47" column="29" severity="info" message="Name &apos;message_payload&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="49" severity="info" message="Remove empty line" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="54" severity="info" message="Remove empty line" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="93" severity="info" message="Remove empty line" source="org.openhab.tools.analysis.checkstyle.NoEmptyLineSeparatorCheck"/>
+<error line="129" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+<error line="286" severity="info" message="Comment matches to-do format &apos;(TODO)|(FIXME)&apos;." source="com.puppycrawl.tools.checkstyle.checks.TodoCommentCheck"/>
+</file>
+</checkstyle>

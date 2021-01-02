@@ -1,0 +1,1457 @@
+<html xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Analysis Report</title><style type="text/css">
+					body {margin-left: 3%; font-size:10pt;font-family:Arial;color:#000000 ; }					
+					table.details tr th {font-size:10pt;font-family:Arial;font-weight:bold;background:#AC58FA}
+					table.details tr {font-size:10pt;font-family:Arial;font-weight:normal;background:#BEa1Fa}
+					table tbody	tr.alternate {background:#BAF4A7;}
+					table tbody tr.dark {background:#F4F4A7;}
+				</style></head>
+   <body>
+      <h2>Report
+         					 
+         					(2021-01-02+01:00;
+         					 13:46:45.816+01:00)
+         				
+      </h2>
+      <h3>Summary Messages</h3>
+      <table width="90%" border="0" class="details">
+         <tr>
+            <th align="left">category</th>
+            <th align="left">tool</th>
+            <th align="left">priority</th>
+            <th align="left">rule</th>
+            <th align="left">count</th>
+         </tr>
+         <tr>
+            <td colspan="5">bad practice</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>findbugs</td>
+            <td align="left">3</td>
+            <td> <a href="http://findbugs.sourceforge.net/bugDescriptions.html#SLF4J_LOGGER_SHOULD_BE_NON_STATIC">Logger should be non-static field (SLF4J)</a></td>
+            <td align="center">1</td>
+         </tr>
+         <tr>
+            <td colspan="5">best practices</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>pmd</td>
+            <td align="left">2</td>
+            <td> <a href="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln">SystemPrintln</a></td>
+            <td align="center">10</td>
+         </tr>
+         <tr>
+            <td colspan="5">design</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>pmd</td>
+            <td align="left">3</td>
+            <td> <a href="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_design.html#simplifybooleanexpressions">SimplifyBooleanExpressions</a></td>
+            <td align="center">1</td>
+         </tr>
+         <tr>
+            <td colspan="5">error prone</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>pmd</td>
+            <td align="left">3</td>
+            <td> <a href="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_errorprone.html#emptyifstmt">EmptyIfStmt</a></td>
+            <td align="center">1</td>
+         </tr>
+         <tr>
+            <td colspan="5">style</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">2</td>
+            <td>NullAnnotationsCheck</td>
+            <td align="center">20</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">2</td>
+            <td>ForbiddenPackageUsageCheck</td>
+            <td align="center">3</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>MemberNameCheck</td>
+            <td align="center">2</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td align="center">7</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td align="center">37</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>LocalFinalVariableNameCheck</td>
+            <td align="center">1</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>TodoCommentCheck</td>
+            <td align="center">11</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>MethodNameCheck</td>
+            <td align="center">1</td>
+         </tr>
+         <tr class="alternate">
+            <td></td>
+            <td>checkstyle</td>
+            <td align="left">3</td>
+            <td>LocalVariableNameCheck</td>
+            <td align="center">2</td>
+         </tr>
+         <tr class="dark">
+            <td colspan="4"></td>
+            <td align="center">97</td>
+         </tr>
+      </table>
+      <p></p>
+      <h3>Summary Files</h3>
+      <table width="90%" border="0" class="details">
+         <tr>
+            <th align="left" width="90pt">class file</th>
+            <th align="center" width="90pt">high</th>
+            <th align="center" width="90pt">medium</th>
+            <th align="center" width="90pt">low</th>
+            <th align="center" width="90pt">total</th>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration.java" title="org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration.java">org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">2</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSBaseConnector.java" title="org.openhab.binding.openwms.connector.OpenWMSBaseConnector.java">org.openhab.binding.openwms.connector.OpenWMSBaseConnector.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">0</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSConnectorInterface.java" title="org.openhab.binding.openwms.connector.OpenWMSConnectorInterface.java">org.openhab.binding.openwms.connector.OpenWMSConnectorInterface.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">4</div>
+            </td>
+            <td align="center">
+               <div class="p3">5</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSEventListener.java" title="org.openhab.binding.openwms.connector.OpenWMSEventListener.java">org.openhab.binding.openwms.connector.OpenWMSEventListener.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">2</div>
+            </td>
+            <td align="center">
+               <div class="p3">3</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSSerialConnector.java" title="org.openhab.binding.openwms.connector.OpenWMSSerialConnector.java">org.openhab.binding.openwms.connector.OpenWMSSerialConnector.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">2</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">3</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSSerialConnectorNeu.java" title="org.openhab.binding.openwms.connector.OpenWMSSerialConnectorNeu.java">org.openhab.binding.openwms.connector.OpenWMSSerialConnectorNeu.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">2</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">3</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSStreamReader.java" title="org.openhab.binding.openwms.connector.OpenWMSStreamReader.java">org.openhab.binding.openwms.connector.OpenWMSStreamReader.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">5</div>
+            </td>
+            <td align="center">
+               <div class="p3">6</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.connector.OpenWMSTcpConnector.java" title="org.openhab.binding.openwms.connector.OpenWMSTcpConnector.java">org.openhab.binding.openwms.connector.OpenWMSTcpConnector.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">6</div>
+            </td>
+            <td align="center">
+               <div class="p3">3</div>
+            </td>
+            <td align="center">
+               <div class="p3">9</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.handler.OpenWMSBridgeHandler.java" title="org.openhab.binding.openwms.handler.OpenWMSBridgeHandler.java">org.openhab.binding.openwms.handler.OpenWMSBridgeHandler.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">2</div>
+            </td>
+            <td align="center">
+               <div class="p3">19</div>
+            </td>
+            <td align="center">
+               <div class="p3">21</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.DeviceMessageListener.java" title="org.openhab.binding.openwms.internal.DeviceMessageListener.java">org.openhab.binding.openwms.internal.DeviceMessageListener.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">0</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.Diverses.java" title="org.openhab.binding.openwms.internal.Diverses.java">org.openhab.binding.openwms.internal.Diverses.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">2</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">3</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.OpenWMSConfiguration.java" title="org.openhab.binding.openwms.internal.OpenWMSConfiguration.java">org.openhab.binding.openwms.internal.OpenWMSConfiguration.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">0</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration.java" title="org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration.java">org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">0</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.OpenWMSDeviceDiscovery.java" title="org.openhab.binding.openwms.internal.OpenWMSDeviceDiscovery.java">org.openhab.binding.openwms.internal.OpenWMSDeviceDiscovery.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">4</div>
+            </td>
+            <td align="center">
+               <div class="p3">5</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.internal.OpenWMSHandler.java" title="org.openhab.binding.openwms.internal.OpenWMSHandler.java">org.openhab.binding.openwms.internal.OpenWMSHandler.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">4</div>
+            </td>
+            <td align="center">
+               <div class="p3">6</div>
+            </td>
+            <td align="center">
+               <div class="p3">10</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.messages.OpenWMSDeviceMessage.java" title="org.openhab.binding.openwms.messages.OpenWMSDeviceMessage.java">org.openhab.binding.openwms.messages.OpenWMSDeviceMessage.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">0</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.messages.OpenWMSGetResponse.java" title="org.openhab.binding.openwms.messages.OpenWMSGetResponse.java">org.openhab.binding.openwms.messages.OpenWMSGetResponse.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">8</div>
+            </td>
+            <td align="center">
+               <div class="p3">9</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.messages.OpenWMSMessage.java" title="org.openhab.binding.openwms.messages.OpenWMSMessage.java">org.openhab.binding.openwms.messages.OpenWMSMessage.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">1</div>
+            </td>
+            <td align="center">
+               <div class="p3">2</div>
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td><a href="#org.openhab.binding.openwms.messages.OpenWMSMessageFactory.java" title="org.openhab.binding.openwms.messages.OpenWMSMessageFactory.java">org.openhab.binding.openwms.messages.OpenWMSMessageFactory.java</a></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">3</div>
+            </td>
+            <td align="center">
+               <div class="p3">8</div>
+            </td>
+            <td align="center">
+               <div class="p3">11</div>
+            </td>
+         </tr>
+         <tr class="dark">
+            <td></td>
+            <td align="center">
+               <div class="p1">0</div>
+            </td>
+            <td align="center">
+               <div class="p2">33</div>
+            </td>
+            <td align="center">
+               <div class="p3">64</div>
+            </td>
+            <td align="center">
+               <div class="p3">97</div>
+            </td>
+         </tr>
+      </table>
+      <p></p>
+      <h3>Details by Class</h3>
+      <table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration.java">org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>18</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>37</td>
+            <td>style</td>
+            <td>MemberNameCheck</td>
+            <td>Name 'NetzID' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSBaseConnector.java">org.openhab.binding.openwms.connector.OpenWMSBaseConnector.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>26</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSConnectorInterface.java">org.openhab.binding.openwms.connector.OpenWMSConnectorInterface.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>23</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>29</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>44</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>52</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>60</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSEventListener.java">org.openhab.binding.openwms.connector.OpenWMSEventListener.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>19</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>27</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>35</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSSerialConnector.java">org.openhab.binding.openwms.connector.OpenWMSSerialConnector.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>20</td>
+            <td>style</td>
+            <td>ForbiddenPackageUsageCheck</td>
+            <td>The package org.apache.commons.io.IOUtils should not be used.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>37</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>60</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSSerialConnectorNeu.java">org.openhab.binding.openwms.connector.OpenWMSSerialConnectorNeu.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>20</td>
+            <td>style</td>
+            <td>ForbiddenPackageUsageCheck</td>
+            <td>The package org.apache.commons.io.IOUtils should not be used.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>37</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>60</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSStreamReader.java">org.openhab.binding.openwms.connector.OpenWMSStreamReader.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>23</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>55</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>65</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>77</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>88</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>100</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.connector.OpenWMSTcpConnector.java">org.openhab.binding.openwms.connector.OpenWMSTcpConnector.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>50</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>52</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>54</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>57</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>23</td>
+            <td>style</td>
+            <td>ForbiddenPackageUsageCheck</td>
+            <td>The package org.apache.commons.io.IOUtils should not be used.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>32</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>42</td>
+            <td>style</td>
+            <td>LocalFinalVariableNameCheck</td>
+            <td>Name 'MAX_CONNECTION' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>81</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>106</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.handler.OpenWMSBridgeHandler.java">org.openhab.binding.openwms.handler.OpenWMSBridgeHandler.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>48</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>59</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>There is no need for a @NonNull annotation because it is set as default. Only @Nullable should be used</td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>3</td>
+            <td>175</td>
+            <td>error prone</td>
+            <td>EmptyIfStmt</td>
+            <td>
+               Avoid empty if statements
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>113</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>126</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>128</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>171</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>176</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>211</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>213</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>214</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>217</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>222</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>225</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>227</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>248</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>253</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>255</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>263</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>273</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>288</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.DeviceMessageListener.java">org.openhab.binding.openwms.internal.DeviceMessageListener.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>24</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.Diverses.java">org.openhab.binding.openwms.internal.Diverses.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>36</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>21</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>23</td>
+            <td>style</td>
+            <td>MethodNameCheck</td>
+            <td>Name 'Long_little_endian_TO_big_endian' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.OpenWMSConfiguration.java">org.openhab.binding.openwms.internal.OpenWMSConfiguration.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>21</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration.java">org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>23</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.OpenWMSDeviceDiscovery.java">org.openhab.binding.openwms.internal.OpenWMSDeviceDiscovery.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>35</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>84</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>94</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>117</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>126</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.internal.OpenWMSHandler.java">org.openhab.binding.openwms.internal.OpenWMSHandler.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>80</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>104</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>152</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>48</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>3</td>
+            <td>99</td>
+            <td>design</td>
+            <td>SimplifyBooleanExpressions</td>
+            <td>
+               Avoid unnecessary comparisons in boolean expressions
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>83</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>139</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line after opening brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>158</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>206</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>225</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.messages.OpenWMSDeviceMessage.java">org.openhab.binding.openwms.messages.OpenWMSDeviceMessage.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>24</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.messages.OpenWMSGetResponse.java">org.openhab.binding.openwms.messages.OpenWMSGetResponse.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>32</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>51</td>
+            <td>style</td>
+            <td>MemberNameCheck</td>
+            <td>Name 'wms_response' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>135</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>142</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>145</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>154</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line before closing brace</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>397</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>401</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>405</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.messages.OpenWMSMessage.java">org.openhab.binding.openwms.messages.OpenWMSMessage.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>23</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>29</td>
+            <td>style</td>
+            <td>JavadocMethodStyleCheck</td>
+            <td>The parameter description in a Javadoc comment of a method or constructor should not start on a new line.</td>
+         </tr>
+      </table><br><table width="90%" border="0" class="details">
+         <th align="left" colspan="6"><a name="org.openhab.binding.openwms.messages.OpenWMSMessageFactory.java">org.openhab.binding.openwms.messages.OpenWMSMessageFactory.java</a></th>
+         <tr>
+            <th align="left" width="80pt">tool</th>
+            <th align="left" width="50pt">priority</th>
+            <th align="left" width="30pt">line</th>
+            <th align="left" width="80pt">category</th>
+            <th align="left" width="380pt">rule</th>
+            <th align="left">message</th>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>120</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>pmd</td>
+            <td>2</td>
+            <td>122</td>
+            <td>best practices</td>
+            <td>SystemPrintln</td>
+            <td>
+               System.out.println is used
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>2</td>
+            <td>28</td>
+            <td>style</td>
+            <td>NullAnnotationsCheck</td>
+            <td>Classes/Interfaces should be annotated with @NonNullByDefault</td>
+         </tr>
+         <tr class="alternate">
+            <td>findbugs</td>
+            <td>3</td>
+            <td></td>
+            <td>bad practice</td>
+            <td>Logger should be non-static field (SLF4J)</td>
+            <td>
+               Logger should be non-static field. Change this field (logger) to non-static field.
+               
+            </td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>45</td>
+            <td>style</td>
+            <td>LocalVariableNameCheck</td>
+            <td>Name 'paket_type' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>47</td>
+            <td>style</td>
+            <td>LocalVariableNameCheck</td>
+            <td>Name 'message_payload' must match pattern '^[a-z][a-zA-Z0-9]*$'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>49</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>54</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>93</td>
+            <td>style</td>
+            <td>NoEmptyLineSeparatorCheck</td>
+            <td>Remove empty line</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>129</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+         <tr class="alternate">
+            <td>checkstyle</td>
+            <td>3</td>
+            <td>286</td>
+            <td>style</td>
+            <td>TodoCommentCheck</td>
+            <td>Comment matches to-do format '(TODO)|(FIXME)'.</td>
+         </tr>
+      </table><br></body>
+</html>

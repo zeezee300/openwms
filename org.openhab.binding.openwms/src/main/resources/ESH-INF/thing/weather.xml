@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="openwms"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:thing="http://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://openhab.org/schemas/thing-description/v1.0.0 http://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<thing-type id="weather">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="bridge"/>
+			<bridge-type-ref id="tcpbridge"/>
+
+		</supported-bridge-type-refs>
+
+
+		<label>OpenWMS Weather sensor</label>
+		<description>A WMS Weather sensor device</description>
+
+		<channels>
+			<channel id="windspeed" typeId="windspeed"/>
+			<channel id="rain" typeId="rain"/>
+			<channel id="brightness" typeId="brightness"/>
+			<channel id="dusk" typeId="dusk"/>
+			<channel id="temperature" typeId="temperature"/>
+
+		</channels>
+
+		<config-description>
+			<parameter name="deviceId" type="text" required="true">
+				<label>Device Id</label>
+				<description>Sensor Id in Hex. Example E49D08</description>
+			</parameter>
+			<parameter name="serial" type="text" required="false">
+				<label>Device Serial</label>
+				<description>Sensor Serial-No Example 430049</description>
+			</parameter>
+			<parameter name="channel" type="text" required="true">
+				<label>Channel</label>
+				<description>Specifies device channel. Default 17</description>
+				<default>17</default>
+				<options>
+					<option value="11">Kanal 11</option>
+					<option value="12">Kanal 12</option>
+					<option value="13">Kanal 13</option>
+					<option value="14">Kanal 14</option>
+					<option value="15">Kanal 15</option>
+					<option value="16">Kanal 16</option>
+					<option value="17">Kanal 17</option>
+					<option value="18">Kanal 18</option>
+					<option value="19">Kanal 19</option>
+					<option value="20">Kanal 20</option>
+					<option value="21">Kanal 21</option>
+					<option value="22">Kanal 22</option>
+					<option value="23">Kanal 23</option>
+					<option value="24">Kanal 24</option>
+					<option value="25">Kanal 25</option>
+					<option value="26">Kanal 26</option>
+				</options>
+			</parameter>
+			<parameter name="panId" type="text" required="true">
+				<label>PANID</label>
+				<description>Specifies device PANID. Example 4DE4</description>
+			</parameter>
+			<parameter name="stateCheck" type="text" required="true">
+				<label>Check Time</label>
+				<description>Time to check the Status state in sec</description>
+				<default>3000</default>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+</thing:thing-descriptions>

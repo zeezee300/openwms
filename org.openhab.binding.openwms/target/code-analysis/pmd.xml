@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.22.0" timestamp="2021-01-02T13:46:40.382">
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\connector\OpenWMSTcpConnector.java">
+<violation beginline="50" endline="50" begincolumn="13" endcolumn="30" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.connector" class="OpenWMSTcpConnector" method="connect" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="52" endline="52" begincolumn="17" endcolumn="34" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.connector" class="OpenWMSTcpConnector" method="connect" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="54" endline="54" begincolumn="17" endcolumn="34" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.connector" class="OpenWMSTcpConnector" method="connect" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="57" endline="57" begincolumn="13" endcolumn="30" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.connector" class="OpenWMSTcpConnector" method="connect" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\handler\OpenWMSBridgeHandler.java">
+<violation beginline="175" endline="177" begincolumn="75" endcolumn="13" rule="EmptyIfStmt" ruleset="Error Prone" package="org.openhab.binding.openwms.handler" class="OpenWMSBridgeHandler" method="connect" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_errorprone.html#emptyifstmt" priority="3">
+Avoid empty if statements
+</violation>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\Diverses.java">
+<violation beginline="36" endline="36" begincolumn="9" endcolumn="26" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.internal" class="Diverses" method="stringToEndian" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\internal\OpenWMSHandler.java">
+<violation beginline="80" endline="80" begincolumn="21" endcolumn="38" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.internal" class="OpenWMSHandler" method="handleCommand" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="99" endline="99" begincolumn="96" endcolumn="99" rule="SimplifyBooleanExpressions" ruleset="Design" package="org.openhab.binding.openwms.internal" class="OpenWMSHandler" method="initialize" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_design.html#simplifybooleanexpressions" priority="3">
+Avoid unnecessary comparisons in boolean expressions
+</violation>
+<violation beginline="104" endline="104" begincolumn="21" endcolumn="38" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.internal" class="OpenWMSHandler" method="initialize" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="152" endline="152" begincolumn="33" endcolumn="50" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.internal" class="OpenWMSHandler" method="initializeBridge" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+<file name="C:\Users\Thorsten\openhab-master\git\openhab-addons\bundles\org.openhab.binding.openwms\src\main\java\org\openhab\binding\openwms\messages\OpenWMSMessageFactory.java">
+<violation beginline="120" endline="120" begincolumn="21" endcolumn="38" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.messages" class="OpenWMSMessageFactory" method="decode" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="122" endline="122" begincolumn="17" endcolumn="34" rule="SystemPrintln" ruleset="Best Practices" package="org.openhab.binding.openwms.messages" class="OpenWMSMessageFactory" method="decode" externalInfoUrl="https://pmd.github.io/pmd-6.22.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+</pmd>
