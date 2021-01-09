@@ -154,26 +154,31 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 while (secondsRemaining > 0) {
                     // System.out.println("Sekunden verbleiben: " + secondsRemaining.toString());
                     secondsRemaining--;
+                    logger.debug("Now sending to controller");
                     connector.sendMessage(OpenWMSMessageFactory.CHECK.getBytes());
-
+                    updateStatus(ThingStatus.ONLINE);
                     // connector.sendMessage("{R06E49D08801001000005}".getBytes());
                     // sendMessage("{R06E49D08801001000005}");
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        updateStatus(ThingStatus.ONLINE);
-                        // updateStatus(ThingStatus.OFFLINE); 31.12.2019
-                    }
+                    // try {
+                    // Thread.sleep(1000);
+                    // } catch (InterruptedException e) {
+                    // updateStatus(ThingStatus.ONLINE);
+                    // logger.debug("Error sending to controller, message: {} ", e.getMessage());
+                    // updateStatus(ThingStatus.OFFLINE); 31.12.2019
+                    // }
                 }
                 // connector.sendMessage(messageString.getBytes());
                 // updateStatus(ThingStatus.ONLINE);
 
             }
+        } catch (org.openhab.core.io.transport.serial.PortInUseException e) {
+            logger.error("Connection to OpenWMS transceiver failed - Port in Use exception", e);
+        } catch (org.openhab.core.io.transport.serial.UnsupportedCommOperationException e) {
+            logger.error("Connection to OpenWMS transceiver failed - Unsupported Comm Operation exception", e);
         } catch (IOException e) {
             logger.error("Connection to OpenWMS transceiver failed - IOException", e);
             if ("device not opened (3)".equalsIgnoreCase(e.getMessage())) {
-
             }
         } catch (Exception e) {
             logger.error("Connection to OpenWMS transceiver failed - Exception", e);

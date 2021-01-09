@@ -34,6 +34,7 @@ import org.openhab.core.thing.ThingTypeUID;
  *
  *
  * @author zeezee - Initial contribution
+ * @author Thorsten - Refactoring for OH3
  */
 @NonNullByDefault
 public class OpenWMSBindingConstants {

@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
  *
  *
  * @author zeezee - Initial contribution
+ * @author Thorsten - Refactoring for OH3
  */
 
 public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService implements DeviceMessageListener {
