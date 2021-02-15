@@ -1,17 +1,30 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+
 package org.openhab.binding.openwms.messages;
 
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.eclipse.smarthome.core.thing.Thing;
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
+import org.openhab.binding.openwms.internal.OpenWMSBindingConstants;
+import org.openhab.core.thing.Thing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
-* @author zeezee - Initial contribution
-*/
+/**
+ * @author zeezee - Initial contribution
+ */
 public class OpenWMSMessageFactory {
 
     // @SuppressWarnings("serial")
@@ -303,5 +316,4 @@ public class OpenWMSMessageFactory {
     //
     // throw new IllegalArgumentException("Unknown packet type " + packetType);
     // }
-
 }

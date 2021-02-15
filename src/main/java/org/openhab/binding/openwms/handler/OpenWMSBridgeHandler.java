@@ -1,3 +1,15 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 package org.openhab.binding.openwms.handler;
 
 import java.io.IOException;
@@ -9,30 +21,29 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.smarthome.core.thing.Bridge;
-import org.eclipse.smarthome.core.thing.ChannelUID;
-import org.eclipse.smarthome.core.thing.Thing;
-import org.eclipse.smarthome.core.thing.ThingStatus;
-import org.eclipse.smarthome.core.thing.ThingStatusDetail;
-import org.eclipse.smarthome.core.thing.binding.BaseBridgeHandler;
-import org.eclipse.smarthome.core.types.Command;
-import org.eclipse.smarthome.io.transport.serial.SerialPortManager;
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
-import org.openhab.binding.openwms.config.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.connector.OpenWMSConnectorInterface;
 import org.openhab.binding.openwms.connector.OpenWMSEventListener;
 import org.openhab.binding.openwms.connector.OpenWMSSerialConnector;
 import org.openhab.binding.openwms.connector.OpenWMSTcpConnector;
 import org.openhab.binding.openwms.internal.DeviceMessageListener;
+import org.openhab.binding.openwms.internal.OpenWMSBindingConstants;
+import org.openhab.binding.openwms.internal.OpenWMSBridgeConfiguration;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
 import org.openhab.binding.openwms.messages.OpenWMSMessageFactory;
+import org.openhab.core.io.transport.serial.SerialPortManager;
+import org.openhab.core.thing.Bridge;
+import org.openhab.core.thing.ChannelUID;
+import org.openhab.core.thing.Thing;
+import org.openhab.core.thing.ThingStatus;
+import org.openhab.core.thing.ThingStatusDetail;
+import org.openhab.core.thing.binding.BaseBridgeHandler;
+import org.openhab.core.types.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import gnu.io.NoSuchPortException;
-/*
-* @author zeezee - Initial contribution
-*/
+/**
+ * @author zeezee - Initial contribution
+ */
 
 public class OpenWMSBridgeHandler extends BaseBridgeHandler {
     private Logger logger = LoggerFactory.getLogger(OpenWMSBridgeHandler.class);
@@ -97,7 +108,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                     } catch (IOException e1) {
                         logger.debug("WMS bridge handler ist offline");
                         updateStatus(ThingStatus.OFFLINE);
-                        e1.printStackTrace();
+                        logger.error("IO Error: message: {}", e1.getMessage());
                     }
 
                 }
@@ -143,28 +154,31 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 while (secondsRemaining > 0) {
                     // System.out.println("Sekunden verbleiben: " + secondsRemaining.toString());
                     secondsRemaining--;
+                    logger.debug("Now sending to controller");
                     connector.sendMessage(OpenWMSMessageFactory.CHECK.getBytes());
-
+                    updateStatus(ThingStatus.ONLINE);
                     // connector.sendMessage("{R06E49D08801001000005}".getBytes());
                     // sendMessage("{R06E49D08801001000005}");
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        updateStatus(ThingStatus.ONLINE);
-                        // updateStatus(ThingStatus.OFFLINE); 31.12.2019
-                    }
+                    // try {
+                    // Thread.sleep(1000);
+                    // } catch (InterruptedException e) {
+                    // updateStatus(ThingStatus.ONLINE);
+                    // logger.debug("Error sending to controller, message: {} ", e.getMessage());
+                    // updateStatus(ThingStatus.OFFLINE); 31.12.2019
+                    // }
                 }
                 // connector.sendMessage(messageString.getBytes());
                 // updateStatus(ThingStatus.ONLINE);
 
             }
-        } catch (NoSuchPortException e) {
-            logger.error("Connection to OpenWMS transceiver failed - NoSuchPortException", e);
+        } catch (org.openhab.core.io.transport.serial.PortInUseException e) {
+            logger.error("Connection to OpenWMS transceiver failed - Port in Use exception", e);
+        } catch (org.openhab.core.io.transport.serial.UnsupportedCommOperationException e) {
+            logger.error("Connection to OpenWMS transceiver failed - Unsupported Comm Operation exception", e);
         } catch (IOException e) {
             logger.error("Connection to OpenWMS transceiver failed - IOException", e);
             if ("device not opened (3)".equalsIgnoreCase(e.getMessage())) {
-
             }
         } catch (Exception e) {
             logger.error("Connection to OpenWMS transceiver failed - Exception", e);
@@ -203,7 +217,7 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                         } catch (IOException e) {
 
                             // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            logger.error("IO Error: message: {}", e.getMessage());
                         }
 
                     } else if (data.replaceAll("[{}]", "").substring(0, 1).equals("v")) {
@@ -253,12 +267,10 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
                 transmitQueue.sendNext();
 
             } catch (Exception e) {
-                logger.error("Error occurred: {}", e);
+                logger.error("Error occurred: {}", e.getMessage());
                 updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR);
             }
-
         }
-
     }
 
     public void sendMessage(String msg) {
@@ -323,5 +335,4 @@ public class OpenWMSBridgeHandler extends BaseBridgeHandler {
         }
         return deviceStatusListeners.remove(deviceStatusListener);
     }
-
 }

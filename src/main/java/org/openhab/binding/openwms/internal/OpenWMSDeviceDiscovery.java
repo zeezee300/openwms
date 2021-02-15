@@ -1,16 +1,26 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+
 package org.openhab.binding.openwms.internal;
 
 import java.util.Set;
 
-import org.eclipse.smarthome.config.discovery.AbstractDiscoveryService;
-import org.eclipse.smarthome.config.discovery.DiscoveryResultBuilder;
-import org.eclipse.smarthome.config.discovery.DiscoveryServiceCallback;
-import org.eclipse.smarthome.config.discovery.ExtendedDiscoveryService;
-import org.eclipse.smarthome.core.thing.ThingTypeUID;
-import org.eclipse.smarthome.core.thing.ThingUID;
-import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.openhab.binding.openwms.handler.OpenWMSBridgeHandler;
 import org.openhab.binding.openwms.messages.OpenWMSGetResponse;
+import org.openhab.core.config.discovery.AbstractDiscoveryService;
+import org.openhab.core.config.discovery.DiscoveryResultBuilder;
+import org.openhab.core.thing.ThingTypeUID;
+import org.openhab.core.thing.ThingUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +29,13 @@ import org.slf4j.LoggerFactory;
  *
  *
  * @author zeezee - Initial contribution
+ * @author Thorsten - Refactoring for OH3
  */
-public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
-        implements ExtendedDiscoveryService, DeviceMessageListener {
+
+public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService implements DeviceMessageListener {
     private final Logger logger = LoggerFactory.getLogger(OpenWMSDeviceDiscovery.class);
 
     private OpenWMSBridgeHandler bridgeHandler;
-    private DiscoveryServiceCallback callback;
 
     public OpenWMSDeviceDiscovery(OpenWMSBridgeHandler openwmsBridgeHandler) {
         super(null, 1, false);
@@ -59,21 +69,21 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
 
         // wenn Netzwerkschlüsssel und PANID vorhanden sind, dann weiter, sonst wird gesucht,
         if (netId != null && !netId.isEmpty() && !panId.isEmpty() && !panId.equals("")) {
-            logger.debug("Scan - found Networkkey: " + netId);
-            logger.debug("Scan - found PANID: " + panId);
+            logger.debug("Info: {}", "Scan - found Networkkey: " + netId);
+            logger.debug("Info: {}", "Scan - found PANID: " + panId);
             messageString = "{K401" + netId + "}";
-            logger.debug("Scan - Transmitting message: " + messageString);
+            logger.debug("Info: {}", "Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
             int i = 17;
             messageString = "{M#" + Integer.toString(i) + panId + "}";
-            logger.debug("Scan - Transmitting message: " + messageString);
+            logger.debug("Info: {}", "Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
             messageString = "{R04FFFFFF5060" + panId + "021100}"; // chanel request
-            logger.debug("Scan - Transmitting message: " + messageString);
+            logger.debug("Info: {}", "Scan - Transmitting message: " + messageString);
             bridgeHandler.sendMessage(messageString);
 
         } else {
-            logger.debug("Scan - found Networkkey: ");
+            logger.debug("Info: {}", "Scan - found Networkkey: ");
             int i = 17;
             messageString = "{M%" + Integer.toString(i) + "FFFF}";
             bridgeHandler.sendMessage(messageString);
@@ -83,12 +93,6 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
             // ToDo - suchen nach der PANID
 
         }
-
-    }
-
-    @Override
-    public void setDiscoveryServiceCallback(DiscoveryServiceCallback callback) {
-        this.callback = callback;
     }
 
     @Override
@@ -111,7 +115,7 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("Interrupted Exception Error: {}", e.getMessage());
             }
         }
         String id = message.getDeviceId();
@@ -120,22 +124,17 @@ public class OpenWMSDeviceDiscovery extends AbstractDiscoveryService
         if (uid != null) {
             ThingUID thingUID = new ThingUID(uid, bridge, id);
             // TODO prüfen, ob das Device bereits vorhanden ist (gibt es die Device-ID schon?)
-            if (callback.getExistingThing(thingUID) == null) {
-                if (!bridgeHandler.getConfiguration().disableDiscovery) {
-                    logger.trace("Adding new OpenWMS Device {} with id '{}' to smarthome inbox", thingUID, id);
-                    DiscoveryResultBuilder discoveryResultBuilder = DiscoveryResultBuilder.create(thingUID)
-                            .withBridge(bridge);
+            if (!bridgeHandler.getConfiguration().disableDiscovery) {
+                logger.trace("Adding new OpenWMS Device {} with id '{}' to smarthome inbox", thingUID, id);
+                DiscoveryResultBuilder discoveryResultBuilder = DiscoveryResultBuilder.create(thingUID)
+                        .withBridge(bridge);
 
-                    message.addDevicePropertiesTo(discoveryResultBuilder);
+                message.addDevicePropertiesTo(discoveryResultBuilder);
 
-                    thingDiscovered(discoveryResultBuilder.build());
-                } else {
-                    logger.trace("Ignoring OpenWMS {} with id '{}' - discovery disabled", thingUID, id);
-                }
+                thingDiscovered(discoveryResultBuilder.build());
             } else {
-                logger.trace("Ignoring already known OpenWMS {} with id '{}'", thingUID, id);
+                logger.trace("Ignoring OpenWMS {} with id '{}' - discovery disabled", thingUID, id);
             }
         }
     }
-
 }

@@ -1,21 +1,34 @@
+/**
+ * Copyright (c) 2010-2020 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+
 package org.openhab.binding.openwms.messages;
 
-import static org.openhab.binding.openwms.config.OpenWMSBindingConstants.*;
+import static org.openhab.binding.openwms.internal.OpenWMSBindingConstants.*;
 
-import org.eclipse.smarthome.config.discovery.DiscoveryResultBuilder;
-import org.eclipse.smarthome.core.library.types.DecimalType;
-import org.eclipse.smarthome.core.library.types.OnOffType;
-import org.eclipse.smarthome.core.library.types.OpenClosedType;
-import org.eclipse.smarthome.core.library.types.PercentType;
-import org.eclipse.smarthome.core.library.types.StopMoveType;
-import org.eclipse.smarthome.core.library.types.UpDownType;
-import org.eclipse.smarthome.core.types.State;
-import org.eclipse.smarthome.core.types.Type;
 import org.openhab.binding.openwms.internal.OpenWMSDeviceConfiguration;
+import org.openhab.core.config.discovery.DiscoveryResultBuilder;
+import org.openhab.core.library.types.DecimalType;
+import org.openhab.core.library.types.OnOffType;
+import org.openhab.core.library.types.OpenClosedType;
+import org.openhab.core.library.types.PercentType;
+import org.openhab.core.library.types.StopMoveType;
+import org.openhab.core.library.types.UpDownType;
+import org.openhab.core.types.State;
+import org.openhab.core.types.Type;
 
-/*
-* @author zeezee - Initial contribution
-*/
+/**
+ * @author zeezee - Initial contribution
+ */
 public class OpenWMSGetResponse {
 
     public String paketTyp;
@@ -52,7 +65,6 @@ public class OpenWMSGetResponse {
         Commands(int command) {
             this.command = command;
         }
-
     }
 
     public OpenWMSGetResponse(String data) {
@@ -269,7 +281,6 @@ public class OpenWMSGetResponse {
         if (rain.equals("C8")) {
             this.rain = "ON";
         }
-
     }
 
     public void setChannel(String channel) {
@@ -380,17 +391,14 @@ public class OpenWMSGetResponse {
                 command = Commands.STOP;
             }
         }
-
     }
 
     public void setConfig(OpenWMSDeviceConfiguration deviceConfiguration) {
         // TODO Auto-generated method stub
-
     }
 
     public void encodeMessage(byte[] data) {
         // TODO Auto-generated method stub
-
     }
 
     public byte[] decodeMessage() {
@@ -402,7 +410,5 @@ public class OpenWMSGetResponse {
         // super.addDevicePropertiesTo(discoveryResultBuilder);
         discoveryResultBuilder.withProperty(PROPERTY_DEVICEID, deviceId);
         discoveryResultBuilder.withProperty(PROPERTY_PANID, panId);
-
     }
-
 }

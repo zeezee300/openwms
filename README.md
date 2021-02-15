@@ -1,3 +1,16 @@
+# Note
+This fork ports the orginal OpenWMS Binding by zeezee300 to OpenHab 3.0, kudos to him for preparing this binding.
+Non OSGI packages have been removed, therefore external opening of the USB port is still required even when connecting the Warema stick directly to your device.
+
+1.) download 'serialport.jar' from https://github.com/zeezee300/openwms/blob/master/serialport.jar
+2.) copy it where you want (f.e. /opt/warema) and make it excecutable
+3.) excecute it with your device as an argument (f.e./dev/ttyUSB2):
+
+It works fine on my OpenHabian 3.0.0 installation, but the code still requires quite a bit of cleanup.
+
+The following is the original readme from zeezee300:
+
+
 # OpenWMS Binding
 
 The OpenWMS binding should be compatible with the Warema WMS Stick (1002775), which contains both receiver and transmitter functions.
