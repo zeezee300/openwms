@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.smarthome.core.thing.Thing;
+import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.openhab.binding.openwms.config.OpenWMSBindingConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,9 +126,10 @@ public class OpenWMSMessageFactory {
      * 2. der eigentliche Sendebefehl
      * -> Command (aus dem openhab Item)
      * -> Thing (Daten des jeweiligen Thing)
+     * -> channelUID (The channel that triggered the command to distinguish position channels, may be null for non-position commands)
      * <- MAP(Zähler für Messages, Message)
      */
-    public static Map<String, String> createMessage(String command, Thing thing) {
+    public static Map<String, String> createMessage(String command, Thing thing, ChannelUID channelUID) {
         String ret = "";
         Map<String, String> messagesToSend = new Hashtable();
         String packetType = thing.getThingTypeUID().getId().toUpperCase();
@@ -153,12 +155,14 @@ public class OpenWMSMessageFactory {
             case "BLIND":
                 if (command.equals("ON") || command.equals("UP")) {
                     pos = 0;
-                    ret = sendePOSITION(dest, pos);
+                    ret = sendePOSITION(dest, pos, channelUID);
                 } else if (command.equals("OFF") || command.equals("DOWN")) {
                     pos = 100;
-                    ret = sendePOSITION(dest, pos);
+                    ret = sendePOSITION(dest, pos, channelUID);
                 } else if (command.equals("STOP")) {
                     ret = "{R06" + dest + "7070" + "01" + "FF" + "FF" + "FFFF00}";
+                    messagesToSend.put(String.valueOf(zeile++), ret);
+                    ret = "{R06" + dest + "801001000005" + "}"; // Request current position after stop at arbitrary position
                 } else if (command.equals("WINKEN")) {
                     ret = sendeWINKEN(dest);
                 } else if (command.equals("GETSTATUS")) {
@@ -171,10 +175,10 @@ public class OpenWMSMessageFactory {
                     // ret = setOpMode(dest, opmode); // auch noch gleichzeitig die Comfortüberwachung ein-/ausschalten
                 } else if (Float.valueOf(command) > 0.0 && Float.valueOf(command) <= 100.0) {
                     pos = Math.round(Float.valueOf(command));
-                    ret = sendePOSITION(dest, pos);
+                    ret = sendePOSITION(dest, pos, channelUID);
                 } else {
                     pos = 0;
-                    ret = sendePOSITION(dest, pos);
+                    ret = sendePOSITION(dest, pos, channelUID);
                 }
 
                 messagesToSend.put(String.valueOf(zeile++), ret);
@@ -210,15 +214,39 @@ public class OpenWMSMessageFactory {
         return ret;
     }
 
-    private static String sendePOSITION(String dest, int position) {
+    private static String convertPosition(int position) {
         String pos = Integer.toHexString(Math.min(Math.max(position, 0), 100) * 2).toUpperCase();
         pos = ("00" + pos).substring(pos.length()); // mit führenden Nullen auf 2 Stelle auffüllen
-        String ret = "{R06" + dest + "7070" + "03" + pos
+        return pos;
+    }
 
-        // + ("0" + (Math.min(Math.max(parameter.angle, 0), 90) +
-        // 127).toString(16)).substr(-2).toUpperCase()
+    private static String sendePOSITION(String dest, int position, ChannelUID channelUID) {
+        String pos = convertPosition(position);
+        String shutter, valance1, valance2;
+        switch (channelUID.getId()) {
+            case OpenWMSBindingConstants.CHANNEL_VALANCE1:
+                shutter = "FF";
+                valance1 = pos;
+                valance2 = "FF";
+                break;
+            case OpenWMSBindingConstants.CHANNEL_VALANCE2:
+                shutter = "FF";
+                valance1 = "FF";
+                valance2 = pos;
+                break;
+            default: //CHANNEL_SHUTTER
+                shutter = pos;
+                valance1 = "FF";
+                valance2 = "FF";
+                break;
+        }
+
+        String ret = "{R06" + dest + "7070" + "03"
+                + shutter
                 + "FF" // angle
-                + "FFFF00}"; // no idea how valance works
+                + valance1
+                + valance2
+                + "00}";
         return ret;
     }
 

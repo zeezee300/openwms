@@ -66,6 +66,18 @@
         <description>Open/Close shutter/blind</description>
     </channel-type>
 
+    <channel-type id="valance1">
+        <item-type>Rollershutter</item-type>
+        <label>Valance 1</label>
+        <description>Open/Close valance 1</description>
+    </channel-type>
+
+    <channel-type id="valance2">
+        <item-type>Rollershutter</item-type>
+        <label>Valance 2</label>
+        <description>Open/Close valance 2</description>
+    </channel-type>
+
     <channel-type id="venetianBlind">
         <item-type>Dimmer</item-type>
         <label>Venetian Blind</label>

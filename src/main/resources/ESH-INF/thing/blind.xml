@@ -18,6 +18,8 @@
         <channels>
             <channel id="command" typeId="command" />
             <channel id="shutter" typeId="shutter" />
+            <channel id="valance1" typeId="valance1" />
+            <channel id="valance2" typeId="valance2" />
             <channel id="dimminglevel" typeId="dimminglevel" />
             
            

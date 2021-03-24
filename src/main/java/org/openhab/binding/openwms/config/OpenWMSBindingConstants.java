@@ -78,6 +78,8 @@ public class OpenWMSBindingConstants {
     // List of all Channel ids
     public static final String CHANNEL_1 = "channel1";
     public static final String CHANNEL_SHUTTER = "shutter";
+    public static final String CHANNEL_VALANCE1 = "valance1";
+    public static final String CHANNEL_VALANCE2 = "valance2";
     public static final String CHANNEL_DIMMINGLEVEL = "dimminglevel";
     public static final String CHANNEL_BRIGHTNESS = "brightness";
     public static final String CHANNEL_DUSK = "dusk";
